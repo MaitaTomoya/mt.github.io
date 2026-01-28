@@ -1,0 +1,2284 @@
+import { WebTemplate, TEMPLATE_CATEGORIES } from '../types'
+
+export const medicalHospitalTemplate: WebTemplate = {
+  id: 'medical-hospital',
+  title: '総合病院',
+  category: TEMPLATE_CATEGORIES.MEDICAL,
+  description: '信頼と安心を提供する総合病院向けの医療サイトテンプレート',
+  thumbnail: '/template-images/medical-hospital.jpg',
+  features: [
+    '診療科目・医師紹介',
+    '外来予約システム',
+    '健康診断案内',
+    'アクセス・駐車場情報',
+    '医療設備紹介'
+  ],
+  tags: ['病院', '医療', 'ヘルスケア', '診療', '健康'],
+  code: {
+    html: `<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>さくら総合病院 - 地域に根ざした医療を</title>
+</head>
+<body>
+    <header class="header">
+        <div class="emergency-banner">
+            <div class="container">
+                <span class="emergency-text">🚨 救急外来24時間対応 TEL: 03-1234-5678</span>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <h1>さくら総合病院</h1>
+                        <span class="tagline">Sakura General Hospital</span>
+                    </div>
+                    <button class="hamburger" id="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <nav class="main-nav" id="main-nav">
+                        <ul>
+                            <li class="nav-item dropdown">
+                                <a href="#departments">診療科・医師</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#internal">内科</a></li>
+                                    <li><a href="#surgery">外科</a></li>
+                                    <li><a href="#pediatrics">小児科</a></li>
+                                    <li><a href="#orthopedics">整形外科</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#outpatient">外来案内</a></li>
+                            <li><a href="#checkup">健康診断</a></li>
+                            <li><a href="#facilities">施設・設備</a></li>
+                            <li><a href="#access">アクセス</a></li>
+                            <li class="nav-cta"><a href="#appointment">診療予約</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-slider">
+            <div class="hero-slide active">
+                <img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=1920&h=800&fit=crop" alt="病院外観">
+                <div class="hero-overlay"></div>
+                <div class="container">
+                    <div class="hero-content">
+                        <h2>地域に根ざした<br><span class="highlight">安心の医療</span>を</h2>
+                        <p>1965年の開院以来、地域の皆様の健康を守り続けています。最新の医療技術と温かい心でお迎えします。</p>
+                        <div class="hero-buttons">
+                            <a href="#appointment" class="btn-primary">診療予約</a>
+                            <a href="#departments" class="btn-outline">診療科を見る</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quick-access">
+        <div class="container">
+            <div class="quick-items">
+                <div class="quick-item">
+                    <div class="quick-icon">📅</div>
+                    <h3>外来予約</h3>
+                    <p>オンラインで簡単予約</p>
+                    <a href="#appointment" class="quick-link">予約する</a>
+                </div>
+                
+                <div class="quick-item">
+                    <div class="quick-icon">🏥</div>
+                    <h3>診療時間</h3>
+                    <p>平日 8:30-17:00<br>土曜 8:30-12:30</p>
+                    <a href="#outpatient" class="quick-link">詳細を見る</a>
+                </div>
+                
+                <div class="quick-item">
+                    <div class="quick-icon">🚗</div>
+                    <h3>駐車場案内</h3>
+                    <p>200台収容可能</p>
+                    <a href="#access" class="quick-link">アクセス</a>
+                </div>
+                
+                <div class="quick-item">
+                    <div class="quick-icon">📋</div>
+                    <h3>健康診断</h3>
+                    <p>人間ドック・各種検診</p>
+                    <a href="#checkup" class="quick-link">詳細を見る</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hospital-intro">
+        <div class="container">
+            <div class="intro-content">
+                <div class="intro-text">
+                    <h2>患者様第一の医療を</h2>
+                    <p>さくら総合病院は、「患者様第一」を理念に、質の高い医療サービスを提供し続けています。総合病院として、内科から外科、小児科まで幅広い診療科を設け、地域の皆様の健康をトータルでサポートいたします。</p>
+                    
+                    <div class="hospital-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">350</div>
+                            <div class="stat-label">病床数</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">45</div>
+                            <div class="stat-label">医師数</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">150</div>
+                            <div class="stat-label">看護師数</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">58年</div>
+                            <div class="stat-label">歴史</div>
+                        </div>
+                    </div>
+                    
+                    <div class="intro-features">
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>24時間救急対応</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>最新医療機器完備</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>チーム医療体制</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="intro-visual">
+                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop" alt="医療チーム">
+                    <div class="visual-badge">
+                        <span class="badge-text">地域医療支援病院</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="departments" class="departments">
+        <div class="container">
+            <h2 class="section-title">診療科・医師紹介</h2>
+            <p class="section-subtitle">専門性の高い医師による質の高い医療を提供しています</p>
+            
+            <div class="departments-grid">
+                <div class="department-card">
+                    <div class="department-icon">
+                        <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=100&h=100&fit=crop" alt="内科">
+                    </div>
+                    <h3>内科</h3>
+                    <p class="department-desc">生活習慣病から急性疾患まで、幅広く対応いたします。</p>
+                    
+                    <div class="doctor-info">
+                        <div class="doctor-photo">
+                            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=80&h=80&fit=crop&crop=face" alt="田中医師">
+                        </div>
+                        <div class="doctor-details">
+                            <h4>田中 健一 医師</h4>
+                            <p class="doctor-title">内科部長</p>
+                            <p class="doctor-specialty">専門：糖尿病、循環器</p>
+                        </div>
+                    </div>
+                    
+                    <div class="department-info">
+                        <p><strong>診療時間:</strong> 月-金 9:00-17:00</p>
+                        <p><strong>予約:</strong> 必要</p>
+                    </div>
+                    
+                    <a href="#" class="department-link">詳細を見る</a>
+                </div>
+                
+                <div class="department-card">
+                    <div class="department-icon">
+                        <img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=100&h=100&fit=crop" alt="外科">
+                    </div>
+                    <h3>外科</h3>
+                    <p class="department-desc">消化器外科から乳腺外科まで、安全で確実な手術を行います。</p>
+                    
+                    <div class="doctor-info">
+                        <div class="doctor-photo">
+                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=80&h=80&fit=crop&crop=face" alt="佐藤医師">
+                        </div>
+                        <div class="doctor-details">
+                            <h4>佐藤 美咲 医師</h4>
+                            <p class="doctor-title">外科部長</p>
+                            <p class="doctor-specialty">専門：消化器外科、内視鏡</p>
+                        </div>
+                    </div>
+                    
+                    <div class="department-info">
+                        <p><strong>診療時間:</strong> 月-金 9:00-17:00</p>
+                        <p><strong>予約:</strong> 必要</p>
+                    </div>
+                    
+                    <a href="#" class="department-link">詳細を見る</a>
+                </div>
+                
+                <div class="department-card">
+                    <div class="department-icon">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=100&h=100&fit=crop" alt="小児科">
+                    </div>
+                    <h3>小児科</h3>
+                    <p class="department-desc">新生児から15歳まで、お子様の成長を見守ります。</p>
+                    
+                    <div class="doctor-info">
+                        <div class="doctor-photo">
+                            <img src="https://images.unsplash.com/photo-1594824047770-d90e6e7e0bb4?w=80&h=80&fit=crop&crop=face" alt="山田医師">
+                        </div>
+                        <div class="doctor-details">
+                            <h4>山田 雄介 医師</h4>
+                            <p class="doctor-title">小児科部長</p>
+                            <p class="doctor-specialty">専門：小児アレルギー、予防接種</p>
+                        </div>
+                    </div>
+                    
+                    <div class="department-info">
+                        <p><strong>診療時間:</strong> 月-土 9:00-17:00</p>
+                        <p><strong>予約:</strong> 推奨</p>
+                    </div>
+                    
+                    <a href="#" class="department-link">詳細を見る</a>
+                </div>
+                
+                <div class="department-card">
+                    <div class="department-icon">
+                        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=100&h=100&fit=crop" alt="整形外科">
+                    </div>
+                    <h3>整形外科</h3>
+                    <p class="department-desc">骨折から関節疾患まで、運動器の専門治療を提供します。</p>
+                    
+                    <div class="doctor-info">
+                        <div class="doctor-photo">
+                            <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=80&h=80&fit=crop&crop=face" alt="鈴木医師">
+                        </div>
+                        <div class="doctor-details">
+                            <h4>鈴木 直子 医師</h4>
+                            <p class="doctor-title">整形外科部長</p>
+                            <p class="doctor-specialty">専門：関節外科、スポーツ医学</p>
+                        </div>
+                    </div>
+                    
+                    <div class="department-info">
+                        <p><strong>診療時間:</strong> 月-金 9:00-17:00</p>
+                        <p><strong>予約:</strong> 必要</p>
+                    </div>
+                    
+                    <a href="#" class="department-link">詳細を見る</a>
+                </div>
+                
+                <div class="department-card">
+                    <div class="department-icon">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=100&h=100&fit=crop" alt="産婦人科">
+                    </div>
+                    <h3>産婦人科</h3>
+                    <p class="department-desc">妊娠・出産から婦人科疾患まで、女性の健康をサポート。</p>
+                    
+                    <div class="doctor-info">
+                        <div class="doctor-photo">
+                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=80&h=80&fit=crop&crop=face" alt="高橋医師">
+                        </div>
+                        <div class="doctor-details">
+                            <h4>高橋 麻美 医師</h4>
+                            <p class="doctor-title">産婦人科部長</p>
+                            <p class="doctor-specialty">専門：周産期医学、不妊治療</p>
+                        </div>
+                    </div>
+                    
+                    <div class="department-info">
+                        <p><strong>診療時間:</strong> 月-金 9:00-17:00</p>
+                        <p><strong>予約:</strong> 必要</p>
+                    </div>
+                    
+                    <a href="#" class="department-link">詳細を見る</a>
+                </div>
+                
+                <div class="department-card">
+                    <div class="department-icon">
+                        <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=100&h=100&fit=crop" alt="眼科">
+                    </div>
+                    <h3>眼科</h3>
+                    <p class="department-desc">白内障手術から網膜疾患まで、眼の総合的な治療。</p>
+                    
+                    <div class="doctor-info">
+                        <div class="doctor-photo">
+                            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=80&h=80&fit=crop&crop=face" alt="伊藤医師">
+                        </div>
+                        <div class="doctor-details">
+                            <h4>伊藤 太郎 医師</h4>
+                            <p class="doctor-title">眼科部長</p>
+                            <p class="doctor-specialty">専門：白内障、緑内障</p>
+                        </div>
+                    </div>
+                    
+                    <div class="department-info">
+                        <p><strong>診療時間:</strong> 月-金 9:00-17:00</p>
+                        <p><strong>予約:</strong> 必要</p>
+                    </div>
+                    
+                    <a href="#" class="department-link">詳細を見る</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="outpatient" class="outpatient">
+        <div class="container">
+            <h2 class="section-title">外来案内</h2>
+            <div class="outpatient-content">
+                <div class="schedule-info">
+                    <h3>診療時間</h3>
+                    <div class="schedule-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>診療科</th>
+                                    <th>午前 (8:30-12:30)</th>
+                                    <th>午後 (14:00-17:00)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>内科</td>
+                                    <td>月-土</td>
+                                    <td>月-金</td>
+                                </tr>
+                                <tr>
+                                    <td>外科</td>
+                                    <td>月-金</td>
+                                    <td>月・水・金</td>
+                                </tr>
+                                <tr>
+                                    <td>小児科</td>
+                                    <td>月-土</td>
+                                    <td>月-金</td>
+                                </tr>
+                                <tr>
+                                    <td>整形外科</td>
+                                    <td>月-金</td>
+                                    <td>月・木</td>
+                                </tr>
+                                <tr>
+                                    <td>産婦人科</td>
+                                    <td>月-金</td>
+                                    <td>火・木</td>
+                                </tr>
+                                <tr>
+                                    <td>眼科</td>
+                                    <td>月・水・金</td>
+                                    <td>月・水</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="schedule-notes">
+                        <h4>注意事項</h4>
+                        <ul>
+                            <li>初診の方は受付終了時間の30分前までにお越しください</li>
+                            <li>紹介状をお持ちの方は受付にご提示ください</li>
+                            <li>急患は随時受け付けております</li>
+                            <li>日曜・祝日・年末年始は休診日です</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="appointment-info">
+                    <h3>予約について</h3>
+                    <div class="appointment-methods">
+                        <div class="method-card">
+                            <div class="method-icon">💻</div>
+                            <h4>オンライン予約</h4>
+                            <p>24時間いつでも予約可能</p>
+                            <button class="btn-primary" id="online-booking">ご予約はこちら</button>
+                        </div>
+                        
+                        <div class="method-card">
+                            <div class="method-icon">📞</div>
+                            <h4>電話予約</h4>
+                            <p>平日 8:00-17:00<br>土曜 8:00-12:00</p>
+                            <p class="phone-number">03-1234-5678</p>
+                        </div>
+                        
+                        <div class="method-card">
+                            <div class="method-icon">🏥</div>
+                            <h4>窓口予約</h4>
+                            <p>1階総合受付にて承ります</p>
+                            <p>次回予約も可能</p>
+                        </div>
+                    </div>
+                    
+                    <div class="insurance-info">
+                        <h4>保険・お支払い</h4>
+                        <div class="insurance-grid">
+                            <div class="insurance-item">
+                                <span class="insurance-icon">✓</span>
+                                <span>各種健康保険</span>
+                            </div>
+                            <div class="insurance-item">
+                                <span class="insurance-icon">✓</span>
+                                <span>自費診療</span>
+                            </div>
+                            <div class="insurance-item">
+                                <span class="insurance-icon">✓</span>
+                                <span>クレジットカード</span>
+                            </div>
+                            <div class="insurance-item">
+                                <span class="insurance-icon">✓</span>
+                                <span>電子マネー</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="checkup" class="checkup">
+        <div class="container">
+            <h2 class="section-title">健康診断・人間ドック</h2>
+            <p class="section-subtitle">病気の早期発見・予防で、健康な毎日を</p>
+            
+            <div class="checkup-plans">
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3>基本健康診断</h3>
+                        <div class="plan-price">¥8,800</div>
+                    </div>
+                    <div class="plan-content">
+                        <p class="plan-desc">基本的な検査項目で健康状態をチェック</p>
+                        <ul class="plan-items">
+                            <li>身体計測</li>
+                            <li>血圧・脈拍</li>
+                            <li>尿検査</li>
+                            <li>血液検査（基本項目）</li>
+                            <li>胸部X線</li>
+                            <li>心電図</li>
+                        </ul>
+                        <p class="plan-duration">所要時間：約1時間</p>
+                        <button class="btn-outline">詳細・予約</button>
+                    </div>
+                </div>
+                
+                <div class="plan-card featured">
+                    <div class="plan-badge">人気</div>
+                    <div class="plan-header">
+                        <h3>総合健康診断</h3>
+                        <div class="plan-price">¥25,000</div>
+                    </div>
+                    <div class="plan-content">
+                        <p class="plan-desc">より詳細な検査で生活習慣病を予防</p>
+                        <ul class="plan-items">
+                            <li>基本健康診断の全項目</li>
+                            <li>腹部超音波</li>
+                            <li>胃内視鏡（または胃透視）</li>
+                            <li>血液検査（詳細項目）</li>
+                            <li>眼底検査</li>
+                            <li>医師面談</li>
+                        </ul>
+                        <p class="plan-duration">所要時間：約3時間</p>
+                        <button class="btn-primary">詳細・予約</button>
+                    </div>
+                </div>
+                
+                <div class="plan-card">
+                    <div class="plan-header">
+                        <h3>人間ドック</h3>
+                        <div class="plan-price">¥45,000</div>
+                    </div>
+                    <div class="plan-content">
+                        <p class="plan-desc">最も包括的な健康チェック</p>
+                        <ul class="plan-items">
+                            <li>総合健康診断の全項目</li>
+                            <li>CT検査</li>
+                            <li>MRI検査</li>
+                            <li>大腸内視鏡</li>
+                            <li>婦人科検診（女性）</li>
+                            <li>栄養士指導</li>
+                        </ul>
+                        <p class="plan-duration">所要時間：1日</p>
+                        <button class="btn-outline">詳細・予約</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="checkup-info">
+                <h3>健康診断をお考えの方へ</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <h4>検査前の注意事項</h4>
+                        <ul>
+                            <li>前日22時以降の飲食は控えてください</li>
+                            <li>当日の朝食は摂らずにお越しください</li>
+                            <li>薬の服用について事前にご相談ください</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-item">
+                        <h4>持参いただくもの</h4>
+                        <ul>
+                            <li>健康保険証</li>
+                            <li>健康診断受診票（お持ちの方）</li>
+                            <li>前回の健康診断結果</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-item">
+                        <h4>結果について</h4>
+                        <ul>
+                            <li>検査結果は約2週間後にお渡し</li>
+                            <li>郵送での結果通知も可能</li>
+                            <li>異常値がある場合は医師より説明</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="facilities" class="facilities">
+        <div class="container">
+            <h2 class="section-title">施設・医療設備</h2>
+            <p class="section-subtitle">最新の医療機器と快適な環境で、質の高い医療を提供</p>
+            
+            <div class="facilities-showcase">
+                <div class="facility-tabs">
+                    <button class="facility-tab active" data-tab="equipment">医療設備</button>
+                    <button class="facility-tab" data-tab="rooms">病室・施設</button>
+                    <button class="facility-tab" data-tab="amenities">患者サービス</button>
+                </div>
+                
+                <div class="facility-content">
+                    <div class="tab-panel active" id="equipment">
+                        <div class="equipment-grid">
+                            <div class="equipment-item">
+                                <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=300&h=200&fit=crop" alt="CT検査室">
+                                <h4>最新CT装置</h4>
+                                <p>高解像度で短時間検査が可能な最新CT装置を導入しています。</p>
+                            </div>
+                            
+                            <div class="equipment-item">
+                                <img src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=300&h=200&fit=crop" alt="MRI検査室">
+                                <h4>MRI装置</h4>
+                                <p>脳や関節の詳細な画像診断が可能な高性能MRI装置です。</p>
+                            </div>
+                            
+                            <div class="equipment-item">
+                                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=300&h=200&fit=crop" alt="手術室">
+                                <h4>最新手術室</h4>
+                                <p>清潔で安全な環境での手術を可能にする最新設備完備の手術室。</p>
+                            </div>
+                            
+                            <div class="equipment-item">
+                                <img src="https://images.unsplash.com/photo-1584515933487-779824d29309?w=300&h=200&fit=crop" alt="内視鏡室">
+                                <h4>内視鏡センター</h4>
+                                <p>最新の内視鏡システムで、精密で低侵襲な検査・治療を実施。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-panel" id="rooms">
+                        <div class="room-grid">
+                            <div class="room-item">
+                                <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=200&fit=crop" alt="個室">
+                                <h4>個室病室</h4>
+                                <p>プライバシーを重視した快適な個室をご用意しています。</p>
+                            </div>
+                            
+                            <div class="room-item">
+                                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&h=200&fit=crop" alt="大部屋">
+                                <h4>4人部屋</h4>
+                                <p>明るく清潔な4人部屋で、安心して療養いただけます。</p>
+                            </div>
+                            
+                            <div class="room-item">
+                                <img src="https://images.unsplash.com/photo-1594824047770-d90e6e7e0bb4?w=300&h=200&fit=crop" alt="ロビー">
+                                <h4>エントランスロビー</h4>
+                                <p>開放感のある明るいロビーでお迎えいたします。</p>
+                            </div>
+                            
+                            <div class="room-item">
+                                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=300&h=200&fit=crop" alt="待合室">
+                                <h4>外来待合室</h4>
+                                <p>ゆったりとした待合スペースで診察をお待ちいただけます。</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-panel" id="amenities">
+                        <div class="amenity-list">
+                            <div class="amenity-item">
+                                <div class="amenity-icon">🍽️</div>
+                                <h4>院内レストラン</h4>
+                                <p>栄養士監修のヘルシーなお食事を提供するレストランを併設</p>
+                            </div>
+                            
+                            <div class="amenity-item">
+                                <div class="amenity-icon">💊</div>
+                                <h4>院内薬局</h4>
+                                <p>処方薬を院内で受け取れるため、移動の負担を軽減</p>
+                            </div>
+                            
+                            <div class="amenity-item">
+                                <div class="amenity-icon">🏪</div>
+                                <h4>売店・コンビニ</h4>
+                                <p>日用品や軽食などをご購入いただける売店を完備</p>
+                            </div>
+                            
+                            <div class="amenity-item">
+                                <div class="amenity-icon">🚗</div>
+                                <h4>駐車場</h4>
+                                <p>200台収容可能な広い駐車場を無料でご利用いただけます</p>
+                            </div>
+                            
+                            <div class="amenity-item">
+                                <div class="amenity-icon">♿</div>
+                                <h4>バリアフリー</h4>
+                                <p>車椅子やご高齢の方にも優しい段差のない設計</p>
+                            </div>
+                            
+                            <div class="amenity-item">
+                                <div class="amenity-icon">📺</div>
+                                <h4>Wi-Fi・テレビ</h4>
+                                <p>全館Wi-Fi完備、病室にはテレビを設置</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="access" class="access">
+        <div class="container">
+            <h2 class="section-title">アクセス・お問い合わせ</h2>
+            
+            <div class="access-content">
+                <div class="access-info">
+                    <h3>さくら総合病院</h3>
+                    
+                    <div class="contact-grid">
+                        <div class="contact-item">
+                            <div class="contact-icon">📍</div>
+                            <div>
+                                <h4>住所</h4>
+                                <p>〒100-0001<br>東京都千代田区千代田1-1-1</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📞</div>
+                            <div>
+                                <h4>代表電話</h4>
+                                <p>03-1234-5678</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">🚨</div>
+                            <div>
+                                <h4>救急外来</h4>
+                                <p>03-1234-5678<br>24時間対応</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">📧</div>
+                            <div>
+                                <h4>メール</h4>
+                                <p>info@sakura-hospital.jp</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="transportation">
+                        <h4>交通アクセス</h4>
+                        <div class="transport-methods">
+                            <div class="transport-item">
+                                <span class="transport-icon">🚃</span>
+                                <div>
+                                    <strong>電車</strong>
+                                    <p>JR山手線「東京駅」徒歩8分<br>東京メトロ丸ノ内線「東京駅」徒歩5分</p>
+                                </div>
+                            </div>
+                            
+                            <div class="transport-item">
+                                <span class="transport-icon">🚌</span>
+                                <div>
+                                    <strong>バス</strong>
+                                    <p>都営バス「さくら病院前」下車徒歩1分</p>
+                                </div>
+                            </div>
+                            
+                            <div class="transport-item">
+                                <span class="transport-icon">🚗</span>
+                                <div>
+                                    <strong>お車</strong>
+                                    <p>首都高速都心環状線「呉服橋IC」より5分<br>駐車場200台完備（無料）</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="map-section">
+                    <div class="map-placeholder">
+                        <h4>病院周辺マップ</h4>
+                        <p>詳細な地図とルート案内</p>
+                        <button class="btn-outline">Googleマップで開く</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>さくら総合病院</h3>
+                    <p>地域に根ざした医療で、皆様の健康を支え続けます。</p>
+                    <div class="hospital-info">
+                        <p>〒100-0001 東京都千代田区千代田1-1-1</p>
+                        <p>TEL: 03-1234-5678</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>診療科目</h4>
+                    <ul>
+                        <li><a href="#">内科</a></li>
+                        <li><a href="#">外科</a></li>
+                        <li><a href="#">小児科</a></li>
+                        <li><a href="#">整形外科</a></li>
+                        <li><a href="#">産婦人科</a></li>
+                        <li><a href="#">眼科</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>外来案内</h4>
+                    <ul>
+                        <li><a href="#">診療時間</a></li>
+                        <li><a href="#">初診の方へ</a></li>
+                        <li><a href="#">予約方法</a></li>
+                        <li><a href="#">診療費用</a></li>
+                        <li><a href="#">各種検査</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>病院について</h4>
+                    <ul>
+                        <li><a href="#">理念・基本方針</a></li>
+                        <li><a href="#">沿革</a></li>
+                        <li><a href="#">施設案内</a></li>
+                        <li><a href="#">医療安全</a></li>
+                        <li><a href="#">採用情報</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-legal">
+                    <p>&copy; 2025 さくら総合病院. All rights reserved.</p>
+                    <div class="legal-links">
+                        <a href="#">プライバシーポリシー</a>
+                        <a href="#">医療安全指針</a>
+                        <a href="#">サイトマップ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>`,
+    css: `@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.emergency-banner {
+    background: #dc2626;
+    color: white;
+    padding: 8px 0;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.header-main {
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.logo h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2563eb;
+    margin: 0;
+    line-height: 1;
+}
+
+.tagline {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    color: #64748b;
+    display: block;
+    margin-top: 4px;
+    letter-spacing: 1px;
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    align-items: center;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #475569;
+    font-weight: 500;
+    font-size: 14px;
+    transition: color 0.3s;
+    padding: 10px 0;
+}
+
+.main-nav a:hover {
+    color: #2563eb;
+}
+
+.nav-cta a {
+    background: #2563eb;
+    color: white !important;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.nav-cta a:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+/* Dropdown Menu */
+.nav-item {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    min-width: 180px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s;
+    z-index: 1000;
+}
+
+.nav-item:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu li {
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 12px 20px;
+    color: #64748b;
+    border-radius: 0;
+}
+
+.dropdown-menu a:hover {
+    background: #f8fafc;
+    color: #2563eb;
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #475569;
+    transition: all 0.3s;
+    border-radius: 2px;
+}
+
+/* Hero */
+.hero {
+    position: relative;
+    height: 70vh;
+    min-height: 500px;
+    overflow: hidden;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.hero-slide.active {
+    opacity: 1;
+}
+
+.hero-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.8), rgba(59, 130, 246, 0.6));
+}
+
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.hero-content h2 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    line-height: 1.2;
+}
+
+.highlight {
+    background: linear-gradient(45deg, #10b981, #059669);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-content p {
+    font-size: 18px;
+    margin-bottom: 40px;
+    opacity: 0.95;
+    line-height: 1.7;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.btn-primary {
+    background: #10b981;
+    color: white;
+    padding: 16px 32px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+}
+
+.btn-outline {
+    background: transparent;
+    color: white;
+    padding: 16px 32px;
+    border: 2px solid white;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+}
+
+.btn-outline:hover {
+    background: white;
+    color: #2563eb;
+}
+
+/* Quick Access */
+.quick-access {
+    padding: 60px 0;
+    background: #f8fafc;
+    margin-top: -30px;
+    position: relative;
+    z-index: 10;
+}
+
+.quick-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.quick-item {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.quick-item:hover {
+    transform: translateY(-5px);
+}
+
+.quick-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+}
+
+.quick-item h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #1e293b;
+}
+
+.quick-item p {
+    color: #64748b;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.quick-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.quick-link:hover {
+    color: #1d4ed8;
+}
+
+/* Hospital Intro */
+.hospital-intro {
+    padding: 80px 0;
+    background: white;
+}
+
+.intro-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.intro-text h2 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: #1e293b;
+}
+
+.intro-text p {
+    font-size: 18px;
+    color: #64748b;
+    line-height: 1.8;
+    margin-bottom: 40px;
+}
+
+.hospital-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2563eb;
+    display: block;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: #64748b;
+    margin-top: 5px;
+}
+
+.intro-features {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #64748b;
+}
+
+.feature-icon {
+    color: #10b981;
+    font-weight: bold;
+}
+
+.intro-visual {
+    position: relative;
+}
+
+.intro-visual img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.visual-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #10b981;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Sections */
+section {
+    padding: 80px 0;
+}
+
+.section-title {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 16px;
+    color: #1e293b;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 60px;
+    font-size: 18px;
+}
+
+/* Departments */
+.departments {
+    background: #f8fafc;
+}
+
+.departments-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+}
+
+.department-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.department-card:hover {
+    transform: translateY(-5px);
+}
+
+.department-icon {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.department-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.department-card h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #1e293b;
+}
+
+.department-desc {
+    color: #64748b;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.doctor-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 8px;
+}
+
+.doctor-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.doctor-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.doctor-details h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 4px;
+}
+
+.doctor-title {
+    font-size: 12px;
+    color: #2563eb;
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.doctor-specialty {
+    font-size: 12px;
+    color: #64748b;
+}
+
+.department-info {
+    background: #f1f5f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.department-info p {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 5px;
+}
+
+.department-link {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.department-link:hover {
+    color: #1d4ed8;
+}
+
+/* Outpatient */
+.outpatient {
+    background: white;
+}
+
+.outpatient-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+}
+
+.schedule-info h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #1e293b;
+}
+
+.schedule-table {
+    margin-bottom: 30px;
+    overflow-x: auto;
+}
+
+.schedule-table table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.schedule-table th {
+    background: #f1f5f9;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #1e293b;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.schedule-table td {
+    padding: 12px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #64748b;
+}
+
+.schedule-notes h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #1e293b;
+}
+
+.schedule-notes ul {
+    list-style: none;
+}
+
+.schedule-notes li {
+    padding: 8px 0;
+    color: #64748b;
+    position: relative;
+    padding-left: 20px;
+}
+
+.schedule-notes li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.appointment-info h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #1e293b;
+}
+
+.appointment-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.method-card {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+.method-icon {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.method-card h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1e293b;
+}
+
+.method-card p {
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.phone-number {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2563eb !important;
+}
+
+.insurance-info h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #1e293b;
+}
+
+.insurance-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.insurance-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.insurance-icon {
+    color: #10b981;
+    font-weight: bold;
+}
+
+/* Checkup */
+.checkup {
+    background: #f8fafc;
+}
+
+.checkup-plans {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.plan-card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.plan-card:hover {
+    transform: translateY(-5px);
+}
+
+.plan-card.featured {
+    border: 2px solid #10b981;
+    transform: scale(1.05);
+}
+
+.plan-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #10b981;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.plan-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.plan-header h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #1e293b;
+}
+
+.plan-price {
+    font-size: 32px;
+    font-weight: 700;
+    color: #10b981;
+}
+
+.plan-desc {
+    color: #64748b;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.plan-items {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.plan-items li {
+    padding: 8px 0;
+    color: #64748b;
+    position: relative;
+    padding-left: 20px;
+}
+
+.plan-items li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #10b981;
+    font-weight: 600;
+}
+
+.plan-duration {
+    color: #2563eb;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.plan-card button {
+    width: 100%;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.checkup-info {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.checkup-info h3 {
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #1e293b;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.info-item h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #1e293b;
+    border-bottom: 2px solid #10b981;
+    padding-bottom: 8px;
+}
+
+.info-item ul {
+    list-style: none;
+}
+
+.info-item li {
+    padding: 8px 0;
+    color: #64748b;
+    position: relative;
+    padding-left: 20px;
+}
+
+.info-item li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #10b981;
+    font-weight: bold;
+}
+
+/* Facilities */
+.facilities {
+    background: white;
+}
+
+.facilities-showcase {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.facility-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    background: #f1f5f9;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.facility-tab {
+    background: transparent;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.facility-tab.active {
+    background: white;
+    color: #2563eb;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+.equipment-grid,
+.room-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.equipment-item,
+.room-item {
+    background: #f8fafc;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+}
+
+.equipment-item img,
+.room-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.equipment-item h4,
+.room-item h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 15px 15px 10px;
+}
+
+.equipment-item p,
+.room-item p {
+    color: #64748b;
+    font-size: 14px;
+    margin: 0 15px 15px;
+    line-height: 1.5;
+}
+
+.amenity-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.amenity-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 20px;
+    background: #f8fafc;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+}
+
+.amenity-icon {
+    font-size: 24px;
+    min-width: 30px;
+    margin-top: 5px;
+}
+
+.amenity-item h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1e293b;
+}
+
+.amenity-item p {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Access */
+.access {
+    background: #f8fafc;
+}
+
+.access-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+}
+
+.access-info h3 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #1e293b;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.contact-icon {
+    font-size: 20px;
+    min-width: 25px;
+    color: #2563eb;
+    margin-top: 2px;
+}
+
+.contact-item h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #1e293b;
+}
+
+.contact-item p {
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.transportation h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1e293b;
+}
+
+.transport-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.transport-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.transport-icon {
+    font-size: 20px;
+    min-width: 25px;
+    margin-top: 2px;
+}
+
+.transport-item strong {
+    color: #1e293b;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.transport-item p {
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.map-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-placeholder {
+    background: #f1f5f9;
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 60px 40px;
+    text-align: center;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-placeholder h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 10px;
+}
+
+.map-placeholder p {
+    color: #94a3b8;
+    margin-bottom: 20px;
+}
+
+/* Footer */
+.footer {
+    background: #1e293b;
+    color: white;
+    padding: 60px 0 30px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #10b981;
+}
+
+.footer-section h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.footer-section p {
+    color: #94a3b8;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.hospital-info p {
+    margin-bottom: 8px;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: #10b981;
+}
+
+.footer-bottom {
+    padding-top: 30px;
+    border-top: 1px solid #334155;
+}
+
+.footer-legal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.legal-links {
+    display: flex;
+    gap: 20px;
+}
+
+.legal-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.legal-links a:hover {
+    color: #10b981;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+    
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .main-nav.active {
+        display: block;
+    }
+    
+    .main-nav ul {
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+    }
+    
+    .main-nav ul li {
+        border-bottom: 1px solid #f1f5f9;
+        width: 100%;
+    }
+    
+    .main-nav a {
+        padding: 15px 0;
+        display: block;
+    }
+    
+    .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        background: #f8fafc;
+        margin-top: 10px;
+    }
+    
+    .hero-content h2 {
+        font-size: 32px;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .quick-items {
+        grid-template-columns: 1fr;
+    }
+    
+    .intro-content,
+    .outpatient-content,
+    .access-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .hospital-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .departments-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .checkup-plans {
+        grid-template-columns: 1fr;
+    }
+    
+    .plan-card.featured {
+        transform: none;
+    }
+    
+    .info-grid,
+    .equipment-grid,
+    .room-grid,
+    .amenity-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .footer-legal {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .legal-links {
+        justify-content: center;
+    }
+}`,
+    js: `// ハンバーガーメニュー
+const hamburger = document.getElementById('hamburger');
+const mainNav = document.getElementById('main-nav');
+
+if (hamburger && mainNav) {
+    hamburger.addEventListener('click', function() {
+        this.classList.toggle('active');
+        mainNav.classList.toggle('active');
+    });
+    
+    // メニューリンクをクリックしたら閉じる
+    const navLinks = mainNav.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            mainNav.classList.remove('active');
+        });
+    });
+}
+
+// スムーズスクロール
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const headerHeight = document.querySelector('.header-main').offsetHeight + 30;
+            const targetPosition = target.offsetTop - headerHeight;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// 施設タブ切り替え
+const facilityTabs = document.querySelectorAll('.facility-tab');
+const tabPanels = document.querySelectorAll('.tab-panel');
+
+facilityTabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+        const tabId = this.getAttribute('data-tab');
+        
+        // アクティブなタブとパネルをリセット
+        facilityTabs.forEach(t => t.classList.remove('active'));
+        tabPanels.forEach(panel => panel.classList.remove('active'));
+        
+        // 新しいタブとパネルをアクティブに
+        this.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+    });
+});
+
+// オンライン予約ボタン
+document.getElementById('online-booking')?.addEventListener('click', function() {
+    alert('オンライン予約システムへ遷移します（実装予定）');
+});
+
+// 診療科詳細リンク
+document.querySelectorAll('.department-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const departmentName = this.closest('.department-card').querySelector('h3').textContent;
+        alert(departmentName + 'の詳細ページへ遷移します（実装予定）');
+    });
+});
+
+// 健康診断プランボタン
+document.querySelectorAll('.plan-card button').forEach(button => {
+    button.addEventListener('click', function() {
+        const planName = this.closest('.plan-card').querySelector('h3').textContent;
+        if (this.textContent.includes('詳細・予約')) {
+            alert(planName + 'の詳細・予約ページへ遷移します（実装予定）');
+        }
+    });
+});
+
+// クイックアクセスリンク
+document.querySelectorAll('.quick-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const linkText = this.textContent;
+        if (linkText.includes('予約')) {
+            alert('予約システムへ遷移します（実装予定）');
+        } else if (linkText.includes('詳細')) {
+            alert('詳細ページへ遷移します（実装予定）');
+        } else if (linkText.includes('アクセス')) {
+            // アクセスセクションにスクロール
+            document.getElementById('access').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Googleマップボタン
+document.querySelector('.map-placeholder button')?.addEventListener('click', function() {
+    alert('Googleマップで病院の場所を開きます（実装予定）');
+});
+
+// スクロールアニメーション
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// アニメーション対象要素を観察
+window.addEventListener('load', () => {
+    const animateElements = document.querySelectorAll('.quick-item, .department-card, .plan-card, .equipment-item, .room-item');
+    animateElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease';
+        observer.observe(el);
+    });
+});
+
+// 統計数字のカウントアニメーション
+function animateValue(element, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const value = Math.floor(progress * (end - start) + start);
+        element.textContent = value + (element.dataset.suffix || '');
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+// 統計セクションが表示されたときのアニメーション
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const statNumbers = entry.target.querySelectorAll('.stat-number');
+            statNumbers.forEach(statNumber => {
+                if (!statNumber.classList.contains('animated')) {
+                    const text = statNumber.textContent;
+                    const number = parseInt(text.replace(/[^0-9]/g, ''));
+                    if (!isNaN(number)) {
+                        statNumber.dataset.suffix = text.replace(/[0-9]/g, '');
+                        statNumber.textContent = '0';
+                        animateValue(statNumber, 0, number, 2000);
+                        statNumber.classList.add('animated');
+                    }
+                }
+            });
+        }
+    });
+}, { threshold: 0.5 });
+
+// 統計セクションを観察
+document.querySelectorAll('.hospital-stats').forEach(stats => {
+    statsObserver.observe(stats);
+});
+
+// 緊急時の電話番号クリック
+document.addEventListener('click', function(e) {
+    if (e.target.textContent && e.target.textContent.includes('03-1234-5678')) {
+        if (confirm('電話をかけますか？')) {
+            window.location.href = 'tel:03-1234-5678';
+        }
+    }
+});
+
+// ページ読み込み時のアニメーション
+window.addEventListener('load', function() {
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
+        heroContent.style.opacity = '0';
+        heroContent.style.transform = 'translateY(30px)';
+        
+        setTimeout(() => {
+            heroContent.style.transition = 'all 1s ease';
+            heroContent.style.opacity = '1';
+            heroContent.style.transform = 'translateY(0)';
+        }, 300);
+    }
+});`
+  }
+}

@@ -1,0 +1,2295 @@
+import { WebTemplate, TEMPLATE_CATEGORIES } from '../types'
+
+export const restaurantFastfoodTemplate: WebTemplate = {
+  id: 'restaurant-fastfood',
+  title: 'ファストフード店',
+  category: TEMPLATE_CATEGORIES.RESTAURANT,
+  description: 'カジュアルで親しみやすいファストフード店のWebサイトテンプレート',
+  thumbnail: '/template-images/restaurant-fastfood.jpg',
+  features: [
+    'ポップなデザイン',
+    'セットメニュー表示',
+    'デリバリー対応',
+    'モバイルオーダー'
+  ],
+  tags: ['レストラン', 'ファストフード', 'デリバリー', 'テイクアウト', 'カジュアル'],
+  code: {
+    html: `<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger King - 本格ハンバーガー</title>
+</head>
+<body>
+    <div class="page-container">
+        <header class="header">
+            <div class="header-wrapper">
+                <div class="brand">
+                    <div class="brand-logo">
+                        <div class="logo-burger">🍔</div>
+                        <div class="brand-info">
+                            <h1>Burger King</h1>
+                            <span class="brand-tagline">Fast & Delicious</span>
+                        </div>
+                    </div>
+                </div>
+                <nav class="navbar">
+                    <ul class="nav-list">
+                        <li><a href="#home">ホーム</a></li>
+                        <li><a href="#menu">メニュー</a></li>
+                        <li><a href="#deals">お得情報</a></li>
+                        <li><a href="#delivery">デリバリー</a></li>
+                        <li><a href="#stores">店舗</a></li>
+                        <li><a href="#contact">お問い合わせ</a></li>
+                        <li><a href="#order" class="order-btn">今すぐ注文</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section id="home" class="hero">
+                <div class="hero-slider">
+                    <div class="slide active">
+                        <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=1920&h=800&fit=crop" alt="ビッグバーガー" class="slide-image">
+                        <div class="slide-overlay"></div>
+                        <div class="slide-content">
+                            <h2 class="slide-title">NEW! ビッグベーコンバーガー</h2>
+                            <p class="slide-description">厚切りベーコンとジューシーパティの最強コンビ</p>
+                            <div class="slide-price">¥690〜</div>
+                            <button class="slide-cta">今すぐ注文</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-features">
+                    <div class="feature-card">
+                        <div class="feature-icon">🚚</div>
+                        <h3>デリバリー</h3>
+                        <p>30分以内にお届け</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>モバイルオーダー</h3>
+                        <p>アプリで簡単注文</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⏰</div>
+                        <h3>24時間営業</h3>
+                        <p>いつでもお待ちしています</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="menu" class="menu">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">メニュー</h2>
+                        <p class="section-subtitle">こだわりの美味しさをお手頃価格で</p>
+                    </div>
+                    
+                    <div class="menu-tabs">
+                        <button class="menu-tab active" data-category="burgers">🍔 バーガー</button>
+                        <button class="menu-tab" data-category="chicken">🍗 チキン</button>
+                        <button class="menu-tab" data-category="sides">🍟 サイド</button>
+                        <button class="menu-tab" data-category="drinks">🥤 ドリンク</button>
+                        <button class="menu-tab" data-category="desserts">🍰 デザート</button>
+                        <button class="menu-tab" data-category="sets">📦 セット</button>
+                    </div>
+
+                    <div class="menu-content">
+                        <div class="menu-category active" id="burgers">
+                            <div class="menu-grid">
+                                <div class="menu-item popular">
+                                    <div class="item-badge">人気No.1</div>
+                                    <div class="item-image">
+                                        <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=300&fit=crop" alt="ビッグベーコンバーガー">
+                                    </div>
+                                    <div class="item-details">
+                                        <h3>ビッグベーコンバーガー</h3>
+                                        <p class="item-desc">厚切りベーコン、ビーフパティ、レタス、トマト、オニオン</p>
+                                        <div class="item-specs">
+                                            <span class="calorie">650kcal</span>
+                                            <span class="spicy-level">🌶️</span>
+                                        </div>
+                                        <div class="item-price">¥690</div>
+                                        <button class="add-cart-btn">カートに追加</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-image">
+                                        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&h=300&fit=crop" alt="クラシックバーガー">
+                                    </div>
+                                    <div class="item-details">
+                                        <h3>クラシックバーガー</h3>
+                                        <p class="item-desc">シンプルで飽きのこない定番の味</p>
+                                        <div class="item-specs">
+                                            <span class="calorie">480kcal</span>
+                                        </div>
+                                        <div class="item-price">¥490</div>
+                                        <button class="add-cart-btn">カートに追加</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item new">
+                                    <div class="item-badge new-badge">NEW</div>
+                                    <div class="item-image">
+                                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop" alt="スパイシーバーガー">
+                                    </div>
+                                    <div class="item-details">
+                                        <h3>スパイシーチーズバーガー</h3>
+                                        <p class="item-desc">ピリ辛ソースとチーズの絶妙な組み合わせ</p>
+                                        <div class="item-specs">
+                                            <span class="calorie">590kcal</span>
+                                            <span class="spicy-level">🌶️🌶️🌶️</span>
+                                        </div>
+                                        <div class="item-price">¥620</div>
+                                        <button class="add-cart-btn">カートに追加</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-image">
+                                        <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&h=300&fit=crop" alt="ダブルチーズバーガー">
+                                    </div>
+                                    <div class="item-details">
+                                        <h3>ダブルチーズバーガー</h3>
+                                        <p class="item-desc">ダブルパティとチーズでボリューム満点</p>
+                                        <div class="item-specs">
+                                            <span class="calorie">780kcal</span>
+                                        </div>
+                                        <div class="item-price">¥790</div>
+                                        <button class="add-cart-btn">カートに追加</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="menu-category" id="chicken">
+                            <div class="menu-grid">
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>フライドチキン（2ピース）</h3>
+                                        <p class="item-desc">サクサクの衣とジューシーなチキン</p>
+                                        <div class="item-specs">
+                                            <span class="calorie">420kcal</span>
+                                        </div>
+                                        <div class="item-price">¥590</div>
+                                        <button class="add-cart-btn">カートに追加</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>チキンナゲット（6個）</h3>
+                                        <p class="item-desc">お子様にも大人気のナゲット</p>
+                                        <div class="item-specs">
+                                            <span class="calorie">350kcal</span>
+                                        </div>
+                                        <div class="item-price">¥390</div>
+                                        <button class="add-cart-btn">カートに追加</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>スパイシーウィング（4本）</h3>
+                                        <p class="item-desc">ピリ辛ソースが効いた手羽先</p>
+                                        <div class="item-specs">
+                                            <span class="calorie">480kcal</span>
+                                            <span class="spicy-level">🌶️🌶️</span>
+                                        </div>
+                                        <div class="item-price">¥490</div>
+                                        <button class="add-cart-btn">カートに追加</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="menu-category" id="sides">
+                            <div class="menu-grid">
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>フレンチフライ</h3>
+                                        <p class="item-desc">カリカリ食感の定番フライドポテト</p>
+                                        <div class="size-options">
+                                            <span class="size">S ¥190</span>
+                                            <span class="size">M ¥250</span>
+                                            <span class="size">L ¥310</span>
+                                        </div>
+                                        <button class="add-cart-btn">カートに追加</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>オニオンリング</h3>
+                                        <p class="item-desc">サクサクの衣に包まれた甘いオニオン</p>
+                                        <div class="item-specs">
+                                            <span class="calorie">290kcal</span>
+                                        </div>
+                                        <div class="item-price">¥290</div>
+                                        <button class="add-cart-btn">カートに追加</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>コールスロー</h3>
+                                        <p class="item-desc">さっぱりとしたキャベツサラダ</p>
+                                        <div class="item-specs">
+                                            <span class="calorie">120kcal</span>
+                                        </div>
+                                        <div class="item-price">¥190</div>
+                                        <button class="add-cart-btn">カートに追加</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="menu-category" id="drinks">
+                            <div class="menu-grid">
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>コーラ</h3>
+                                        <p class="item-desc">爽快な炭酸の効いたコーラ</p>
+                                        <div class="size-options">
+                                            <span class="size">S ¥150</span>
+                                            <span class="size">M ¥200</span>
+                                            <span class="size">L ¥250</span>
+                                        </div>
+                                        <button class="add-cart-btn">カートに追加</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>オレンジジュース</h3>
+                                        <p class="item-desc">100%果汁のフレッシュジュース</p>
+                                        <div class="item-price">¥250</div>
+                                        <button class="add-cart-btn">カートに追加</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>コーヒー</h3>
+                                        <p class="item-desc">香り豊かなブレンドコーヒー</p>
+                                        <div class="size-options">
+                                            <span class="size">S ¥180</span>
+                                            <span class="size">M ¥220</span>
+                                        </div>
+                                        <button class="add-cart-btn">カートに追加</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="menu-category" id="desserts">
+                            <div class="menu-grid">
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>アップルパイ</h3>
+                                        <p class="item-desc">サクサクのパイ生地と甘いりんご</p>
+                                        <div class="item-specs">
+                                            <span class="calorie">280kcal</span>
+                                        </div>
+                                        <div class="item-price">¥250</div>
+                                        <button class="add-cart-btn">カートに追加</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>ソフトクリーム</h3>
+                                        <p class="item-desc">なめらかで濃厚なバニラソフト</p>
+                                        <div class="item-specs">
+                                            <span class="calorie">190kcal</span>
+                                        </div>
+                                        <div class="item-price">¥190</div>
+                                        <button class="add-cart-btn">カートに追加</button>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>チョコレートクッキー</h3>
+                                        <p class="item-desc">チョコチップたっぷりのクッキー</p>
+                                        <div class="item-specs">
+                                            <span class="calorie">320kcal</span>
+                                        </div>
+                                        <div class="item-price">¥220</div>
+                                        <button class="add-cart-btn">カートに追加</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="menu-category" id="sets">
+                            <div class="menu-grid sets-grid">
+                                <div class="set-item">
+                                    <div class="set-header">
+                                        <h3>ビッグベーコンセット</h3>
+                                        <div class="savings">¥150お得！</div>
+                                    </div>
+                                    <div class="set-contents">
+                                        <div class="set-main">🍔 ビッグベーコンバーガー</div>
+                                        <div class="set-side">🍟 フレンチフライ（M）</div>
+                                        <div class="set-drink">🥤 ドリンク（M）</div>
+                                    </div>
+                                    <div class="set-price">
+                                        <span class="original-price">¥1,140</span>
+                                        <span class="set-price-main">¥990</span>
+                                    </div>
+                                    <button class="add-cart-btn">カートに追加</button>
+                                </div>
+
+                                <div class="set-item popular">
+                                    <div class="item-badge">人気</div>
+                                    <div class="set-header">
+                                        <h3>クラシックセット</h3>
+                                        <div class="savings">¥120お得！</div>
+                                    </div>
+                                    <div class="set-contents">
+                                        <div class="set-main">🍔 クラシックバーガー</div>
+                                        <div class="set-side">🍟 フレンチフライ（M）</div>
+                                        <div class="set-drink">🥤 ドリンク（M）</div>
+                                    </div>
+                                    <div class="set-price">
+                                        <span class="original-price">¥940</span>
+                                        <span class="set-price-main">¥820</span>
+                                    </div>
+                                    <button class="add-cart-btn">カートに追加</button>
+                                </div>
+
+                                <div class="set-item">
+                                    <div class="set-header">
+                                        <h3>チキンセット</h3>
+                                        <div class="savings">¥140お得！</div>
+                                    </div>
+                                    <div class="set-contents">
+                                        <div class="set-main">🍗 フライドチキン（2ピース）</div>
+                                        <div class="set-side">🍟 フレンチフライ（M）</div>
+                                        <div class="set-drink">🥤 ドリンク（M）</div>
+                                    </div>
+                                    <div class="set-price">
+                                        <span class="original-price">¥1,040</span>
+                                        <span class="set-price-main">¥900</span>
+                                    </div>
+                                    <button class="add-cart-btn">カートに追加</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="deals" class="deals">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">お得情報</h2>
+                        <p class="section-subtitle">期間限定のスペシャルオファー</p>
+                    </div>
+                    
+                    <div class="deals-grid">
+                        <div class="deal-card hot">
+                            <div class="deal-badge">HOT🔥</div>
+                            <div class="deal-image">
+                                <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=300&h=200&fit=crop" alt="半額キャンペーン">
+                            </div>
+                            <div class="deal-content">
+                                <h3>バーガー半額キャンペーン</h3>
+                                <p class="deal-desc">平日15:00-17:00限定！すべてのバーガーが半額に</p>
+                                <div class="deal-period">期間: 2月1日〜2月28日</div>
+                                <div class="deal-condition">※テイクアウトのみ対象</div>
+                            </div>
+                        </div>
+
+                        <div class="deal-card">
+                            <div class="deal-image">
+                                <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=300&h=200&fit=crop" alt="学割">
+                            </div>
+                            <div class="deal-content">
+                                <h3>学生応援キャンペーン</h3>
+                                <p class="deal-desc">学生証提示で全商品10%OFF</p>
+                                <div class="deal-period">常時開催中</div>
+                                <div class="deal-condition">※学生証の提示が必要</div>
+                            </div>
+                        </div>
+
+                        <div class="deal-card">
+                            <div class="deal-image">
+                                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300&h=200&fit=crop" alt="ファミリーパック">
+                            </div>
+                            <div class="deal-content">
+                                <h3>ファミリーパック</h3>
+                                <p class="deal-desc">4人分のセットメニューが特別価格</p>
+                                <div class="deal-price">¥2,980（通常¥3,500）</div>
+                                <div class="deal-condition">※バーガー4個、ポテト4個、ドリンク4個</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="delivery" class="delivery">
+                <div class="container">
+                    <div class="delivery-content">
+                        <div class="delivery-info">
+                            <h2 class="section-title">デリバリー・テイクアウト</h2>
+                            <p class="delivery-lead">お家でも、職場でも、美味しいハンバーガーをお楽しみください</p>
+                            
+                            <div class="delivery-options">
+                                <div class="option-card">
+                                    <div class="option-icon">🚚</div>
+                                    <h3>デリバリー</h3>
+                                    <ul class="option-features">
+                                        <li>配達時間: 20-30分</li>
+                                        <li>配達料: ¥300（¥1,500以上で無料）</li>
+                                        <li>配達エリア: 店舗から3km圏内</li>
+                                        <li>営業時間: 11:00-23:00</li>
+                                    </ul>
+                                    <button class="option-btn delivery-btn">デリバリー注文</button>
+                                </div>
+                                
+                                <div class="option-card">
+                                    <div class="option-icon">🛍️</div>
+                                    <h3>テイクアウト</h3>
+                                    <ul class="option-features">
+                                        <li>待ち時間: 5-10分</li>
+                                        <li>事前注文可能</li>
+                                        <li>全店舗で対応</li>
+                                        <li>営業時間: 6:00-24:00</li>
+                                    </ul>
+                                    <button class="option-btn takeout-btn">テイクアウト注文</button>
+                                </div>
+                            </div>
+                            
+                            <div class="mobile-app">
+                                <h3>📱 モバイルアプリでもっと便利に</h3>
+                                <p>アプリ限定のクーポンや事前注文機能をご利用いただけます。</p>
+                                <div class="app-buttons">
+                                    <button class="app-btn ios">App Store</button>
+                                    <button class="app-btn android">Google Play</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="delivery-visual">
+                            <div class="visual-main">
+                                <img src="https://images.unsplash.com/photo-1556909086-f18c79d4a7ea?w=600&h=400&fit=crop" alt="デリバリー">
+                            </div>
+                            <div class="delivery-stats">
+                                <div class="stat-box">
+                                    <span class="stat-number">20-30</span>
+                                    <span class="stat-label">分で配達</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-number">24h</span>
+                                    <span class="stat-label">営業店舗あり</span>
+                                </div>
+                                <div class="stat-box">
+                                    <span class="stat-number">95%</span>
+                                    <span class="stat-label">満足度</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="stores" class="stores">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">店舗案内</h2>
+                        <p class="section-subtitle">お近くの店舗をお探しください</p>
+                    </div>
+                    
+                    <div class="store-finder">
+                        <div class="finder-controls">
+                            <input type="text" class="location-input" placeholder="地域名や駅名を入力">
+                            <button class="search-btn">検索</button>
+                        </div>
+                    </div>
+                    
+                    <div class="stores-list">
+                        <div class="store-card">
+                            <div class="store-info">
+                                <h3>渋谷センター街店</h3>
+                                <div class="store-address">〒150-0043 東京都渋谷区道玄坂2-6-17</div>
+                                <div class="store-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">営業時間</span>
+                                        <span class="detail-value">24時間営業</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">電話</span>
+                                        <span class="detail-value">03-1234-5678</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">アクセス</span>
+                                        <span class="detail-value">JR渋谷駅 徒歩3分</span>
+                                    </div>
+                                </div>
+                                <div class="store-services">
+                                    <span class="service-tag">デリバリー</span>
+                                    <span class="service-tag">24h営業</span>
+                                    <span class="service-tag">WiFi</span>
+                                </div>
+                            </div>
+                            <div class="store-image">
+                                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=300&h=200&fit=crop" alt="渋谷センター街店">
+                            </div>
+                        </div>
+
+                        <div class="store-card">
+                            <div class="store-info">
+                                <h3>新宿南口店</h3>
+                                <div class="store-address">〒160-0022 東京都新宿区新宿3-35-7</div>
+                                <div class="store-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">営業時間</span>
+                                        <span class="detail-value">6:00-24:00</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">電話</span>
+                                        <span class="detail-value">03-2345-6789</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">アクセス</span>
+                                        <span class="detail-value">JR新宿駅 南口徒歩1分</span>
+                                    </div>
+                                </div>
+                                <div class="store-services">
+                                    <span class="service-tag">デリバリー</span>
+                                    <span class="service-tag">禁煙</span>
+                                    <span class="service-tag">WiFi</span>
+                                </div>
+                            </div>
+                            <div class="store-image">
+                                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=300&h=200&fit=crop" alt="新宿南口店">
+                            </div>
+                        </div>
+
+                        <div class="store-card">
+                            <div class="store-info">
+                                <h3>池袋東口店</h3>
+                                <div class="store-address">〒170-0013 東京都豊島区東池袋1-5-6</div>
+                                <div class="store-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">営業時間</span>
+                                        <span class="detail-value">7:00-23:00</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">電話</span>
+                                        <span class="detail-value">03-3456-7890</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">アクセス</span>
+                                        <span class="detail-value">JR池袋駅 東口徒歩2分</span>
+                                    </div>
+                                </div>
+                                <div class="store-services">
+                                    <span class="service-tag">テイクアウト</span>
+                                    <span class="service-tag">禁煙</span>
+                                    <span class="service-tag">キッズ席</span>
+                                </div>
+                            </div>
+                            <div class="store-image">
+                                <img src="https://images.unsplash.com/photo-1524634126442-357e0eac3c14?w=300&h=200&fit=crop" alt="池袋東口店">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="contact">
+                <div class="container">
+                    <div class="section-header">
+                        <h2 class="section-title">お問い合わせ</h2>
+                        <p class="section-subtitle">ご質問・ご要望はお気軽にお寄せください</p>
+                    </div>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-card">
+                            <div class="contact-icon">📞</div>
+                            <h3>お電話でのお問い合わせ</h3>
+                            <div class="contact-info">
+                                <div class="phone-number">0120-123-456</div>
+                                <div class="phone-hours">受付時間: 9:00-18:00（年中無休）</div>
+                            </div>
+                            <p>商品に関するご質問やご意見はお電話にてお受けしております。</p>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-icon">✉️</div>
+                            <h3>メールでのお問い合わせ</h3>
+                            <div class="contact-info">
+                                <div class="email-address">info@burgerking.jp</div>
+                                <div class="response-time">通常24時間以内に返信</div>
+                            </div>
+                            <p>詳細なご質問やご要望はメールでもお受けしております。</p>
+                        </div>
+                        
+                        <div class="contact-card">
+                            <div class="contact-icon">💬</div>
+                            <h3>チャットサポート</h3>
+                            <div class="contact-info">
+                                <div class="chat-hours">対応時間: 10:00-22:00</div>
+                                <button class="chat-btn">チャットを開始</button>
+                            </div>
+                            <p>リアルタイムでのサポートをご希望の方はチャットをご利用ください。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="order" class="order-section">
+                <div class="container">
+                    <div class="order-cta">
+                        <h2>今すぐ注文して、美味しいハンバーガーをお楽しみください！</h2>
+                        <div class="order-buttons">
+                            <button class="order-btn delivery">🚚 デリバリー注文</button>
+                            <button class="order-btn takeout">🛍️ テイクアウト注文</button>
+                            <button class="order-btn app">📱 アプリで注文</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <div class="footer-logo">
+                            <div class="logo-burger">🍔</div>
+                            <div class="brand-info">
+                                <h3>Burger King</h3>
+                                <span>Fast & Delicious</span>
+                            </div>
+                        </div>
+                        <p class="footer-description">
+                            1985年創業以来、本格的なハンバーガーをお手頃価格でお届けしています。
+                        </p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <div class="link-column">
+                            <h4>メニュー</h4>
+                            <ul>
+                                <li><a href="#menu">バーガー</a></li>
+                                <li><a href="#menu">チキン</a></li>
+                                <li><a href="#menu">サイド</a></li>
+                                <li><a href="#menu">セット</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="link-column">
+                            <h4>サービス</h4>
+                            <ul>
+                                <li><a href="#delivery">デリバリー</a></li>
+                                <li><a href="#delivery">テイクアウト</a></li>
+                                <li><a href="#deals">お得情報</a></li>
+                                <li><a href="#stores">店舗検索</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="link-column">
+                            <h4>会社情報</h4>
+                            <ul>
+                                <li><a href="#">企業情報</a></li>
+                                <li><a href="#">採用情報</a></li>
+                                <li><a href="#">ニュース</a></li>
+                                <li><a href="#contact">お問い合わせ</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="link-column">
+                            <h4>SNS</h4>
+                            <div class="social-links">
+                                <a href="#" class="social-link twitter">Twitter</a>
+                                <a href="#" class="social-link instagram">Instagram</a>
+                                <a href="#" class="social-link facebook">Facebook</a>
+                                <a href="#" class="social-link youtube">YouTube</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <div class="footer-legal">
+                        <a href="#">プライバシーポリシー</a>
+                        <a href="#">利用規約</a>
+                        <a href="#">特定商取引法</a>
+                    </div>
+                    <p class="copyright">© 2025 Burger King Japan. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>`,
+    css: `@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One:wght@400&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    color: #2c3e50;
+    background: #fff;
+    line-height: 1.6;
+}
+
+.page-container {
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    background: #fff;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 3px solid #e74c3c;
+}
+
+.header-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-burger {
+    font-size: 3rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+.brand-info h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.5rem;
+    color: #e74c3c;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.brand-tagline {
+    font-size: 0.9rem;
+    color: #f39c12;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-list a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-list a:hover {
+    color: #e74c3c;
+    transform: translateY(-2px);
+}
+
+.order-btn {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white !important;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4); }
+    50% { box-shadow: 0 4px 25px rgba(231, 76, 60, 0.6); }
+    100% { box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4); }
+}
+
+.order-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(231, 76, 60, 0.5);
+}
+
+/* Hero */
+.hero {
+    margin-top: 80px;
+    position: relative;
+}
+
+.hero-slider {
+    height: 70vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(231, 76, 60, 0.8) 0%, rgba(192, 57, 43, 0.6) 100%);
+}
+
+.slide-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    max-width: 600px;
+    padding: 0 2rem;
+}
+
+.slide-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+}
+
+.slide-description {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    opacity: 0.95;
+}
+
+.slide-price {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #f1c40f;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.slide-cta {
+    background: #f1c40f;
+    color: #2c3e50;
+    padding: 1.2rem 3rem;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(241, 196, 15, 0.4);
+}
+
+.slide-cta:hover {
+    background: #f39c12;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(241, 196, 15, 0.5);
+}
+
+.hero-features {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 3rem 2rem;
+    background: #ecf0f1;
+}
+
+.feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    min-width: 200px;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    font-size: 1.3rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.feature-card p {
+    color: #7f8c8d;
+    font-weight: 500;
+}
+
+/* Common Styles */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+section {
+    padding: 5rem 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 3rem;
+    color: #e74c3c;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: #7f8c8d;
+    font-weight: 500;
+}
+
+/* Menu */
+.menu {
+    background: #f8f9fa;
+}
+
+.menu-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.menu-tab {
+    padding: 1rem 2rem;
+    background: white;
+    border: 3px solid #e74c3c;
+    color: #e74c3c;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: 'Nunito', sans-serif;
+}
+
+.menu-tab.active,
+.menu-tab:hover {
+    background: #e74c3c;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(231, 76, 60, 0.4);
+}
+
+.menu-category {
+    display: none;
+}
+
+.menu-category.active {
+    display: block;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+}
+
+.sets-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.menu-item {
+    background: white;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.menu-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.menu-item.popular,
+.menu-item.new {
+    border: 3px solid #f1c40f;
+}
+
+.item-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #e74c3c;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    z-index: 1;
+}
+
+.new-badge {
+    background: #27ae60;
+}
+
+.item-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.menu-item:hover .item-image img {
+    transform: scale(1.1);
+}
+
+.item-details {
+    padding: 2rem;
+}
+
+.item-details h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: #2c3e50;
+}
+
+.item-desc {
+    color: #7f8c8d;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.item-specs {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.calorie {
+    background: #3498db;
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.spicy-level {
+    font-size: 1rem;
+}
+
+.size-options {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+}
+
+.size {
+    background: #ecf0f1;
+    color: #2c3e50;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.item-price {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #e74c3c;
+    margin-bottom: 1rem;
+}
+
+.add-cart-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #f1c40f 0%, #f39c12 100%);
+    color: #2c3e50;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 15px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Nunito', sans-serif;
+}
+
+.add-cart-btn:hover {
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+    transform: scale(1.02);
+}
+
+/* Set Menu */
+.set-item {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 25px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.set-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.set-item.popular {
+    border: 3px solid #f1c40f;
+}
+
+.set-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.set-header h3 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+.savings {
+    background: #e74c3c;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.set-contents {
+    margin-bottom: 2rem;
+}
+
+.set-main,
+.set-side,
+.set-drink {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #ecf0f1;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.set-drink {
+    border-bottom: none;
+}
+
+.set-price {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #95a5a6;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.set-price-main {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: #e74c3c;
+}
+
+/* Deals */
+.deals {
+    background: white;
+}
+
+.deals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+}
+
+.deal-card {
+    background: #f8f9fa;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.deal-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.deal-card.hot {
+    border: 3px solid #e74c3c;
+}
+
+.deal-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #e74c3c;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    z-index: 1;
+}
+
+.deal-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.deal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.deal-card:hover .deal-image img {
+    transform: scale(1.1);
+}
+
+.deal-content {
+    padding: 2rem;
+}
+
+.deal-content h3 {
+    font-size: 1.4rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.deal-desc {
+    color: #7f8c8d;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.deal-period {
+    color: #e74c3c;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.deal-price {
+    font-size: 1.5rem;
+    color: #27ae60;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.deal-condition {
+    color: #95a5a6;
+    font-size: 0.9rem;
+}
+
+/* Delivery */
+.delivery {
+    background: #f8f9fa;
+}
+
+.delivery-content {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.delivery-lead {
+    font-size: 1.3rem;
+    color: #7f8c8d;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+}
+
+.delivery-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.option-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.option-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.option-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.option-card h3 {
+    font-size: 1.4rem;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.option-features {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.option-features li {
+    padding: 0.5rem 0;
+    color: #7f8c8d;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.option-features li:last-child {
+    border-bottom: none;
+}
+
+.option-btn {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Nunito', sans-serif;
+}
+
+.delivery-btn {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+}
+
+.takeout-btn {
+    background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+    color: white;
+}
+
+.option-btn:hover {
+    transform: scale(1.05);
+}
+
+.mobile-app {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 25px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-app h3 {
+    font-size: 1.4rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.mobile-app p {
+    color: #7f8c8d;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.app-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.app-btn {
+    flex: 1;
+    padding: 1rem;
+    border: 2px solid #2c3e50;
+    background: transparent;
+    color: #2c3e50;
+    border-radius: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Nunito', sans-serif;
+}
+
+.app-btn:hover {
+    background: #2c3e50;
+    color: white;
+}
+
+.visual-main img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 25px;
+    margin-bottom: 2rem;
+}
+
+.delivery-stats {
+    display: flex;
+    justify-content: space-around;
+    background: white;
+    padding: 2rem;
+    border-radius: 25px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.stat-box {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #e74c3c;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    margin-top: 0.3rem;
+}
+
+/* Stores */
+.stores {
+    background: white;
+}
+
+.store-finder {
+    margin-bottom: 3rem;
+}
+
+.finder-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.location-input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: 2px solid #ecf0f1;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-family: 'Nunito', sans-serif;
+}
+
+.location-input:focus {
+    outline: none;
+    border-color: #e74c3c;
+}
+
+.search-btn {
+    background: #e74c3c;
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Nunito', sans-serif;
+}
+
+.search-btn:hover {
+    background: #c0392b;
+    transform: scale(1.05);
+}
+
+.stores-list {
+    display: grid;
+    gap: 2rem;
+}
+
+.store-card {
+    background: #f8f9fa;
+    border-radius: 25px;
+    padding: 2.5rem;
+    display: flex;
+    gap: 2rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.store-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.store-info {
+    flex: 1;
+}
+
+.store-card h3 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.store-address {
+    color: #7f8c8d;
+    margin-bottom: 2rem;
+}
+
+.store-details {
+    margin-bottom: 2rem;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.detail-value {
+    color: #7f8c8d;
+}
+
+.store-services {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.service-tag {
+    background: #e74c3c;
+    color: white;
+    padding: 0.3rem 1rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.store-image {
+    flex-shrink: 0;
+    width: 200px;
+}
+
+.store-image img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+/* Contact */
+.contact {
+    background: #f8f9fa;
+}
+
+.contact-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+}
+
+.contact-card {
+    background: white;
+    padding: 3rem 2rem;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.contact-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.contact-card h3 {
+    font-size: 1.4rem;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.contact-info {
+    margin-bottom: 2rem;
+}
+
+.phone-number {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #e74c3c;
+    margin-bottom: 0.5rem;
+}
+
+.phone-hours,
+.response-time,
+.chat-hours {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.email-address {
+    font-size: 1.2rem;
+    color: #3498db;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.chat-btn {
+    background: #27ae60;
+    color: white;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Nunito', sans-serif;
+}
+
+.chat-btn:hover {
+    background: #229954;
+    transform: scale(1.05);
+}
+
+.contact-card p {
+    color: #7f8c8d;
+    line-height: 1.6;
+}
+
+/* Order Section */
+.order-section {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    color: white;
+    text-align: center;
+}
+
+.order-cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    font-weight: 700;
+}
+
+.order-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.order-buttons .order-btn {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 1.5rem 3rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Nunito', sans-serif;
+}
+
+.order-buttons .order-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer */
+.footer {
+    background: #2c3e50;
+    color: #bdc3c7;
+    padding: 4rem 0 2rem;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.footer-main {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-brand {
+    max-width: 400px;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.footer-logo .logo-burger {
+    font-size: 2.5rem;
+}
+
+.footer-logo h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2rem;
+    color: #e74c3c;
+}
+
+.footer-logo span {
+    font-size: 0.8rem;
+    color: #f39c12;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-description {
+    line-height: 1.7;
+    color: #95a5a6;
+}
+
+.link-column h4 {
+    color: #e74c3c;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.link-column ul {
+    list-style: none;
+}
+
+.link-column li {
+    margin-bottom: 0.8rem;
+}
+
+.link-column a {
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.link-column a:hover {
+    color: #e74c3c;
+}
+
+.social-links {
+    display: grid;
+    gap: 0.8rem;
+}
+
+.social-link {
+    color: #bdc3c7;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.social-link:hover {
+    color: #e74c3c;
+}
+
+.footer-bottom {
+    border-top: 1px solid #34495e;
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-legal {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-legal a {
+    color: #95a5a6;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-legal a:hover {
+    color: #bdc3c7;
+}
+
+.copyright {
+    color: #95a5a6;
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-list {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .slide-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-features {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .menu-tabs {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 1rem;
+    }
+    
+    .menu-grid,
+    .sets-grid,
+    .deals-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .delivery-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .delivery-options {
+        grid-template-columns: 1fr;
+    }
+    
+    .app-buttons {
+        flex-direction: column;
+    }
+    
+    .store-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .store-image {
+        width: 100%;
+    }
+    
+    .order-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .footer-main {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .footer-legal {
+        justify-content: center;
+    }
+}`,
+    js: `// メニュータブ機能
+document.querySelectorAll('.menu-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+        // すべてのタブからactiveクラスを削除
+        document.querySelectorAll('.menu-tab').forEach(t => {
+            t.classList.remove('active');
+        });
+        
+        // すべてのメニューカテゴリを非表示
+        document.querySelectorAll('.menu-category').forEach(category => {
+            category.classList.remove('active');
+        });
+        
+        // クリックされたタブにactiveクラス追加
+        this.classList.add('active');
+        
+        // 対応するカテゴリを表示
+        const categoryId = this.getAttribute('data-category');
+        document.getElementById(categoryId).classList.add('active');
+    });
+});
+
+// スムーズスクロール
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            const targetPosition = target.offsetTop - headerHeight;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// ヒーロースライドCTA
+document.querySelector('.slide-cta').addEventListener('click', function() {
+    document.querySelector('#order').scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
+});
+
+// 注文ボタンのイベント
+document.querySelectorAll('.order-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const btnText = this.textContent;
+        alert(\`\${btnText}システムへ移動します（実装予定）\`);
+    });
+});
+
+// カートに追加ボタン
+document.querySelectorAll('.add-cart-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const itemName = this.closest('.menu-item, .set-item').querySelector('h3').textContent;
+        
+        // ボタンアニメーション
+        this.style.background = '#27ae60';
+        this.textContent = '追加しました！';
+        this.style.transform = 'scale(1.05)';
+        
+        setTimeout(() => {
+            this.style.background = '';
+            this.textContent = 'カートに追加';
+            this.style.transform = '';
+        }, 1500);
+    });
+});
+
+// ヘッダーのスクロール効果
+window.addEventListener('scroll', function() {
+    const header = document.querySelector('.header');
+    if (window.scrollY > 100) {
+        header.style.background = 'rgba(255, 255, 255, 0.98)';
+        header.style.boxShadow = '0 2px 30px rgba(0, 0, 0, 0.15)';
+    } else {
+        header.style.background = '#fff';
+        header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+    }
+});
+
+// デリバリー・テイクアウトボタン
+document.querySelectorAll('.option-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const optionType = this.classList.contains('delivery-btn') ? 'デリバリー' : 'テイクアウト';
+        alert(\`\${optionType}注文システムへ移動します（実装予定）\`);
+    });
+});
+
+// アプリダウンロードボタン
+document.querySelectorAll('.app-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const platform = this.classList.contains('ios') ? 'App Store' : 'Google Play';
+        alert(\`\${platform}へ移動します（実装予定）\`);
+    });
+});
+
+// 店舗検索
+document.querySelector('.search-btn').addEventListener('click', function() {
+    const location = document.querySelector('.location-input').value;
+    if (location.trim()) {
+        alert(\`"\${location}"周辺の店舗を検索します（実装予定）\`);
+    } else {
+        alert('地域名や駅名を入力してください');
+    }
+});
+
+// 店舗検索のエンターキー対応
+document.querySelector('.location-input').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        document.querySelector('.search-btn').click();
+    }
+});
+
+// チャットボタン
+document.querySelector('.chat-btn').addEventListener('click', function() {
+    alert('チャットサポートを開始します（実装予定）');
+});
+
+// 要素のアニメーション
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// アニメーション対象要素の初期化
+document.querySelectorAll('.menu-item, .set-item, .deal-card, .store-card, .contact-card').forEach(item => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(50px)';
+    item.style.transition = 'all 0.8s ease';
+    observer.observe(item);
+});
+
+// メニューアイテムのホバー効果強化
+document.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('mouseenter', function() {
+        const badge = this.querySelector('.item-badge');
+        if (badge) {
+            badge.style.transform = 'scale(1.1) rotate(5deg)';
+            badge.style.transition = 'transform 0.3s ease';
+        }
+    });
+    
+    item.addEventListener('mouseleave', function() {
+        const badge = this.querySelector('.item-badge');
+        if (badge) {
+            badge.style.transform = 'scale(1) rotate(0deg)';
+        }
+    });
+});
+
+// スパイシーレベルのインタラクション
+document.querySelectorAll('.spicy-level').forEach(spicy => {
+    spicy.addEventListener('click', function() {
+        const level = this.textContent.length;
+        let message = '';
+        
+        switch(level) {
+            case 1:
+                message = 'マイルドな辛さです';
+                break;
+            case 2:
+                message = '中程度の辛さです';
+                break;
+            case 3:
+                message = 'かなり辛いです！';
+                break;
+            default:
+                message = 'お辛さについてお尋ねください';
+        }
+        
+        alert(message);
+    });
+    
+    spicy.style.cursor = 'pointer';
+});
+
+// サイズオプションのクリック効果
+document.querySelectorAll('.size').forEach(size => {
+    size.addEventListener('click', function() {
+        // 同じメニューアイテム内の他のサイズをリセット
+        const parent = this.closest('.size-options');
+        parent.querySelectorAll('.size').forEach(s => {
+            s.style.background = '#ecf0f1';
+            s.style.color = '#2c3e50';
+        });
+        
+        // 選択されたサイズをハイライト
+        this.style.background = '#e74c3c';
+        this.style.color = 'white';
+        this.style.transition = 'all 0.3s ease';
+    });
+    
+    size.style.cursor = 'pointer';
+});
+
+// 統計数値のカウントアップアニメーション
+function animateStats() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    
+    statNumbers.forEach(stat => {
+        const text = stat.textContent;
+        
+        if (text.includes('-')) {
+            // "20-30" のような範囲の場合
+            const [start, end] = text.split('-').map(n => parseInt(n));
+            let current = 0;
+            const timer = setInterval(() => {
+                current += 1;
+                if (current >= start) {
+                    stat.textContent = \`\${start}-\${end}\`;
+                    clearInterval(timer);
+                } else {
+                    stat.textContent = \`\${current}-\${current + 10}\`;
+                }
+            }, 50);
+        } else if (text.includes('%')) {
+            // パーセンテージの場合
+            const number = parseInt(text.replace('%', ''));
+            let current = 0;
+            const timer = setInterval(() => {
+                current += 2;
+                if (current >= number) {
+                    stat.textContent = number + '%';
+                    clearInterval(timer);
+                } else {
+                    stat.textContent = current + '%';
+                }
+            }, 30);
+        } else if (text.includes('h')) {
+            // "24h" の場合は特別処理
+            let current = 0;
+            const timer = setInterval(() => {
+                current += 1;
+                if (current >= 24) {
+                    stat.textContent = '24h';
+                    clearInterval(timer);
+                } else {
+                    stat.textContent = current + 'h';
+                }
+            }, 50);
+        }
+    });
+}
+
+// 統計セクションが見えたときにアニメーション開始
+const statsObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateStats();
+            statsObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+const deliveryStats = document.querySelector('.delivery-stats');
+if (deliveryStats) {
+    statsObserver.observe(deliveryStats);
+}
+
+// 電話番号のクリック効果
+document.querySelectorAll('.phone-number').forEach(phone => {
+    phone.addEventListener('click', function() {
+        this.style.transform = 'scale(1.1)';
+        this.style.transition = 'transform 0.2s ease';
+        
+        setTimeout(() => {
+            this.style.transform = 'scale(1)';
+        }, 200);
+    });
+});
+
+// ディールカードの特別効果
+document.querySelectorAll('.deal-card.hot').forEach(card => {
+    // HOTなディールカードに炎のエフェクトを追加
+    setInterval(() => {
+        const badge = card.querySelector('.deal-badge');
+        if (badge) {
+            badge.style.boxShadow = \`0 0 \${Math.random() * 20 + 10}px rgba(231, 76, 60, 0.8)\`;
+        }
+    }, 500);
+});
+
+// セットアイテムの節約額を強調
+document.querySelectorAll('.savings').forEach(saving => {
+    saving.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.1) rotate(-5deg)';
+        this.style.transition = 'transform 0.3s ease';
+    });
+    
+    saving.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1) rotate(0deg)';
+    });
+});`
+  }
+}

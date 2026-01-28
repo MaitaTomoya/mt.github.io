@@ -1,0 +1,2296 @@
+import { WebTemplate, TEMPLATE_CATEGORIES } from '../types'
+
+export const restaurantVegetarianTemplate: WebTemplate = {
+  id: 'restaurant-vegetarian',
+  title: 'ベジタリアンレストラン',
+  category: TEMPLATE_CATEGORIES.RESTAURANT,
+  description: '植物性食材にこだわったヘルシーなレストランWebサイトテンプレート',
+  thumbnail: '/template-images/restaurant-vegetarian.jpg',
+  features: [
+    'ナチュラルなデザイン',
+    'オーガニック食材紹介',
+    'ヴィーガン対応メニュー',
+    '健康志向アピール'
+  ],
+  tags: ['レストラン', 'ベジタリアン', 'ヴィーガン', 'オーガニック', 'ヘルシー'],
+  code: {
+    html: `<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Garden - ベジタリアンレストラン</title>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="header-inner">
+                <div class="logo">
+                    <div class="logo-icon">🌱</div>
+                    <div class="logo-text">
+                        <h1>Green Garden</h1>
+                        <span class="logo-tagline">Plant-Based Restaurant</span>
+                    </div>
+                </div>
+                <nav class="navigation">
+                    <ul class="nav-menu">
+                        <li><a href="#home">ホーム</a></li>
+                        <li><a href="#philosophy">理念</a></li>
+                        <li><a href="#menu">メニュー</a></li>
+                        <li><a href="#ingredients">食材</a></li>
+                        <li><a href="#wellness">ウェルネス</a></li>
+                        <li><a href="#events">イベント</a></li>
+                        <li><a href="#contact">コンタクト</a></li>
+                        <li><a href="#booking" class="booking-btn">予約</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>
+            <section id="home" class="hero">
+                <div class="hero-background">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1920&h=800&fit=crop" alt="Organic vegetables" class="hero-image">
+                    <div class="hero-overlay"></div>
+                </div>
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h2 class="hero-title">Green Garden</h2>
+                        <p class="hero-subtitle">自然の恵みを活かした植物性料理</p>
+                        <div class="hero-features">
+                            <div class="feature-badge">
+                                <span class="badge-icon">🌿</span>
+                                <span class="badge-text">100% Plant-Based</span>
+                            </div>
+                            <div class="feature-badge">
+                                <span class="badge-icon">🌾</span>
+                                <span class="badge-text">オーガニック食材</span>
+                            </div>
+                            <div class="feature-badge">
+                                <span class="badge-icon">💚</span>
+                                <span class="badge-text">環境に優しい</span>
+                            </div>
+                        </div>
+                        <button class="hero-cta">メニューを見る</button>
+                    </div>
+                </div>
+                <div class="hero-decoration">
+                    <div class="leaf-animation">🍃</div>
+                </div>
+            </section>
+
+            <section id="philosophy" class="philosophy">
+                <div class="container">
+                    <div class="philosophy-layout">
+                        <div class="philosophy-content">
+                            <h2 class="section-title">私たちの理念</h2>
+                            <div class="title-decoration">🌱</div>
+                            <p class="philosophy-lead">地球と身体に優しい、持続可能な食文化を</p>
+                            
+                            <div class="philosophy-text">
+                                <p>Green Gardenでは、植物性食材のみを使用した料理を通じて、健康で持続可能な食文化の普及を目指しています。</p>
+                                <p>地元の有機農家と直接契約し、農薬や化学肥料を使わない新鮮な野菜や果物を使用。動物性食品を使わないことで、環境負荷を軽減し、動物の福祉にも配慮しています。</p>
+                                <p>美味しさと栄養を両立させた植物性料理で、すべての人に健康的な食事の喜びをお届けします。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="philosophy-visual">
+                            <div class="visual-card">
+                                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&h=400&fit=crop" alt="オーガニック野菜">
+                                <div class="card-overlay">
+                                    <h3>オーガニック食材</h3>
+                                    <p>農薬不使用の安全な食材</p>
+                                </div>
+                            </div>
+                            
+                            <div class="values-grid">
+                                <div class="value-item">
+                                    <div class="value-icon">🌍</div>
+                                    <h4>地球に優しい</h4>
+                                    <p>持続可能な農業を支援</p>
+                                </div>
+                                <div class="value-item">
+                                    <div class="value-icon">❤️</div>
+                                    <h4>健康第一</h4>
+                                    <p>栄養バランスを重視</p>
+                                </div>
+                                <div class="value-item">
+                                    <div class="value-icon">🐾</div>
+                                    <h4>動物愛護</h4>
+                                    <p>動物性食品を使用しない</p>
+                                </div>
+                                <div class="value-item">
+                                    <div class="value-icon">🌱</div>
+                                    <h4>地産地消</h4>
+                                    <p>地元農家を支援</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="menu" class="menu">
+                <div class="container">
+                    <h2 class="section-title">メニュー</h2>
+                    <div class="title-decoration">🍽️</div>
+                    <p class="menu-intro">季節の野菜と果物を使った、彩り豊かな植物性料理</p>
+                    
+                    <div class="menu-navigation">
+                        <button class="menu-tab active" data-menu="bowls">パワーボウル</button>
+                        <button class="menu-tab" data-menu="salad">サラダ</button>
+                        <button class="menu-tab" data-menu="main">メイン料理</button>
+                        <button class="menu-tab" data-menu="dessert">デザート</button>
+                        <button class="menu-tab" data-menu="drink">ドリンク</button>
+                    </div>
+
+                    <div class="menu-sections">
+                        <div class="menu-section active" id="bowls">
+                            <div class="menu-grid">
+                                <div class="menu-item featured">
+                                    <div class="item-badge">人気No.1</div>
+                                    <div class="item-image">
+                                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" alt="レインボーボウル">
+                                        <div class="diet-tags">
+                                            <span class="tag vegan">ヴィーガン</span>
+                                            <span class="tag gluten-free">グルテンフリー</span>
+                                        </div>
+                                    </div>
+                                    <div class="item-details">
+                                        <h3>レインボーボウル</h3>
+                                        <p class="item-desc">7色の野菜とキヌア、アボカドのパワーボウル。タヒニドレッシング付き</p>
+                                        <div class="nutrition-info">
+                                            <span class="nutrition-item">タンパク質 15g</span>
+                                            <span class="nutrition-item">食物繊維 12g</span>
+                                            <span class="nutrition-item">480kcal</span>
+                                        </div>
+                                        <div class="item-price">¥1,580</div>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-image">
+                                        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=400&h=300&fit=crop" alt="ブッダボウル">
+                                        <div class="diet-tags">
+                                            <span class="tag vegan">ヴィーガン</span>
+                                        </div>
+                                    </div>
+                                    <div class="item-details">
+                                        <h3>ブッダボウル</h3>
+                                        <p class="item-desc">玄米、豆腐、季節野菜のバランスボウル</p>
+                                        <div class="item-price">¥1,380</div>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-image">
+                                        <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=300&fit=crop" alt="アサイーボウル">
+                                        <div class="diet-tags">
+                                            <span class="tag raw">ロー</span>
+                                        </div>
+                                    </div>
+                                    <div class="item-details">
+                                        <h3>アサイーボウル</h3>
+                                        <p class="item-desc">アサイー、フルーツ、ナッツのデトックスボウル</p>
+                                        <div class="item-price">¥1,280</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="menu-section" id="salad">
+                            <div class="menu-grid">
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>ケールサラダ</h3>
+                                        <p class="item-desc">スーパーフードケールとアーモンドのサラダ</p>
+                                        <div class="item-price">¥980</div>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>ビーツとほうれん草のサラダ</h3>
+                                        <p class="item-desc">鉄分豊富な栄養満点サラダ</p>
+                                        <div class="item-price">¥1,080</div>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>キヌアタブレ</h3>
+                                        <p class="item-desc">中東風キヌアサラダ、ハーブたっぷり</p>
+                                        <div class="item-price">¥1,180</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="menu-section" id="main">
+                            <div class="menu-grid">
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>ヴィーガンパスタ</h3>
+                                        <p class="item-desc">トマトベースとバジルの香り豊かなパスタ</p>
+                                        <div class="item-price">¥1,680</div>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>きのこのリゾット</h3>
+                                        <p class="item-desc">5種のきのこと玄米のクリーミーリゾット</p>
+                                        <div class="item-price">¥1,780</div>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>野菜カレー</h3>
+                                        <p class="item-desc">スパイス香る色とりどりの野菜カレー</p>
+                                        <div class="item-price">¥1,480</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="menu-section" id="dessert">
+                            <div class="menu-grid">
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>チョコレートムース</h3>
+                                        <p class="item-desc">アボカドベースのリッチなチョコムース</p>
+                                        <div class="item-price">¥680</div>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>フルーツタルト</h3>
+                                        <p class="item-desc">季節のフルーツたっぷりタルト</p>
+                                        <div class="item-price">¥780</div>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>チアシードプディング</h3>
+                                        <p class="item-desc">ココナッツミルクとチアシードのプディング</p>
+                                        <div class="item-price">¥580</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="menu-section" id="drink">
+                            <div class="menu-grid">
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>グリーンスムージー</h3>
+                                        <p class="item-desc">ケール、りんご、バナナの栄養スムージー</p>
+                                        <div class="item-price">¥680</div>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>コールドプレスジュース</h3>
+                                        <p class="item-desc">人参、りんご、生姜の免疫力アップジュース</p>
+                                        <div class="item-price">¥780</div>
+                                    </div>
+                                </div>
+
+                                <div class="menu-item">
+                                    <div class="item-details">
+                                        <h3>ハーブティー</h3>
+                                        <p class="item-desc">カモミール、ペパーミント等、選べるハーブティー</p>
+                                        <div class="item-price">¥480</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ingredients" class="ingredients">
+                <div class="container">
+                    <h2 class="section-title">こだわりの食材</h2>
+                    <div class="title-decoration">🥬</div>
+                    <p class="ingredients-intro">地元の信頼できる農家から直接仕入れる新鮮なオーガニック食材</p>
+                    
+                    <div class="ingredients-showcase">
+                        <div class="showcase-main">
+                            <div class="seasonal-ingredients">
+                                <h3>今月の旬の食材</h3>
+                                <div class="seasonal-grid">
+                                    <div class="seasonal-item">
+                                        <div class="seasonal-image">
+                                            <img src="https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=200&h=200&fit=crop" alt="トマト">
+                                        </div>
+                                        <div class="seasonal-info">
+                                            <h4>完熟トマト</h4>
+                                            <p>群馬県産オーガニック</p>
+                                            <span class="seasonal-benefit">リコピン豊富</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="seasonal-item">
+                                        <div class="seasonal-image">
+                                            <img src="https://images.unsplash.com/photo-1622973536968-3ead9e780960?w=200&h=200&fit=crop" alt="ケール">
+                                        </div>
+                                        <div class="seasonal-info">
+                                            <h4>フレッシュケール</h4>
+                                            <p>千葉県産無農薬</p>
+                                            <span class="seasonal-benefit">ビタミンK豊富</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="seasonal-item">
+                                        <div class="seasonal-image">
+                                            <img src="https://images.unsplash.com/photo-1553279768-865429fe0e67?w=200&h=200&fit=crop" alt="アボカド">
+                                        </div>
+                                        <div class="seasonal-info">
+                                            <h4>アボカド</h4>
+                                            <p>メキシコ産オーガニック</p>
+                                            <span class="seasonal-benefit">良質な脂質</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="seasonal-item">
+                                        <div class="seasonal-image">
+                                            <img src="https://images.unsplash.com/photo-1571197133937-4ad522cd9eda?w=200&h=200&fit=crop" alt="キヌア">
+                                        </div>
+                                        <div class="seasonal-info">
+                                            <h4>キヌア</h4>
+                                            <p>ボリビア産オーガニック</p>
+                                            <span class="seasonal-benefit">完全タンパク質</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="showcase-sidebar">
+                            <div class="sourcing-info">
+                                <h3>食材の調達について</h3>
+                                <div class="sourcing-points">
+                                    <div class="sourcing-point">
+                                        <div class="point-icon">🚜</div>
+                                        <div class="point-content">
+                                            <h4>契約農家</h4>
+                                            <p>関東近郊の有機農家と直接契約し、新鮮な野菜を毎日仕入れています。</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="sourcing-point">
+                                        <div class="point-icon">🌱</div>
+                                        <div class="point-content">
+                                            <h4>オーガニック認証</h4>
+                                            <p>JAS有機認証を受けた食材のみを使用し、安全性を保証しています。</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="sourcing-point">
+                                        <div class="point-icon">📅</div>
+                                        <div class="point-content">
+                                            <h4>季節重視</h4>
+                                            <p>旬の食材を中心としたメニュー構成で、自然のリズムに合わせた食事を提供。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="wellness" class="wellness">
+                <div class="container">
+                    <div class="wellness-layout">
+                        <div class="wellness-content">
+                            <h2 class="section-title">ウェルネス</h2>
+                            <div class="title-decoration">🧘‍♀️</div>
+                            <p class="wellness-lead">心と体の健康をサポートする、総合的なウェルネス体験</p>
+                            
+                            <div class="wellness-programs">
+                                <div class="program-item">
+                                    <div class="program-icon">🥗</div>
+                                    <div class="program-content">
+                                        <h3>栄養相談</h3>
+                                        <p>管理栄養士による個別栄養相談。植物性食品での栄養バランスについてアドバイスします。</p>
+                                        <span class="program-price">30分 ¥3,000</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="program-item">
+                                    <div class="program-icon">📚</div>
+                                    <div class="program-content">
+                                        <h3>料理教室</h3>
+                                        <p>プロのシェフから学ぶ植物性料理のテクニック。月2回開催しています。</p>
+                                        <span class="program-price">2時間 ¥5,500</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="program-item">
+                                    <div class="program-icon">🌿</div>
+                                    <div class="program-content">
+                                        <h3>デトックスプログラム</h3>
+                                        <p>7日間のコールドプレスジュースとスープによるデトックスプログラム。</p>
+                                        <span class="program-price">7日間 ¥28,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="wellness-visual">
+                            <div class="wellness-image">
+                                <img src="https://images.unsplash.com/photo-1506629905607-4d7d8b3ebe6f?w=600&h=800&fit=crop" alt="ヨガと健康的な食事">
+                            </div>
+                            <div class="wellness-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number">500+</span>
+                                    <span class="stat-label">参加者</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">95%</span>
+                                    <span class="stat-label">満足度</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">12</span>
+                                    <span class="stat-label">プログラム</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="events" class="events">
+                <div class="container">
+                    <h2 class="section-title">イベント・ワークショップ</h2>
+                    <div class="title-decoration">🎪</div>
+                    <p class="events-intro">健康と環境を考える様々なイベントを開催しています</p>
+                    
+                    <div class="events-list">
+                        <div class="event-item">
+                            <div class="event-date">
+                                <span class="date-day">15</span>
+                                <span class="date-month">Feb</span>
+                            </div>
+                            <div class="event-content">
+                                <h3>ヴィーガン料理教室</h3>
+                                <p class="event-desc">初心者向けのヴィーガン料理教室。基本的なテクニックから学べます。</p>
+                                <div class="event-details">
+                                    <span class="event-time">14:00 - 16:00</span>
+                                    <span class="event-capacity">定員8名</span>
+                                    <span class="event-price">¥5,500</span>
+                                </div>
+                            </div>
+                            <div class="event-status available">申込可能</div>
+                        </div>
+                        
+                        <div class="event-item">
+                            <div class="event-date">
+                                <span class="date-day">22</span>
+                                <span class="date-month">Feb</span>
+                            </div>
+                            <div class="event-content">
+                                <h3>オーガニック農場見学ツアー</h3>
+                                <p class="event-desc">契約農家の農場を訪問し、有機栽培について学びます。</p>
+                                <div class="event-details">
+                                    <span class="event-time">9:00 - 15:00</span>
+                                    <span class="event-capacity">定員15名</span>
+                                    <span class="event-price">¥8,800</span>
+                                </div>
+                            </div>
+                            <div class="event-status few-left">残りわずか</div>
+                        </div>
+                        
+                        <div class="event-item">
+                            <div class="event-date">
+                                <span class="date-day">08</span>
+                                <span class="date-month">Mar</span>
+                            </div>
+                            <div class="event-content">
+                                <h3>プラントベース栄養学セミナー</h3>
+                                <p class="event-desc">管理栄養士による植物性食品の栄養について詳しく学べるセミナーです。</p>
+                                <div class="event-details">
+                                    <span class="event-time">19:00 - 21:00</span>
+                                    <span class="event-capacity">定員20名</span>
+                                    <span class="event-price">¥3,300</span>
+                                </div>
+                            </div>
+                            <div class="event-status available">申込可能</div>
+                        </div>
+                        
+                        <div class="event-item">
+                            <div class="event-date">
+                                <span class="date-day">20</span>
+                                <span class="date-month">Mar</span>
+                            </div>
+                            <div class="event-content">
+                                <h3>スプリングデトックス体験会</h3>
+                                <p class="event-desc">春の新生活に向けたデトックスプログラムの体験会です。</p>
+                                <div class="event-details">
+                                    <span class="event-time">10:00 - 12:00</span>
+                                    <span class="event-capacity">定員12名</span>
+                                    <span class="event-price">¥2,200</span>
+                                </div>
+                            </div>
+                            <div class="event-status available">申込可能</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="contact">
+                <div class="container">
+                    <div class="contact-layout">
+                        <div class="contact-info">
+                            <h2 class="section-title">コンタクト</h2>
+                            <div class="title-decoration">📍</div>
+                            
+                            <div class="info-sections">
+                                <div class="info-section">
+                                    <h3>営業時間</h3>
+                                    <div class="hours-info">
+                                        <div class="hours-item">
+                                            <span class="day">月〜土</span>
+                                            <span class="time">11:00 - 21:00（L.O. 20:00）</span>
+                                        </div>
+                                        <div class="hours-item">
+                                            <span class="day">日・祝</span>
+                                            <span class="time">11:00 - 19:00（L.O. 18:00）</span>
+                                        </div>
+                                        <div class="hours-item">
+                                            <span class="day">定休日</span>
+                                            <span class="time">第2・第4火曜日</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-section">
+                                    <h3>アクセス</h3>
+                                    <div class="location-info">
+                                        <p class="address">〒150-0001<br>東京都渋谷区神宮前5-8-5<br>グリーンビル 1F</p>
+                                        <div class="transport">
+                                            <p>JR原宿駅 徒歩5分</p>
+                                            <p>地下鉄表参道駅 A1出口より徒歩3分</p>
+                                            <p>地下鉄明治神宮前駅 4番出口より徒歩2分</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="info-section">
+                                    <h3>お問い合わせ</h3>
+                                    <div class="contact-details">
+                                        <p class="phone">TEL: 03-6234-5678</p>
+                                        <p class="email">EMAIL: hello@greengarden.jp</p>
+                                        <div class="social-links">
+                                            <a href="#" class="social-link">Instagram</a>
+                                            <a href="#" class="social-link">Facebook</a>
+                                            <a href="#" class="social-link">Twitter</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-visual">
+                            <div class="restaurant-images">
+                                <div class="main-image">
+                                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=400&fit=crop" alt="店内の様子">
+                                    <div class="image-caption">店内の様子</div>
+                                </div>
+                                <div class="sub-images">
+                                    <div class="sub-image">
+                                        <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=300&h=200&fit=crop" alt="テラス席">
+                                        <div class="image-caption">テラス席</div>
+                                    </div>
+                                    <div class="sub-image">
+                                        <img src="https://images.unsplash.com/photo-1524634126442-357e0eac3c14?w=300&h=200&fit=crop" alt="外観">
+                                        <div class="image-caption">外観</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="booking" class="booking">
+                <div class="container">
+                    <div class="booking-content">
+                        <h2 class="section-title">ご予約</h2>
+                        <div class="title-decoration">📅</div>
+                        <p class="booking-intro">お電話またはオンラインでご予約を承っております</p>
+                        
+                        <div class="booking-methods">
+                            <div class="booking-method">
+                                <div class="method-icon">📞</div>
+                                <h3>お電話での予約</h3>
+                                <div class="phone-info">
+                                    <span class="phone-number">03-6234-5678</span>
+                                    <span class="phone-hours">受付時間: 10:00 - 20:00</span>
+                                </div>
+                                <p>お急ぎの場合やご質問がございましたら、お気軽にお電話ください。</p>
+                            </div>
+                            
+                            <div class="booking-method">
+                                <div class="method-icon">💻</div>
+                                <h3>オンライン予約</h3>
+                                <button class="online-booking-btn">オンライン予約へ</button>
+                                <span class="online-note">24時間受付可能</span>
+                                <p>ご希望の日時とお席のタイプをお選びいただけます。</p>
+                            </div>
+                        </div>
+                        
+                        <div class="booking-notes">
+                            <h3>ご予約について</h3>
+                            <div class="notes-list">
+                                <div class="note-item">
+                                    <h4>食物アレルギーについて</h4>
+                                    <p>食物アレルギーをお持ちの方は、ご予約時にお知らせください。可能な限り対応いたします。</p>
+                                </div>
+                                <div class="note-item">
+                                    <h4>お子様連れについて</h4>
+                                    <p>お子様連れでのご利用も歓迎です。キッズメニューもご用意しております。</p>
+                                </div>
+                                <div class="note-item">
+                                    <h4>団体利用について</h4>
+                                    <p>8名様以上でのご利用の場合は、事前にお電話でご相談ください。</p>
+                                </div>
+                                <div class="note-item">
+                                    <h4>キャンセルについて</h4>
+                                    <p>キャンセルの場合は、前日までにご連絡をお願いいたします。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-logo">
+                        <div class="logo-icon">🌱</div>
+                        <div class="logo-text">
+                            <h3>Green Garden</h3>
+                            <span>Plant-Based Restaurant</span>
+                        </div>
+                    </div>
+                    <p class="footer-description">
+                        自然の恵みを活かした植物性料理で、健康と環境に配慮したライフスタイルをサポートします。
+                    </p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>メニュー</h4>
+                        <ul>
+                            <li><a href="#menu">パワーボウル</a></li>
+                            <li><a href="#menu">サラダ</a></li>
+                            <li><a href="#menu">メイン料理</a></li>
+                            <li><a href="#menu">デザート</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>サービス</h4>
+                        <ul>
+                            <li><a href="#wellness">栄養相談</a></li>
+                            <li><a href="#wellness">料理教室</a></li>
+                            <li><a href="#events">イベント</a></li>
+                            <li><a href="#booking">予約</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h4>コンタクト</h4>
+                        <ul>
+                            <li>〒150-0001</li>
+                            <li>東京都渋谷区神宮前5-8-5</li>
+                            <li>TEL: 03-6234-5678</li>
+                            <li>EMAIL: hello@greengarden.jp</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="copyright">© 2025 Green Garden. All rights reserved.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-link">Instagram</a>
+                    <a href="#" class="social-link">Facebook</a>
+                    <a href="#" class="social-link">Twitter</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>`,
+    css: `@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: #2d3748;
+    background: #fafafa;
+    line-height: 1.6;
+}
+
+.app-container {
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(46, 125, 50, 0.1);
+    border-bottom: 1px solid rgba(46, 125, 50, 0.1);
+}
+
+.header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-icon {
+    font-size: 2.5rem;
+    animation: gentle-sway 3s ease-in-out infinite;
+}
+
+@keyframes gentle-sway {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+}
+
+.logo-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #2e7d32;
+    font-weight: 700;
+}
+
+.logo-tagline {
+    font-size: 0.8rem;
+    color: #4caf50;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #2d3748;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -3px;
+    left: 50%;
+    background: #4caf50;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-menu a:hover {
+    color: #2e7d32;
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
+}
+
+.booking-btn {
+    background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+    color: white !important;
+    padding: 0.8rem 1.8rem;
+    border-radius: 25px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.booking-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+/* Hero */
+.hero {
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(46, 125, 50, 0.7) 0%, rgba(76, 175, 80, 0.5) 100%);
+    z-index: -1;
+}
+
+.hero-content {
+    text-align: center;
+    color: white;
+    max-width: 800px;
+    padding: 0 2rem;
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero-subtitle {
+    font-size: 1.4rem;
+    margin-bottom: 3rem;
+    opacity: 0.95;
+    font-weight: 400;
+}
+
+.hero-features {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.feature-badge {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    padding: 1rem 1.5rem;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.badge-icon {
+    font-size: 1.2rem;
+}
+
+.badge-text {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.hero-cta {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 1.2rem 3rem;
+    font-size: 1.1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.hero-cta:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.hero-decoration {
+    position: absolute;
+    bottom: 100px;
+    right: 100px;
+}
+
+.leaf-animation {
+    font-size: 3rem;
+    animation: float 4s ease-in-out infinite;
+    opacity: 0.7;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-10px) rotate(5deg); }
+    75% { transform: translateY(10px) rotate(-5deg); }
+}
+
+/* Common Styles */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+section {
+    padding: 6rem 0;
+    background: white;
+}
+
+section:nth-child(even) {
+    background: #f8fdf8;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: #2d3748;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.title-decoration {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    opacity: 0.7;
+}
+
+/* Philosophy */
+.philosophy {
+    background: white;
+}
+
+.philosophy-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+}
+
+.philosophy-lead {
+    font-size: 1.4rem;
+    color: #4caf50;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+.philosophy-text p {
+    margin-bottom: 1.8rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #4a5568;
+}
+
+.visual-card {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.visual-card img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    padding: 2rem;
+}
+
+.card-overlay h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.value-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2f3e4;
+    transition: all 0.3s ease;
+}
+
+.value-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.value-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.value-item h4 {
+    font-size: 1.1rem;
+    color: #2e7d32;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.value-item p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Menu */
+.menu {
+    background: #f8fdf8;
+}
+
+.menu-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 4rem;
+}
+
+.menu-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.menu-tab {
+    padding: 1rem 2rem;
+    background: white;
+    border: 2px solid #4caf50;
+    color: #4caf50;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.menu-tab.active,
+.menu-tab:hover {
+    background: #4caf50;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+}
+
+.menu-section {
+    display: none;
+}
+
+.menu-section.active {
+    display: block;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+}
+
+.menu-item {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.menu-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+}
+
+.menu-item.featured {
+    border: 3px solid #4caf50;
+}
+
+.item-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #ff5722;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 1;
+}
+
+.item-image {
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.menu-item:hover .item-image img {
+    transform: scale(1.1);
+}
+
+.diet-tags {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.tag {
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.tag.vegan {
+    background: #4caf50;
+    color: white;
+}
+
+.tag.gluten-free {
+    background: #ff9800;
+    color: white;
+}
+
+.tag.raw {
+    background: #2196f3;
+    color: white;
+}
+
+.item-details {
+    padding: 2rem;
+}
+
+.item-details h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: #2d3748;
+}
+
+.item-desc {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.nutrition-info {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.nutrition-item {
+    background: #e8f5e8;
+    color: #2e7d32;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.item-price {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #4caf50;
+    text-align: right;
+}
+
+/* Ingredients */
+.ingredients {
+    background: white;
+}
+
+.ingredients-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 4rem;
+}
+
+.ingredients-showcase {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+}
+
+.seasonal-ingredients h3 {
+    font-size: 1.8rem;
+    color: #2e7d32;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.seasonal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.seasonal-item {
+    background: #f8fdf8;
+    padding: 2rem;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    border-left: 4px solid #4caf50;
+    transition: all 0.3s ease;
+}
+
+.seasonal-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.seasonal-image {
+    flex-shrink: 0;
+}
+
+.seasonal-image img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.seasonal-info h4 {
+    font-size: 1.2rem;
+    color: #2d3748;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+}
+
+.seasonal-info p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.seasonal-benefit {
+    background: #4caf50;
+    color: white;
+    padding: 0.2rem 0.8rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.sourcing-info {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    height: fit-content;
+}
+
+.sourcing-info h3 {
+    font-size: 1.5rem;
+    color: #2e7d32;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.sourcing-points {
+    display: grid;
+    gap: 2rem;
+}
+
+.sourcing-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.point-icon {
+    font-size: 1.8rem;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+}
+
+.point-content h4 {
+    font-size: 1.1rem;
+    color: #2d3748;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.point-content p {
+    color: #666;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Wellness */
+.wellness {
+    background: #f8fdf8;
+}
+
+.wellness-layout {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.wellness-lead {
+    font-size: 1.3rem;
+    color: #4caf50;
+    font-weight: 600;
+    margin-bottom: 3rem;
+    line-height: 1.5;
+}
+
+.wellness-programs {
+    display: grid;
+    gap: 2rem;
+}
+
+.program-item {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    transition: all 0.3s ease;
+}
+
+.program-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.program-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+}
+
+.program-content h3 {
+    font-size: 1.3rem;
+    color: #2d3748;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.program-content p {
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.program-price {
+    color: #4caf50;
+    font-weight: 600;
+    background: #e8f5e8;
+    padding: 0.3rem 1rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+}
+
+.wellness-image img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+}
+
+.wellness-stats {
+    display: flex;
+    justify-content: space-around;
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #4caf50;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.3rem;
+}
+
+/* Events */
+.events {
+    background: white;
+}
+
+.events-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 4rem;
+}
+
+.events-list {
+    display: grid;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.event-item {
+    background: #f8fdf8;
+    padding: 2.5rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    border-left: 5px solid #4caf50;
+    transition: all 0.3s ease;
+}
+
+.event-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.event-date {
+    text-align: center;
+    min-width: 80px;
+}
+
+.date-day {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #4caf50;
+    line-height: 1;
+}
+
+.date-month {
+    display: block;
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+}
+
+.event-content {
+    flex-grow: 1;
+}
+
+.event-content h3 {
+    font-size: 1.4rem;
+    color: #2d3748;
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+}
+
+.event-desc {
+    color: #666;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.event-details {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.event-time,
+.event-capacity,
+.event-price {
+    font-size: 0.9rem;
+    color: #4caf50;
+    font-weight: 500;
+}
+
+.event-status {
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    min-width: 100px;
+}
+
+.event-status.available {
+    background: #e8f5e8;
+    color: #2e7d32;
+}
+
+.event-status.few-left {
+    background: #fff3e0;
+    color: #f57c00;
+}
+
+/* Contact */
+.contact {
+    background: #f8fdf8;
+}
+
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+.info-sections {
+    display: grid;
+    gap: 3rem;
+}
+
+.info-section h3 {
+    font-size: 1.4rem;
+    color: #2e7d32;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.hours-info {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+}
+
+.hours-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+    border-bottom: 1px solid #e2f3e4;
+}
+
+.hours-item:last-child {
+    border-bottom: none;
+}
+
+.day {
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.time {
+    color: #666;
+}
+
+.location-info {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+}
+
+.address {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    color: #2d3748;
+}
+
+.transport p {
+    margin-bottom: 0.5rem;
+    color: #666;
+}
+
+.contact-details {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+}
+
+.phone {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #4caf50;
+    margin-bottom: 0.5rem;
+}
+
+.email {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    color: #4caf50;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.social-link:hover {
+    color: #2e7d32;
+}
+
+.restaurant-images {
+    display: grid;
+    gap: 1rem;
+}
+
+.main-image {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.main-image img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.sub-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.sub-image {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.sub-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.image-caption {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Booking */
+.booking {
+    background: white;
+}
+
+.booking-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 4rem;
+}
+
+.booking-methods {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.booking-method {
+    background: #f8fdf8;
+    padding: 3rem 2rem;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.booking-method:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+}
+
+.method-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.booking-method h3 {
+    font-size: 1.5rem;
+    color: #2d3748;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.phone-info {
+    margin-bottom: 2rem;
+}
+
+.phone-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #4caf50;
+    margin-bottom: 0.5rem;
+}
+
+.phone-hours {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.online-booking-btn {
+    background: #4caf50;
+    color: white;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.online-booking-btn:hover {
+    background: #2e7d32;
+    transform: scale(1.05);
+}
+
+.online-note {
+    display: block;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+}
+
+.booking-notes h3 {
+    text-align: center;
+    font-size: 2rem;
+    color: #2d3748;
+    margin-bottom: 3rem;
+    font-weight: 600;
+}
+
+.notes-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.note-item {
+    background: #f8fdf8;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    border-top: 4px solid #4caf50;
+}
+
+.note-item h4 {
+    font-size: 1.2rem;
+    color: #2e7d32;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.note-item p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Footer */
+.footer {
+    background: #1a2e1c;
+    color: #ccc;
+    padding: 4rem 0 2rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.footer-logo .logo-icon {
+    font-size: 2rem;
+}
+
+.footer-logo h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #4caf50;
+    margin-bottom: 0.2rem;
+}
+
+.footer-logo span {
+    font-size: 0.8rem;
+    color: #66bb69;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.footer-description {
+    line-height: 1.7;
+    color: #aaa;
+}
+
+.link-group h4 {
+    color: #4caf50;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.link-group ul {
+    list-style: none;
+}
+
+.link-group li {
+    margin-bottom: 0.8rem;
+}
+
+.link-group a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.link-group a:hover {
+    color: #4caf50;
+}
+
+.footer-bottom {
+    border-top: 1px solid #2e4c2f;
+    padding-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.copyright {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.footer-social {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-social .social-link {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.footer-social .social-link:hover {
+    color: #4caf50;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-menu {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .hero-features {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .philosophy-layout,
+    .wellness-layout,
+    .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .ingredients-showcase {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .seasonal-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .menu-navigation {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 1rem;
+    }
+    
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .booking-methods {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .notes-list {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}`,
+    js: `// メニュータブ機能
+document.querySelectorAll('.menu-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+        // すべてのタブからactiveクラスを削除
+        document.querySelectorAll('.menu-tab').forEach(t => {
+            t.classList.remove('active');
+        });
+        
+        // すべてのメニューセクションを非表示
+        document.querySelectorAll('.menu-section').forEach(section => {
+            section.classList.remove('active');
+        });
+        
+        // クリックされたタブにactiveクラス追加
+        this.classList.add('active');
+        
+        // 対応するメニューセクションを表示
+        const menuId = this.getAttribute('data-menu');
+        document.getElementById(menuId).classList.add('active');
+    });
+});
+
+// スムーズスクロール
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            const targetPosition = target.offsetTop - headerHeight;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// ヒーローCTAボタン
+document.querySelector('.hero-cta').addEventListener('click', function() {
+    const menuSection = document.querySelector('#menu');
+    const headerHeight = document.querySelector('.header').offsetHeight;
+    const targetPosition = menuSection.offsetTop - headerHeight;
+    window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
+    });
+});
+
+// オンライン予約ボタン
+document.querySelector('.online-booking-btn').addEventListener('click', function() {
+    alert('オンライン予約システムへ移動します（実装予定）');
+});
+
+// ヘッダーのスクロール効果
+window.addEventListener('scroll', function() {
+    const header = document.querySelector('.header');
+    if (window.scrollY > 100) {
+        header.style.background = 'rgba(255, 255, 255, 0.98)';
+        header.style.boxShadow = '0 2px 30px rgba(46, 125, 50, 0.15)';
+    } else {
+        header.style.background = 'rgba(255, 255, 255, 0.95)';
+        header.style.boxShadow = '0 2px 20px rgba(46, 125, 50, 0.1)';
+    }
+});
+
+// 要素のアニメーション
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// アニメーション対象要素の初期化
+document.querySelectorAll('.menu-item, .value-item, .program-item, .event-item, .note-item').forEach(item => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(40px)';
+    item.style.transition = 'all 0.8s ease';
+    observer.observe(item);
+});
+
+// 季節の食材アイテムのクリック効果
+document.querySelectorAll('.seasonal-item').forEach(item => {
+    item.addEventListener('click', function() {
+        const ingredientName = this.querySelector('h4').textContent;
+        this.style.background = '#e8f5e8';
+        this.style.borderLeftColor = '#2e7d32';
+        this.style.transform = 'translateX(10px) scale(1.02)';
+        this.style.transition = 'all 0.3s ease';
+        
+        setTimeout(() => {
+            this.style.background = '#f8fdf8';
+            this.style.borderLeftColor = '#4caf50';
+            this.style.transform = 'translateX(0) scale(1)';
+        }, 600);
+        
+        alert(\`\${ingredientName}についての詳しい情報は店舗までお問い合わせください。\`);
+    });
+    
+    item.style.cursor = 'pointer';
+});
+
+// プログラムアイテムのホバー効果強化
+document.querySelectorAll('.program-item').forEach(item => {
+    item.addEventListener('mouseenter', function() {
+        const icon = this.querySelector('.program-icon');
+        icon.style.transform = 'scale(1.2) rotate(5deg)';
+        icon.style.transition = 'transform 0.3s ease';
+    });
+    
+    item.addEventListener('mouseleave', function() {
+        const icon = this.querySelector('.program-icon');
+        icon.style.transform = 'scale(1) rotate(0deg)';
+    });
+});
+
+// 統計数値のカウントアップアニメーション
+function animateStats() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    
+    statNumbers.forEach(stat => {
+        const text = stat.textContent;
+        const isPercentage = text.includes('%');
+        const number = parseInt(text.replace(/[^0-9]/g, ''));
+        
+        if (number > 0) {
+            let current = 0;
+            const increment = number / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= number) {
+                    stat.textContent = number + (isPercentage ? '%' : '+');
+                    clearInterval(timer);
+                } else {
+                    stat.textContent = Math.floor(current) + (isPercentage ? '%' : '+');
+                }
+            }, 40);
+        }
+    });
+}
+
+// 統計セクションが見えたときにアニメーション開始
+const statsObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateStats();
+            statsObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+const wellnessStats = document.querySelector('.wellness-stats');
+if (wellnessStats) {
+    statsObserver.observe(wellnessStats);
+}
+
+// イベントアイテムのクリック効果
+document.querySelectorAll('.event-item').forEach(item => {
+    item.addEventListener('click', function() {
+        const eventTitle = this.querySelector('h3').textContent;
+        const eventStatus = this.querySelector('.event-status').textContent;
+        
+        if (eventStatus === '申込可能') {
+            alert(\`\${eventTitle}への参加申し込みページへ移動します（実装予定）\`);
+        } else {
+            alert(\`\${eventTitle}は現在\${eventStatus}です。\`);
+        }
+    });
+    
+    item.style.cursor = 'pointer';
+});
+
+// 電話番号のクリック効果
+document.querySelectorAll('.phone, .phone-number').forEach(phone => {
+    phone.addEventListener('click', function() {
+        this.style.transform = 'scale(1.05)';
+        this.style.transition = 'transform 0.2s ease';
+        
+        setTimeout(() => {
+            this.style.transform = 'scale(1)';
+        }, 200);
+    });
+});
+
+// 画像のクリック効果（ライトボックス風）
+document.querySelectorAll('.main-image img, .sub-image img').forEach(img => {
+    img.addEventListener('click', function() {
+        const caption = this.parentElement.querySelector('.image-caption').textContent;
+        alert(\`\${caption}の拡大画像を表示します（実装予定）\`);
+    });
+    
+    img.style.cursor = 'pointer';
+});
+
+// リーフアニメーションの向上
+const leaf = document.querySelector('.leaf-animation');
+if (leaf) {
+    // 風に舞うような動きを追加
+    setInterval(() => {
+        const randomX = (Math.random() - 0.5) * 20;
+        const randomY = (Math.random() - 0.5) * 20;
+        leaf.style.transform = \`translate(\${randomX}px, \${randomY}px) rotate(\${Math.random() * 360}deg)\`;
+        leaf.style.transition = 'transform 2s ease-in-out';
+    }, 3000);
+}
+
+// ダイエットタグのインタラクション
+document.querySelectorAll('.diet-tags .tag').forEach(tag => {
+    tag.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.1)';
+        this.style.transition = 'transform 0.3s ease';
+    });
+    
+    tag.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1)';
+    });
+});
+
+// 栄養情報の表示切り替え
+document.querySelectorAll('.nutrition-info').forEach(nutrition => {
+    nutrition.addEventListener('click', function() {
+        const items = this.querySelectorAll('.nutrition-item');
+        items.forEach((item, index) => {
+            setTimeout(() => {
+                item.style.background = '#2e7d32';
+                item.style.color = 'white';
+                item.style.transform = 'scale(1.05)';
+                
+                setTimeout(() => {
+                    item.style.background = '#e8f5e8';
+                    item.style.color = '#2e7d32';
+                    item.style.transform = 'scale(1)';
+                }, 300);
+            }, index * 100);
+        });
+    });
+    
+    nutrition.style.cursor = 'pointer';
+});`
+  }
+}

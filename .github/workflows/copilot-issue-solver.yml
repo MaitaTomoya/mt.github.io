@@ -1,0 +1,280 @@
+name: Copilot Issue Solver
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  actions: read
+
+jobs:
+  solve-with-copilot:
+    # /copilot または /solve コマンドで起動
+    if: |
+      github.event.issue.pull_request == null &&
+      (startsWith(github.event.comment.body, '/copilot') || startsWith(github.event.comment.body, '/solve'))
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 🎯 React to comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.reactions.createForIssueComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: context.payload.comment.id,
+              content: 'rocket'
+            });
+      
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: 🔧 Setup environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: 📦 Install GitHub CLI with Copilot
+        run: |
+          # Copilot CLIの確認とインストール
+          gh extension list | grep copilot || gh extension install github/gh-copilot
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: 🤖 Generate solution with Copilot
+        id: generate
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMENT_BODY: ${{ github.event.comment.body }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          # コメントから指示を抽出（環境変数から安全に取得）
+          INSTRUCTION=$(echo "$COMMENT_BODY" | sed 's/^\/[a-z]*//')
+          ISSUE_NUMBER=${{ github.event.issue.number }}
+          
+          echo "📋 Processing Issue #$ISSUE_NUMBER: $ISSUE_TITLE"
+          
+          # Copilotで解決策を生成（日本語プロンプト）
+          cat > copilot_prompt.txt << EOF
+          【重要】このプロンプトには日本語で回答してください。コメントも日本語でお願いします。
+          
+          GitHub Issue #$ISSUE_NUMBER: $ISSUE_TITLE
+          
+          課題の説明:
+          $ISSUE_BODY
+          
+          ユーザーの要求:
+          $INSTRUCTION
+          
+          以下を日本語で提供してください：
+          1. 完全な実装コード（日本語コメント付き）
+          2. コードを保存するファイルパス
+          3. 必要なテストコード
+          4. 解決策の簡潔な説明
+          
+          以下の形式でファイルパスを明確に示してください：
+          ### File: src/example.ts
+          \`\`\`typescript
+          // 日本語のコメント
+          // 実装コード
+          \`\`\`
+          EOF
+          
+          # Copilot CLIで解決策を生成（日本語対応）
+          export LANG=ja_JP.UTF-8
+          export LC_ALL=ja_JP.UTF-8
+          export LANGUAGE=ja_JP:ja
+          
+          # Copilot CLIを直接実行（日本語を明示的に指定）
+          echo "日本語で回答してください: $(cat copilot_prompt.txt)" | gh copilot suggest > solution.md 2>&1 || {
+            echo "⚠️ Copilot CLI response failed, using alternative method..."
+            echo "Error output:"
+            cat solution.md
+            
+            # 代替: 日本語テンプレートベースの解決策
+            cat > solution.md << 'FALLBACK'
+          ## 🤖 解決策テンプレート
+          
+          Issue要件に基づいて、以下のアプローチを提案します：
+          
+          ### File: src/solution.ts
+          ```typescript
+          // TODO: Issue #${{ github.event.issue.number }}の解決策を実装
+          // タイトル: ${{ github.event.issue.title }}
+          
+          export function solution() {
+            // ここに実装を記述
+            // VS CodeでCopilotを使用して自動補完を活用してください
+          }
+          ```
+          
+          ### File: src/solution.test.ts
+          ```typescript
+          import { solution } from './solution';
+          
+          describe('Issue #${{ github.event.issue.number }}の解決策', () => {
+            it('期待通りに動作すること', () => {
+              // テストの実装
+            });
+          });
+          ```
+          FALLBACK
+          }
+          
+          # 解決策をIssueにコメント（日本語）
+          {
+            echo "## 🤖 Copilot生成ソリューション"
+            echo ""
+            echo "リクエストに基づいて、以下の解決策を提案します："
+            echo ""
+            cat solution.md
+            echo ""
+            echo "---"
+            echo "### 📝 次のステップ："
+            echo "1. 提案されたソリューションをレビュー"
+            echo "2. 承認する場合は👍をクリックしてPRを自動作成"
+            echo "3. または手動でコードをコピーして実装"
+            echo ""
+            echo "*GitHub Copilotにより生成 • PRを作成するには \`/apply\` と返信*"
+          } > comment.md
+          
+          gh issue comment $ISSUE_NUMBER --body-file comment.md
+      
+      - name: 📊 Parse solution and create files
+        id: parse
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            // solution.mdを読み込み
+            const solution = fs.readFileSync('solution.md', 'utf8');
+            
+            // ファイルパスとコードを抽出
+            const fileRegex = /### File: ([^\n]+)/g;
+            const codeBlockRegex = /```(?:\w+)?\n([\s\S]*?)```/g;
+            
+            const files = [];
+            let fileMatch;
+            const filePaths = [];
+            
+            while ((fileMatch = fileRegex.exec(solution)) !== null) {
+              filePaths.push(fileMatch[1].trim());
+            }
+            
+            const codeBlocks = [];
+            let codeMatch;
+            while ((codeMatch = codeBlockRegex.exec(solution)) !== null) {
+              codeBlocks.push(codeMatch[1]);
+            }
+            
+            // ファイルを作成
+            let changesDetected = false;
+            for (let i = 0; i < Math.min(filePaths.length, codeBlocks.length); i++) {
+              const filePath = filePaths[i];
+              const code = codeBlocks[i];
+              
+              if (filePath && code) {
+                const dir = path.dirname(filePath);
+                if (!fs.existsSync(dir)) {
+                  fs.mkdirSync(dir, { recursive: true });
+                }
+                
+                fs.writeFileSync(filePath, code);
+                console.log(`✅ Created: ${filePath}`);
+                changesDetected = true;
+              }
+            }
+            
+            core.setOutput('changes_detected', changesDetected);
+      
+      - name: 🌿 Create branch and commit
+        if: steps.parse.outputs.changes_detected == 'true'
+        run: |
+          # ブランチ作成
+          BRANCH_NAME="copilot-issue-${{ github.event.issue.number }}-${{ github.run_number }}"
+          git checkout -b $BRANCH_NAME
+          
+          # 変更をコミット
+          git config user.name "GitHub Copilot[bot]"
+          git config user.email "copilot[bot]@users.noreply.github.com"
+          
+          git add -A
+          git commit -m "🤖 Implement solution for issue #${{ github.event.issue.number }}
+          
+          Co-authored-by: ${{ github.event.comment.user.login }} <${{ github.event.comment.user.id }}+${{ github.event.comment.user.login }}@users.noreply.github.com>"
+          
+          git push -u origin $BRANCH_NAME
+          
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_ENV
+      
+      - name: 🔀 Create Pull Request
+        if: steps.parse.outputs.changes_detected == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --title "🤖 [Copilot] ${{ github.event.issue.title }}" \
+            --body "## 📋 Overview
+          
+          This PR implements the solution for #${{ github.event.issue.number }}
+          
+          ## 🤖 Generated by GitHub Copilot
+          
+          The solution was automatically generated based on the issue description and user comment.
+          
+          ## 📝 Changes
+          
+          - Implemented solution based on issue requirements
+          - Added necessary files and code
+          
+          ## 🔗 Related Issue
+          
+          Closes #${{ github.event.issue.number }}
+          
+          ## 👤 Triggered by
+          
+          @${{ github.event.comment.user.login }}
+          
+          ## ✅ Checklist
+          
+          - [ ] Code review
+          - [ ] Tests pass
+          - [ ] Documentation updated
+          
+          ---
+          
+          *This PR was automatically generated using GitHub Copilot*" \
+            --head ${{ env.branch_name }} \
+            --base main
+      
+      - name: ❌ Handle no changes
+        if: steps.parse.outputs.changes_detected != 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## ℹ️ コード変更が生成されませんでした
+            
+            Copilotの提案は作成されましたが、実際のファイル変更は検出されませんでした。
+            
+            **対処方法:**
+            1. 上記の提案されたソリューションを確認
+            2. 提案されたアプローチを手動で実装
+            3. またはより具体的なコマンドを試してください：
+               \`/copilot src/utils.tsにreverseStringというTypeScript関数を作成\`
+            
+            ---
+            *ヒント: より良い結果を得るために、ファイル名と実装の詳細を具体的に指定してください*`
+            });

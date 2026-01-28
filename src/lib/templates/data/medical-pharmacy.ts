@@ -1,0 +1,2431 @@
+import { WebTemplate, TEMPLATE_CATEGORIES } from '../types'
+
+export const medicalPharmacyTemplate: WebTemplate = {
+  id: 'medical-pharmacy',
+  title: '調剤薬局',
+  category: TEMPLATE_CATEGORIES.MEDICAL,
+  description: '地域密着型の調剤薬局向けの親しみやすいWebサイトテンプレート',
+  thumbnail: '/template-images/medical-pharmacy.jpg',
+  features: [
+    '処方薬・OTC医薬品紹介',
+    '薬剤師相談サービス',
+    '健康情報・コラム',
+    'お薬手帳アプリ連携',
+    '在宅医療サポート'
+  ],
+  tags: ['薬局', '調剤', '薬剤師', 'ヘルスケア', '健康相談'],
+  code: {
+    html: `<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>みらい薬局 - あなたの健康パートナー</title>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>💊 みらい薬局</h1>
+                    <span class="tagline">Mirai Pharmacy</span>
+                </div>
+                <button class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <nav class="main-nav" id="main-nav">
+                    <ul>
+                        <li><a href="#about">薬局について</a></li>
+                        <li class="nav-item dropdown">
+                            <a href="#services">サービス</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#prescription">調剤サービス</a></li>
+                                <li><a href="#otc">OTC医薬品</a></li>
+                                <li><a href="#consultation">薬剤師相談</a></li>
+                                <li><a href="#home-care">在宅医療</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#health-info">健康情報</a></li>
+                        <li><a href="#staff">薬剤師紹介</a></li>
+                        <li><a href="#contact">お問い合わせ</a></li>
+                        <li class="nav-cta"><a href="#app">お薬手帳アプリ</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>あなたの健康を<br><span class="highlight">いちばん近く</span>で<br>サポート</h2>
+                    <p>みらい薬局は地域の皆様の健康パートナーとして、安全で確実な調剤サービスと丁寧な健康相談を提供しています。お薬のことでお困りのときは、いつでもお気軽にご相談ください。</p>
+                    <div class="hero-buttons">
+                        <a href="#services" class="btn-primary">サービス案内</a>
+                        <a href="#consultation" class="btn-outline">薬剤師に相談</a>
+                    </div>
+                    <div class="hero-features">
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>24時間受付</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>在宅医療対応</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-icon">✓</span>
+                            <span>薬剤師常駐</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="pharmacy-scene">
+                        <img src="https://images.unsplash.com/photo-1576671081837-49000212a370?w=600&h=500&fit=crop" alt="薬局内部">
+                        <div class="floating-icons">
+                            <div class="icon-bubble icon-1">💊</div>
+                            <div class="icon-bubble icon-2">🩺</div>
+                            <div class="icon-bubble icon-3">📱</div>
+                            <div class="icon-bubble icon-4">🏠</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quick-info">
+        <div class="container">
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="info-icon">🕒</div>
+                    <h3>営業時間</h3>
+                    <p>平日 9:00-20:00<br>土曜 9:00-18:00<br>日祝 10:00-17:00</p>
+                    <small>年中無休でお薬をお渡し</small>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon">📞</div>
+                    <h3>お電話相談</h3>
+                    <p class="phone-number">03-1234-5678</p>
+                    <small>お薬のご相談はお電話でも</small>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon">🚚</div>
+                    <h3>お薬配達</h3>
+                    <p>半径5km以内<br>配達無料</p>
+                    <small>お体の不自由な方もご利用を</small>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon">📱</div>
+                    <h3>お薬手帳アプリ</h3>
+                    <p>デジタル<br>お薬手帳</p>
+                    <small>スマホで簡単管理</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">みらい薬局について</h2>
+                    <p class="section-subtitle">地域の健康を支えて30年</p>
+                    
+                    <div class="about-description">
+                        <p>みらい薬局は1993年の開局以来、地域の皆様の健康を第一に考え、安全で確実な調剤サービスを提供してまいりました。</p>
+                        <p>処方せんの調剤はもちろん、OTC医薬品の販売、健康相談、在宅医療サポートまで、薬局の枠を超えた総合的な健康サービスをお届けしています。経験豊富な薬剤師が、お一人おひとりのお悩みに丁寧にお答えいたします。</p>
+                    </div>
+                    
+                    <div class="pharmacy-values">
+                        <div class="value-item">
+                            <div class="value-icon">🛡️</div>
+                            <h4>安全第一</h4>
+                            <p>薬の相互作用チェックや重複投薬の確認を徹底し、安全な服薬をサポートします。</p>
+                        </div>
+                        
+                        <div class="value-item">
+                            <div class="value-icon">👥</div>
+                            <h4>患者様中心</h4>
+                            <p>お一人おひとりの生活スタイルに合わせた服薬指導と健康アドバイスを行います。</p>
+                        </div>
+                        
+                        <div class="value-item">
+                            <div class="value-icon">🏘️</div>
+                            <h4>地域密着</h4>
+                            <p>地域医療の一翼を担い、在宅医療や健康イベントで地域貢献を続けます。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-visual">
+                    <div class="pharmacy-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">15,000+</div>
+                            <div class="stat-label">年間処方せん枚数</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">30年</div>
+                            <div class="stat-label">地域貢献年数</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">8名</div>
+                            <div class="stat-label">薬剤師在籍数</div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1585435557343-3b092031e0ab?w=500&h=400&fit=crop" alt="薬剤師">
+                        <div class="certification-badge">
+                            <span class="badge-text">健康サポート薬局</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">サービス案内</h2>
+            <p class="section-subtitle">調剤から健康相談まで幅広くサポート</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">💊</div>
+                    <h3>調剤サービス</h3>
+                    <p class="service-desc">処方せんに基づく正確で迅速な調剤を行います。お待ち時間短縮のため、FAXでの事前受付も承っております。</p>
+                    
+                    <div class="service-features">
+                        <h4>主なサービス</h4>
+                        <ul>
+                            <li>処方せん調剤</li>
+                            <li>ジェネリック医薬品対応</li>
+                            <li>薬歴管理</li>
+                            <li>服薬指導</li>
+                            <li>相互作用チェック</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-time">
+                        <strong>受付時間:</strong> 平日 9:00-20:00 / 土日祝 10:00-17:00
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🏪</div>
+                    <h3>OTC医薬品販売</h3>
+                    <p class="service-desc">風邪薬から健康食品まで、豊富な品揃えでお客様の健康維持をサポートいたします。</p>
+                    
+                    <div class="service-features">
+                        <h4>取扱商品</h4>
+                        <ul>
+                            <li>一般用医薬品</li>
+                            <li>健康食品・サプリメント</li>
+                            <li>医療機器・測定器</li>
+                            <li>衛生用品</li>
+                            <li>介護用品</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="service-benefits">
+                        <span class="benefit-tag">薬剤師相談無料</span>
+                        <span class="benefit-tag">ポイントカード</span>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🩺</div>
+                    <h3>薬剤師相談</h3>
+                    <p class="service-desc">お薬の飲み合わせや副作用、健康に関するお悩みなど、薬剤師が専門的にアドバイスいたします。</p>
+                    
+                    <div class="service-features">
+                        <h4>相談内容</h4>
+                        <ul>
+                            <li>薬の飲み合わせ</li>
+                            <li>副作用について</li>
+                            <li>健康管理アドバイス</li>
+                            <li>生活習慣病予防</li>
+                            <li>栄養相談</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="consultation-methods">
+                        <div class="method-item">
+                            <span class="method-icon">🏪</span>
+                            <span>店頭相談</span>
+                        </div>
+                        <div class="method-item">
+                            <span class="method-icon">📞</span>
+                            <span>電話相談</span>
+                        </div>
+                        <div class="method-item">
+                            <span class="method-icon">💻</span>
+                            <span>オンライン相談</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🏠</div>
+                    <h3>在宅医療サポート</h3>
+                    <p class="service-desc">ご自宅での療養を支援するため、お薬の配達から服薬管理まで総合的にサポートいたします。</p>
+                    
+                    <div class="service-features">
+                        <h4>在宅サービス</h4>
+                        <ul>
+                            <li>お薬の配達</li>
+                            <li>服薬管理指導</li>
+                            <li>医師との連携</li>
+                            <li>介護施設への薬剤管理</li>
+                            <li>医療機器の貸出</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="home-care-area">
+                        <strong>対応エリア:</strong> 薬局から半径5km以内（配達無料）
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>お薬手帳アプリ</h3>
+                    <p class="service-desc">スマートフォンで簡単にお薬の履歴を管理。薬局での待ち時間短縮にも役立ちます。</p>
+                    
+                    <div class="service-features">
+                        <h4>アプリ機能</h4>
+                        <ul>
+                            <li>お薬履歴管理</li>
+                            <li>服薬アラーム</li>
+                            <li>処方せん事前送信</li>
+                            <li>健康記録</li>
+                            <li>薬剤師チャット相談</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="app-download">
+                        <button class="download-btn ios">App Store</button>
+                        <button class="download-btn android">Google Play</button>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🔬</div>
+                    <h3>健康測定サービス</h3>
+                    <p class="service-desc">血圧、血糖値、体組成などの測定を無料で行い、健康状態のチェックをサポートします。</p>
+                    
+                    <div class="service-features">
+                        <h4>測定項目</h4>
+                        <ul>
+                            <li>血圧測定</li>
+                            <li>血糖値測定</li>
+                            <li>体組成測定</li>
+                            <li>骨密度測定</li>
+                            <li>HbA1c測定</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="measurement-schedule">
+                        <strong>実施日:</strong> 毎月第2・4土曜日 10:00-16:00
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="health-info" class="health-info">
+        <div class="container">
+            <h2 class="section-title">健康情報・コラム</h2>
+            <p class="section-subtitle">薬剤師からの健康アドバイス</p>
+            
+            <div class="health-categories">
+                <div class="category-nav">
+                    <button class="category-tab active" data-category="seasonal">季節の健康</button>
+                    <button class="category-tab" data-category="medicine">お薬情報</button>
+                    <button class="category-tab" data-category="lifestyle">生活習慣</button>
+                    <button class="category-tab" data-category="prevention">予防・対策</button>
+                </div>
+                
+                <div class="articles-grid">
+                    <div class="article-card">
+                        <div class="article-image">
+                            <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=300&h=200&fit=crop" alt="インフルエンザ予防">
+                            <div class="article-category">季節の健康</div>
+                        </div>
+                        <div class="article-content">
+                            <h3>インフルエンザ予防のポイント</h3>
+                            <p>今年もインフルエンザの季節がやってきました。予防接種や手洗い・うがいの重要性について薬剤師が解説します。</p>
+                            <div class="article-meta">
+                                <span class="author">薬剤師 田中</span>
+                                <span class="date">2025.01.15</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="article-card">
+                        <div class="article-image">
+                            <img src="https://images.unsplash.com/photo-1576671081837-49000212a370?w=300&h=200&fit=crop" alt="薬の正しい保管方法">
+                            <div class="article-category">お薬情報</div>
+                        </div>
+                        <div class="article-content">
+                            <h3>お薬の正しい保管方法</h3>
+                            <p>お薬の効果を保つための適切な保管方法をご紹介。湿気や光、温度に注意して品質を維持しましょう。</p>
+                            <div class="article-meta">
+                                <span class="author">薬剤師 佐藤</span>
+                                <span class="date">2025.01.10</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="article-card">
+                        <div class="article-image">
+                            <img src="https://images.unsplash.com/photo-1505576399279-565b52d4ac71?w=300&h=200&fit=crop" alt="生活習慣病予防">
+                            <div class="article-category">生活習慣</div>
+                        </div>
+                        <div class="article-content">
+                            <h3>生活習慣病を予防する食事のコツ</h3>
+                            <p>高血圧や糖尿病などの生活習慣病予防に効果的な食事のポイントを管理栄養士と薬剤師が共同でアドバイス。</p>
+                            <div class="article-meta">
+                                <span class="author">薬剤師 山田</span>
+                                <span class="date">2025.01.08</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="article-card">
+                        <div class="article-image">
+                            <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=300&h=200&fit=crop" alt="花粉症対策">
+                            <div class="article-category">予防・対策</div>
+                        </div>
+                        <div class="article-content">
+                            <h3>早めの花粉症対策で快適な春を</h3>
+                            <p>花粉症シーズンを乗り切るための薬の選び方や生活上の注意点について詳しく解説いたします。</p>
+                            <div class="article-meta">
+                                <span class="author">薬剤師 鈴木</span>
+                                <span class="date">2025.01.05</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="health-tools">
+                    <h3>健康管理ツール</h3>
+                    <div class="tools-grid">
+                        <div class="tool-item">
+                            <div class="tool-icon">📊</div>
+                            <h4>BMI計算機</h4>
+                            <p>身長・体重からBMIを計算</p>
+                            <button class="tool-btn">計算する</button>
+                        </div>
+                        
+                        <div class="tool-item">
+                            <div class="tool-icon">💧</div>
+                            <h4>水分摂取量チェック</h4>
+                            <p>1日の適切な水分量を計算</p>
+                            <button class="tool-btn">チェック</button>
+                        </div>
+                        
+                        <div class="tool-item">
+                            <div class="tool-icon">💊</div>
+                            <h4>服薬時間計算</h4>
+                            <p>食前・食後の適切な服薬時間</p>
+                            <button class="tool-btn">計算する</button>
+                        </div>
+                        
+                        <div class="tool-item">
+                            <div class="tool-icon">🎯</div>
+                            <h4>生活習慣チェック</h4>
+                            <p>健康的な生活習慣の評価</p>
+                            <button class="tool-btn">チェック</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="staff" class="staff">
+        <div class="container">
+            <h2 class="section-title">薬剤師・スタッフ紹介</h2>
+            <p class="section-subtitle">経験豊富な薬剤師がお待ちしています</p>
+            
+            <div class="staff-grid">
+                <div class="staff-card chief">
+                    <div class="staff-photo">
+                        <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200&h=200&fit=crop&crop=face" alt="管理薬剤師">
+                    </div>
+                    <div class="staff-info">
+                        <h3>田中 健一</h3>
+                        <p class="staff-title">管理薬剤師</p>
+                        <p class="staff-experience">薬剤師歴15年</p>
+                        
+                        <div class="staff-message">
+                            <p>「お薬を通じて地域の皆様の健康をサポートしたい」という想いで日々取り組んでいます。お薬のことで分からないことがあれば、何でもお気軽にご相談ください。</p>
+                        </div>
+                        
+                        <div class="staff-specialties">
+                            <h4>専門分野</h4>
+                            <div class="specialty-tags">
+                                <span class="specialty-tag">服薬指導</span>
+                                <span class="specialty-tag">在宅医療</span>
+                                <span class="specialty-tag">糖尿病</span>
+                            </div>
+                        </div>
+                        
+                        <div class="staff-qualifications">
+                            <h4>資格・認定</h4>
+                            <ul>
+                                <li>認定薬剤師</li>
+                                <li>糖尿病療養指導士</li>
+                                <li>在宅療養支援認定薬剤師</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="staff-card">
+                    <div class="staff-photo">
+                        <img src="https://images.unsplash.com/photo-1594824047770-d90e6e7e0bb4?w=150&h=150&fit=crop&crop=face" alt="薬剤師">
+                    </div>
+                    <div class="staff-info">
+                        <h3>佐藤 美咲</h3>
+                        <p class="staff-title">薬剤師</p>
+                        <p class="staff-experience">薬剤師歴8年</p>
+                        
+                        <div class="staff-specialties">
+                            <h4>専門分野</h4>
+                            <div class="specialty-tags">
+                                <span class="specialty-tag">漢方薬</span>
+                                <span class="specialty-tag">小児薬物療法</span>
+                                <span class="specialty-tag">栄養指導</span>
+                            </div>
+                        </div>
+                        
+                        <div class="staff-message">
+                            <p>漢方薬や小児の薬物療法を得意としています。お子様の服薬でお困りの際はぜひご相談ください。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="staff-card">
+                    <div class="staff-photo">
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&h=150&fit=crop&crop=face" alt="薬剤師">
+                    </div>
+                    <div class="staff-info">
+                        <h3>山田 雄介</h3>
+                        <p class="staff-title">薬剤師</p>
+                        <p class="staff-experience">薬剤師歴12年</p>
+                        
+                        <div class="staff-specialties">
+                            <h4>専門分野</h4>
+                            <div class="specialty-tags">
+                                <span class="specialty-tag">循環器</span>
+                                <span class="specialty-tag">腎臓病</span>
+                                <span class="specialty-tag">高血圧</span>
+                            </div>
+                        </div>
+                        
+                        <div class="staff-message">
+                            <p>循環器系のお薬に詳しく、血圧管理や心疾患の薬物療法についてアドバイスいたします。</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="staff-card">
+                    <div class="staff-photo">
+                        <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=150&h=150&fit=crop&crop=face" alt="登録販売者">
+                    </div>
+                    <div class="staff-info">
+                        <h3>鈴木 花子</h3>
+                        <p class="staff-title">登録販売者</p>
+                        <p class="staff-experience">登録販売者歴5年</p>
+                        
+                        <div class="staff-specialties">
+                            <h4>担当業務</h4>
+                            <div class="specialty-tags">
+                                <span class="specialty-tag">OTC医薬品</span>
+                                <span class="specialty-tag">健康食品</span>
+                                <span class="specialty-tag">介護用品</span>
+                            </div>
+                        </div>
+                        
+                        <div class="staff-message">
+                            <p>市販薬の選び方や健康食品について、お客様のニーズに合わせてご提案いたします。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">お客様の声</h2>
+            <p class="section-subtitle">地域の皆様からいただいた温かいお言葉</p>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        <p>"いつも丁寧に説明してくださり、安心してお薬を受け取れます。在宅配達もしていただけるので、体調の悪い時にとても助かっています。"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <h4>A.Kさん（70代女性）</h4>
+                        <p>在宅医療サービス利用</p>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        <p>"子どもの薬で困ったときに、佐藤薬剤師さんが親身になって相談に乗ってくれました。飲みやすくする工夫も教えてもらえて感謝しています。"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <h4>M.Tさん（30代女性）</h4>
+                        <p>小児薬物療法相談</p>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="testimonial-rating">⭐⭐⭐⭐⭐</div>
+                        <p>"お薬手帳アプリがとても便利です。薬の履歴が一目で分かり、飲み忘れ防止のアラーム機能も重宝しています。"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <h4>S.Nさん（50代男性）</h4>
+                        <p>お薬手帳アプリ利用</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">お問い合わせ・アクセス</h2>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>みらい薬局</h3>
+                    
+                    <div class="pharmacy-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">📍</div>
+                            <div>
+                                <h4>住所</h4>
+                                <p>〒150-0001<br>東京都渋谷区神宮前1-1-1 みらいビル1F</p>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">📞</div>
+                            <div>
+                                <h4>電話番号</h4>
+                                <p>03-1234-5678</p>
+                                <small>お薬の相談もお電話で承ります</small>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">📠</div>
+                            <div>
+                                <h4>FAX</h4>
+                                <p>03-1234-5679</p>
+                                <small>処方せんの事前送信にご利用ください</small>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">🕒</div>
+                            <div>
+                                <h4>営業時間</h4>
+                                <div class="schedule-detail">
+                                    <p>平日：9:00-20:00</p>
+                                    <p>土曜：9:00-18:00</p>
+                                    <p>日祝：10:00-17:00</p>
+                                    <small>年中無休（年末年始除く）</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">🚃</div>
+                            <div>
+                                <h4>アクセス</h4>
+                                <p>JR山手線「原宿駅」徒歩5分<br>東京メトロ千代田線「明治神宮前駅」徒歩3分</p>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">🚗</div>
+                            <div>
+                                <h4>駐車場</h4>
+                                <p>専用駐車場2台完備<br>近隣コインパーキングもご利用いただけます</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-section">
+                    <h3>お問い合わせフォーム</h3>
+                    <form class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">お名前</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">電話番号</label>
+                                <input type="tel" id="phone">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">メールアドレス</label>
+                            <input type="email" id="email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="inquiry-type">お問い合わせ内容</label>
+                            <select id="inquiry-type" required>
+                                <option value="">選択してください</option>
+                                <option value="prescription">処方薬について</option>
+                                <option value="otc">市販薬について</option>
+                                <option value="consultation">薬剤師相談</option>
+                                <option value="delivery">配達サービス</option>
+                                <option value="app">お薬手帳アプリ</option>
+                                <option value="other">その他</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">詳細・ご質問</label>
+                            <textarea id="message" rows="5" placeholder="お薬や健康に関するご質問など、お気軽にご記入ください"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">送信する</button>
+                        <p class="form-note">お問い合わせ内容によっては、回答までにお時間をいただく場合がございます。</p>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="map-section">
+                <div class="map-placeholder">
+                    <h4>アクセスマップ</h4>
+                    <p>原宿駅・明治神宮前駅から徒歩圏内</p>
+                    <button class="btn-outline">Googleマップで開く</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section main-info">
+                    <h3>💊 みらい薬局</h3>
+                    <p>あなたの健康パートナー</p>
+                    <div class="pharmacy-info">
+                        <p>〒150-0001 東京都渋谷区神宮前1-1-1 みらいビル1F</p>
+                        <p>TEL: 03-1234-5678 / FAX: 03-1234-5679</p>
+                        <p>Email: info@mirai-pharmacy.jp</p>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>サービス案内</h4>
+                    <ul>
+                        <li><a href="#services">調剤サービス</a></li>
+                        <li><a href="#services">OTC医薬品</a></li>
+                        <li><a href="#services">薬剤師相談</a></li>
+                        <li><a href="#services">在宅医療</a></li>
+                        <li><a href="#services">健康測定</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>薬局情報</h4>
+                    <ul>
+                        <li><a href="#about">薬局について</a></li>
+                        <li><a href="#staff">薬剤師紹介</a></li>
+                        <li><a href="#health-info">健康情報</a></li>
+                        <li><a href="#contact">アクセス</a></li>
+                        <li><a href="#app">お薬手帳アプリ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>営業時間</h4>
+                    <div class="schedule-footer">
+                        <table>
+                            <tr>
+                                <td>平日</td>
+                                <td>9:00-20:00</td>
+                            </tr>
+                            <tr>
+                                <td>土曜</td>
+                                <td>9:00-18:00</td>
+                            </tr>
+                            <tr>
+                                <td>日祝</td>
+                                <td>10:00-17:00</td>
+                            </tr>
+                        </table>
+                        <p class="emergency-note">夜間・休日の緊急時は当番薬局をご案内いたします</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 みらい薬局. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">プライバシーポリシー</a>
+                    <a href="#">利用規約</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>`,
+    css: `@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700&family=Fredoka+One&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    color: #2d3436;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header */
+.header {
+    background: white;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.logo h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 24px;
+    color: #00cec9;
+    margin: 0;
+    line-height: 1;
+}
+
+.tagline {
+    font-size: 11px;
+    color: #a29bfe;
+    display: block;
+    margin-top: 2px;
+    letter-spacing: 1px;
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+    align-items: center;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #2d3436;
+    font-weight: 500;
+    font-size: 14px;
+    transition: color 0.3s;
+    padding: 10px 0;
+}
+
+.main-nav a:hover {
+    color: #00cec9;
+}
+
+.nav-cta a {
+    background: #fd79a8;
+    color: white !important;
+    padding: 12px 24px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.nav-cta a:hover {
+    background: #e84393;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(253, 121, 168, 0.3);
+}
+
+/* Dropdown Menu */
+.nav-item {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    min-width: 180px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border-radius: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s;
+    z-index: 1000;
+}
+
+.nav-item:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu li {
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 12px 20px;
+    color: #636e72;
+    border-radius: 0;
+}
+
+.dropdown-menu a:hover {
+    background: #f8f9fa;
+    color: #00cec9;
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #2d3436;
+    transition: all 0.3s;
+    border-radius: 2px;
+}
+
+/* Hero */
+.hero {
+    background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 50%, #00cec9 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="pills" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="12.5" cy="12.5" r="8" fill="rgba(255,255,255,0.03)"/><rect x="5" y="5" width="15" height="8" rx="4" fill="rgba(255,255,255,0.02)"/></pattern></defs><rect width="100" height="100" fill="url(%23pills)"/></svg>');
+}
+
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    margin-top: 80px;
+}
+
+.hero-text h2 {
+    font-size: 48px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 24px;
+    line-height: 1.2;
+}
+
+.highlight {
+    background: linear-gradient(45deg, #fdcb6e, #e17055);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-text p {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 40px;
+    line-height: 1.8;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.btn-primary {
+    background: #00cec9;
+    color: white;
+    padding: 16px 32px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    background: #00b894;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 206, 201, 0.4);
+}
+
+.btn-outline {
+    background: transparent;
+    color: white;
+    padding: 16px 32px;
+    border: 2px solid white;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+    display: inline-block;
+}
+
+.btn-outline:hover {
+    background: white;
+    color: #6c5ce7;
+}
+
+.hero-features {
+    display: flex;
+    gap: 30px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+}
+
+.feature-icon {
+    color: #fdcb6e;
+    font-weight: bold;
+}
+
+/* Hero Visual */
+.hero-visual {
+    position: relative;
+}
+
+.pharmacy-scene {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.pharmacy-scene img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+}
+
+.floating-icons {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.icon-bubble {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: float 8s ease-in-out infinite;
+}
+
+.icon-1 {
+    top: 20%;
+    right: 10%;
+    animation-delay: 0s;
+}
+
+.icon-2 {
+    top: 50%;
+    left: 5%;
+    animation-delay: 2s;
+}
+
+.icon-3 {
+    bottom: 30%;
+    right: 15%;
+    animation-delay: 4s;
+}
+
+.icon-4 {
+    bottom: 15%;
+    left: 20%;
+    animation-delay: 6s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    25% { transform: translateY(-10px) scale(1.05); }
+    50% { transform: translateY(-5px) scale(1); }
+    75% { transform: translateY(-15px) scale(0.95); }
+}
+
+/* Quick Info */
+.quick-info {
+    padding: 60px 0;
+    background: #f8f9fa;
+    margin-top: -30px;
+    position: relative;
+    z-index: 10;
+}
+
+.info-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.info-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+}
+
+.info-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+}
+
+.info-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #2d3436;
+}
+
+.info-card p {
+    color: #636e72;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.phone-number {
+    font-size: 20px;
+    font-weight: 700;
+    color: #00cec9 !important;
+}
+
+.info-card small {
+    color: #b2bec3;
+    font-size: 12px;
+}
+
+/* Sections */
+section {
+    padding: 80px 0;
+}
+
+.section-title {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 16px;
+    color: #2d3436;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #636e72;
+    margin-bottom: 60px;
+    font-size: 18px;
+}
+
+/* About */
+.about {
+    background: white;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+}
+
+.about-description {
+    margin-bottom: 40px;
+}
+
+.about-description p {
+    color: #636e72;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.pharmacy-values {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.value-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border-left: 4px solid #00cec9;
+}
+
+.value-icon {
+    font-size: 24px;
+    min-width: 30px;
+    margin-top: 2px;
+}
+
+.value-item h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #2d3436;
+}
+
+.value-item p {
+    color: #636e72;
+    line-height: 1.6;
+}
+
+.about-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.pharmacy-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.stat-number {
+    font-size: 24px;
+    font-weight: 700;
+    color: #00cec9;
+    display: block;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #636e72;
+    margin-top: 5px;
+}
+
+.about-image {
+    position: relative;
+}
+
+.about-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.certification-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #00cec9;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Services */
+.services {
+    background: #f8f9fa;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.service-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+    text-align: center;
+    display: block;
+}
+
+.service-card h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #2d3436;
+    text-align: center;
+}
+
+.service-desc {
+    color: #636e72;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.service-features h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #2d3436;
+}
+
+.service-features ul {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.service-features li {
+    padding: 6px 0;
+    color: #636e72;
+    position: relative;
+    padding-left: 20px;
+}
+
+.service-features li:before {
+    content: "💊";
+    position: absolute;
+    left: 0;
+    font-size: 12px;
+}
+
+.service-time,
+.home-care-area,
+.measurement-schedule {
+    background: #e8f5e8;
+    color: #00b894;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.service-benefits {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.benefit-tag {
+    background: #e8f4fd;
+    color: #0984e3;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.consultation-methods {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.method-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #f8f9fa;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.method-icon {
+    font-size: 14px;
+}
+
+.app-download {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.download-btn {
+    background: #2d3436;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.download-btn.ios {
+    background: #000;
+}
+
+.download-btn.android {
+    background: #01875f;
+}
+
+.download-btn:hover {
+    opacity: 0.8;
+}
+
+/* Health Info */
+.health-info {
+    background: white;
+}
+
+.health-categories {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.category-nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 50px;
+    background: #f8f9fa;
+    padding: 8px;
+    border-radius: 15px;
+}
+
+.category-tab {
+    background: transparent;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #636e72;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.category-tab.active {
+    background: #00cec9;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 206, 201, 0.3);
+}
+
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.article-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.article-card:hover {
+    transform: translateY(-5px);
+}
+
+.article-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.article-category {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #00cec9;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.article-content {
+    padding: 25px;
+}
+
+.article-content h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #2d3436;
+}
+
+.article-content p {
+    color: #636e72;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.article-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #b2bec3;
+}
+
+.author {
+    font-weight: 500;
+}
+
+.health-tools h3 {
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #2d3436;
+}
+
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.tool-item {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+}
+
+.tool-item:hover {
+    border-color: #00cec9;
+    transform: translateY(-3px);
+}
+
+.tool-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+}
+
+.tool-item h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #2d3436;
+}
+
+.tool-item p {
+    color: #636e72;
+    margin-bottom: 20px;
+}
+
+.tool-btn {
+    background: #00cec9;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.tool-btn:hover {
+    background: #00b894;
+}
+
+/* Staff */
+.staff {
+    background: #f8f9fa;
+}
+
+.staff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.staff-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.staff-card:hover {
+    transform: translateY(-5px);
+}
+
+.staff-card.chief {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+    text-align: left;
+    background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+    color: white;
+}
+
+.staff-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 20px;
+    border: 4px solid #00cec9;
+}
+
+.chief .staff-photo {
+    margin: 0;
+    width: 120px;
+    height: 120px;
+}
+
+.staff-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.staff-info h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #2d3436;
+}
+
+.chief .staff-info h3 {
+    color: white;
+    font-size: 24px;
+}
+
+.staff-title {
+    font-size: 14px;
+    color: #00cec9;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.chief .staff-title {
+    color: #fdcb6e;
+}
+
+.staff-experience {
+    font-size: 12px;
+    color: #636e72;
+    margin-bottom: 20px;
+}
+
+.chief .staff-experience {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.staff-message {
+    margin-bottom: 25px;
+}
+
+.staff-message p {
+    color: #636e72;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+.chief .staff-message p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.staff-specialties h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #2d3436;
+}
+
+.chief .staff-specialties h4 {
+    color: white;
+}
+
+.specialty-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.chief .specialty-tags {
+    justify-content: flex-start;
+}
+
+.specialty-tag {
+    background: #e8f5e8;
+    color: #00b894;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.chief .specialty-tag {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.staff-qualifications h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: white;
+}
+
+.staff-qualifications ul {
+    list-style: none;
+    text-align: left;
+}
+
+.staff-qualifications li {
+    padding: 4px 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 12px;
+    position: relative;
+    padding-left: 15px;
+}
+
+.staff-qualifications li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #fdcb6e;
+    font-weight: 600;
+}
+
+/* Testimonials */
+.testimonials {
+    background: white;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 40px;
+}
+
+.testimonial-card {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    border-left: 4px solid #00cec9;
+}
+
+.testimonial-rating {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.testimonial-content p {
+    color: #2d3436;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.testimonial-author h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2d3436;
+    margin-bottom: 4px;
+}
+
+.testimonial-author p {
+    font-size: 12px;
+    color: #00cec9;
+}
+
+/* Contact */
+.contact {
+    background: #f8f9fa;
+}
+
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+}
+
+.contact-info h3 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #2d3436;
+}
+
+.pharmacy-details {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.detail-icon {
+    font-size: 20px;
+    min-width: 25px;
+    color: #00cec9;
+    margin-top: 2px;
+}
+
+.detail-item h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #2d3436;
+}
+
+.detail-item p {
+    color: #636e72;
+    line-height: 1.5;
+    margin-bottom: 4px;
+}
+
+.detail-item small {
+    color: #b2bec3;
+    font-size: 12px;
+}
+
+.schedule-detail p {
+    margin-bottom: 2px;
+}
+
+.contact-form-section h3 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #2d3436;
+}
+
+.contact-form {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #2d3436;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #00cec9;
+}
+
+.form-note {
+    font-size: 12px;
+    color: #636e72;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.map-section {
+    display: flex;
+    justify-content: center;
+}
+
+.map-placeholder {
+    background: white;
+    border: 2px dashed #ddd;
+    border-radius: 15px;
+    padding: 60px 40px;
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-placeholder h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #636e72;
+    margin-bottom: 10px;
+}
+
+.map-placeholder p {
+    color: #b2bec3;
+    margin-bottom: 20px;
+}
+
+/* Footer */
+.footer {
+    background: #2d3436;
+    color: white;
+    padding: 60px 0 30px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section.main-info h3 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 20px;
+    color: #00cec9;
+    margin-bottom: 15px;
+}
+
+.footer-section h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.footer-section p {
+    color: #b2bec3;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.pharmacy-info p {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section a {
+    color: #b2bec3;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: #00cec9;
+}
+
+.schedule-footer table {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.schedule-footer td {
+    padding: 4px 0;
+    color: #b2bec3;
+    font-size: 14px;
+}
+
+.schedule-footer td:first-child {
+    font-weight: 500;
+    width: 50px;
+}
+
+.emergency-note {
+    font-size: 12px;
+    color: #fd79a8;
+    font-style: italic;
+}
+
+.footer-bottom {
+    padding-top: 30px;
+    border-top: 1px solid #636e72;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: #b2bec3;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #00cec9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+    
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .main-nav.active {
+        display: block;
+    }
+    
+    .main-nav ul {
+        flex-direction: column;
+        padding: 20px;
+        gap: 15px;
+    }
+    
+    .main-nav ul li {
+        border-bottom: 1px solid #f8f9fa;
+        width: 100%;
+    }
+    
+    .main-nav a {
+        padding: 15px 0;
+        display: block;
+    }
+    
+    .dropdown-menu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        background: #f8f9fa;
+        margin-top: 10px;
+    }
+    
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .hero-text h2 {
+        font-size: 36px;
+    }
+    
+    .hero-buttons {
+        justify-content: center;
+    }
+    
+    .hero-features {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .floating-icons {
+        display: none;
+    }
+    
+    .info-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .about-content,
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .staff-card.chief {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .staff-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .specialty-tags {
+        justify-content: center;
+    }
+    
+    .services-grid,
+    .articles-grid,
+    .tools-grid,
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    .footer-links {
+        justify-content: center;
+    }
+}`,
+    js: `// ハンバーガーメニュー
+const hamburger = document.getElementById('hamburger');
+const mainNav = document.getElementById('main-nav');
+
+if (hamburger && mainNav) {
+    hamburger.addEventListener('click', function() {
+        this.classList.toggle('active');
+        mainNav.classList.toggle('active');
+    });
+    
+    // メニューリンクをクリックしたら閉じる
+    const navLinks = mainNav.querySelectorAll('a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            mainNav.classList.remove('active');
+        });
+    });
+}
+
+// スムーズスクロール
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const headerHeight = document.querySelector('.header').offsetHeight;
+            const targetPosition = target.offsetTop - headerHeight - 20;
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// 健康情報カテゴリタブ（まだ実装していないが、準備）
+const categoryTabs = document.querySelectorAll('.category-tab');
+categoryTabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+        // アクティブなタブを更新
+        categoryTabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        
+        // ここで記事のフィルタリング機能を実装可能
+        const category = this.getAttribute('data-category');
+        console.log('Selected category:', category);
+    });
+});
+
+// お問い合わせフォーム送信
+const contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('お問い合わせを送信しました。担当薬剤師よりご連絡いたします。');
+    });
+}
+
+// 健康管理ツールボタン
+document.querySelectorAll('.tool-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const toolName = this.closest('.tool-item').querySelector('h4').textContent;
+        alert(toolName + 'を開始します（実装予定）');
+    });
+});
+
+// アプリダウンロードボタン
+document.querySelectorAll('.download-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        const platform = this.classList.contains('ios') ? 'App Store' : 'Google Play';
+        alert(platform + 'でお薬手帳アプリをダウンロードします（実装予定）');
+    });
+});
+
+// 電話番号クリック
+document.addEventListener('click', function(e) {
+    const text = e.target.textContent;
+    if (text && text.includes('03-1234-5678')) {
+        if (confirm('薬局に電話をかけますか？')) {
+            window.location.href = 'tel:03-1234-5678';
+        }
+    }
+});
+
+// 記事カードクリック
+document.querySelectorAll('.article-card').forEach(card => {
+    card.addEventListener('click', function() {
+        const title = this.querySelector('h3').textContent;
+        alert('"' + title + '"の記事詳細ページへ遷移します（実装予定）');
+    });
+});
+
+// Googleマップボタン
+document.querySelector('.map-placeholder button')?.addEventListener('click', function() {
+    alert('Googleマップで薬局の場所を開きます（実装予定）');
+});
+
+// スクロールアニメーション
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// アニメーション対象要素を観察
+window.addEventListener('load', () => {
+    const animateElements = document.querySelectorAll('.info-card, .value-item, .service-card, .staff-card, .article-card, .tool-item');
+    animateElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'all 0.6s ease';
+        observer.observe(el);
+    });
+});
+
+// 統計数字のカウントアニメーション
+function animateValue(element, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        let value = Math.floor(progress * (end - start) + start);
+        if (element.dataset.suffix) {
+            element.textContent = value.toLocaleString() + element.dataset.suffix;
+        } else {
+            element.textContent = value.toLocaleString();
+        }
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+// 統計セクションが表示されたときのアニメーション
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const statNumbers = entry.target.querySelectorAll('.stat-number');
+            statNumbers.forEach(statNumber => {
+                if (!statNumber.classList.contains('animated')) {
+                    const text = statNumber.textContent;
+                    const match = text.match(/(\d+)/);
+                    if (match) {
+                        const number = parseInt(match[1]);
+                        const suffix = text.replace(/[\d,]/g, '');
+                        statNumber.dataset.suffix = suffix;
+                        statNumber.textContent = '0';
+                        animateValue(statNumber, 0, number, 2000);
+                        statNumber.classList.add('animated');
+                    }
+                }
+            });
+        }
+    });
+}, { threshold: 0.5 });
+
+// 統計セクションを観察
+document.querySelectorAll('.pharmacy-stats').forEach(stats => {
+    statsObserver.observe(stats);
+});
+
+// フローティングアイコンのランダムアニメーション
+window.addEventListener('load', function() {
+    const iconBubbles = document.querySelectorAll('.icon-bubble');
+    iconBubbles.forEach((bubble, index) => {
+        bubble.style.opacity = '0';
+        bubble.style.transform = 'translateY(30px) scale(0.5)';
+        
+        setTimeout(() => {
+            bubble.style.transition = 'all 0.8s ease';
+            bubble.style.opacity = '1';
+            bubble.style.transform = 'translateY(0) scale(1)';
+        }, 800 + (index * 300));
+    });
+});
+
+// サービスカードのホバーエフェクト強化
+document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-8px) scale(1.02)';
+        this.style.boxShadow = '0 15px 40px rgba(0, 206, 201, 0.2)';
+    });
+    
+    card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+        this.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+    });
+});
+
+// ツールカードのクリックアニメーション
+document.querySelectorAll('.tool-item').forEach(tool => {
+    tool.addEventListener('click', function() {
+        this.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            this.style.transform = 'scale(1)';
+        }, 150);
+    });
+});`
+  }
+}
