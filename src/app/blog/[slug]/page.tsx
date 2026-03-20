@@ -19,17 +19,9 @@ export default async function BlogPostPage(props: any) {
         <span className="text-green-600">#{post.id}</span> {post.title}
       </h1>
       <ul className="list-none border-b border-gray-600 pb-4 mb-6">
-        {post.create && (
-          <li className="text-gray-500 text-sm">
-            作成日時: {post.create}
-          </li>
-        )}
+        {post.create && <li className="text-gray-500 text-sm">作成日時: {post.create}</li>}
         {/* 更新日が存在する場合は表示する。存在しない場合は表示しない。 */}
-        {post.update && (
-          <li className="text-gray-500 text-sm">
-            更新日時: {post.update}
-          </li>
-        )}
+        {post.update && <li className="text-gray-500 text-sm">更新日時: {post.update}</li>}
         {/* タグが存在する場合は表示する。存在しない場合は表示しない。 */}
         {post.tags && post.tags.length > 0 && (
           <li className="flex flex-wrap gap-2 mt-2">
@@ -41,12 +33,9 @@ export default async function BlogPostPage(props: any) {
           </li>
         )}
       </ul>
-      <nav className="mb-6 pb-4 border-b border-gray-700 flex justify-between">
-        <Link href="/" className="text-blue-400 hover:text-blue-300 hover:underline">
-          ← ホームへ
-        </Link>
-        <Link href="/blog" className="text-blue-400 hover:text-blue-300 hover:underline">
-          記事一覧へ →
+      <nav className="mb-6 pb-4 border-b border-gray-700">
+        <Link href="/blog" className="text-blue-400 hover:text-blue-300 hover:underline text-sm">
+          ← 記事一覧へ
         </Link>
       </nav>
       <article
@@ -54,12 +43,9 @@ export default async function BlogPostPage(props: any) {
         dangerouslySetInnerHTML={{ __html: post.contentHtml }}
       />
       <MermaidClientWrapper />
-      <nav className="mt-8 pt-4 border-t border-gray-700 flex justify-between">
-        <Link href="/" className="text-blue-400 hover:text-blue-300 hover:underline">
-          ← ホームへ
-        </Link>
-        <Link href="/blog" className="text-blue-400 hover:text-blue-300 hover:underline">
-          記事一覧へ →
+      <nav className="mt-8 pt-4 border-t border-gray-700">
+        <Link href="/blog" className="text-blue-400 hover:text-blue-300 hover:underline text-sm">
+          ← 記事一覧へ
         </Link>
       </nav>
       <ScrollToTopButton />

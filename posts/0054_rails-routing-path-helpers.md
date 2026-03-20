@@ -1,4 +1,5 @@
 ---
+id: 54
 title: "Rails routingとPath Helperの仕組みを理解する"
 date: 2025-09-10 00:32
 create: 2025-09-10 00:32
@@ -12,6 +13,7 @@ tags:
   - RESTful API
   - Web Framework
 ---
+id: 54
 
 # Rails routingとPath Helperの仕組みを理解する
 

@@ -1,4 +1,5 @@
 ---
+id: 55
 title: "Stimulus.jsでミックスイン（Mixin）パターンを活用してコードの再利用性を高める"
 date: 2025-09-10 00:51
 create: 2025-09-10 00:51
@@ -14,6 +15,7 @@ tags:
   - Code reuse
   - Rails frontend
 ---
+id: 55
 
 # Stimulus.jsでミックスイン（Mixin）パターンを活用してコードの再利用性を高める
 
