@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { getSortedPostsData, getAllTags } from '@/lib/posts'
+import { getAllDailyDates } from '@/lib/daily'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://mt-github-io.vercel.app'
 
@@ -51,6 +52,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.5,
     },
+    {
+      url: `${BASE_URL}/daily/`,
+      changeFrequency: 'daily',
+      priority: 0.8,
+    },
+    ...getAllDailyDates().map((date) => ({
+      url: `${BASE_URL}/daily/${date}/`,
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    })),
     ...postEntries,
     ...tagEntries,
   ]
