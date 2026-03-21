@@ -31,7 +31,7 @@ export default async function TagPage({ params }: PageProps) {
   }
 
   return (
-    <div className="max-w-2xl mx-auto py-10 px-4">
+    <div className="max-w-3xl mx-auto py-10 px-4">
       <nav className="mb-6">
         <Link
           href="/blog/tags"

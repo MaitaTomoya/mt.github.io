@@ -6,7 +6,7 @@ export default function Home() {
   const posts = getSortedPostsData()
 
   return (
-    <div className="max-w-2xl mx-auto py-10 px-4">
+    <div className="max-w-3xl mx-auto py-10 px-4">
       <div className="mb-4">
         <h1 className="text-3xl md:text-4xl font-bold">maita tomoya dev io</h1>
       </div>

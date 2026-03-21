@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 
 const MermaidRenderer = dynamic(() => import('@/components/MermaidRenderer'), {
-  ssr: false
+  ssr: false,
 })
 
 type Props = {
@@ -27,15 +27,15 @@ export default function PostPageContent({ postData }: Props) {
           primaryBorderColor: '#0066cc',
           lineColor: '#5a5a5a',
           secondaryColor: '#fff3e0',
-          tertiaryColor: '#f3e5f5'
-        }
+          tertiaryColor: '#f3e5f5',
+        },
       })
       mermaid.default.contentLoaded()
     })
   }, [])
 
   return (
-    <div className="max-w-2xl mx-auto py-10 px-4">
+    <div className="max-w-3xl mx-auto py-10 px-4">
       <h1 className="text-3xl font-bold mb-2">{postData.title}</h1>
       <p className="text-gray-500 text-sm mb-8">{postData.create}</p>
       <article

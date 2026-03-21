@@ -25,6 +25,15 @@ const noteSections: NoteSection[] = [
     status: 'active',
   },
   {
+    title: 'Full Stack Developer Roadmap',
+    description:
+      'roadmap.sh準拠のフルスタック開発者ロードマップ。各技術を自分の言葉で解説し、人に教えられるレベルを目指す',
+    href: '/note/roadmap',
+    color: 'green',
+    tags: ['ロードマップ', '学習記録', 'フルスタック'],
+    status: 'new',
+  },
+  {
     title: 'ブラウザゲームコレクション',
     description:
       'HTML5 Canvas APIで作成したミニゲーム集。テトリス、スネーク、2048などクラシックゲームをプレイ可能',

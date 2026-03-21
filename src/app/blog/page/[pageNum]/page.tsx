@@ -31,7 +31,7 @@ export default async function BlogPage({ params }: PageProps) {
   // 不正なページ番号の処理
   if (isNaN(pageNumber) || pageNumber < 1) {
     return (
-      <div className="max-w-2xl mx-auto py-10 px-4">
+      <div className="max-w-3xl mx-auto py-10 px-4">
         <p className="text-red-500">ページが見つかりません</p>
         <Link href="/blog/page/1/" className="text-blue-400 hover:text-blue-300 hover:underline">
           最初のページへ戻る
@@ -45,7 +45,7 @@ export default async function BlogPage({ params }: PageProps) {
   // ページが存在しない場合
   if (posts.length === 0 && pageNumber > 1) {
     return (
-      <div className="max-w-2xl mx-auto py-10 px-4">
+      <div className="max-w-3xl mx-auto py-10 px-4">
         <p className="text-red-500">このページには記事がありません</p>
         <Link href="/blog/page/1/" className="text-blue-400 hover:text-blue-300 hover:underline">
           最初のページへ戻る
@@ -55,7 +55,7 @@ export default async function BlogPage({ params }: PageProps) {
   }
 
   return (
-    <div className="max-w-2xl mx-auto py-10 px-4">
+    <div className="max-w-3xl mx-auto py-10 px-4">
       <div className="mb-6">
         <h1 className="text-3xl font-bold">記事一覧</h1>
         <p className="text-gray-500 text-sm mt-2">
