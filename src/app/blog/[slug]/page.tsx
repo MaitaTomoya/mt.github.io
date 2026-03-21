@@ -14,7 +14,7 @@ export default async function BlogPostPage(props: any) {
   if (!post) notFound()
 
   return (
-    <div className="max-w-2xl mx-auto py-10 px-4">
+    <div className="max-w-3xl mx-auto py-10 px-4">
       <h1 className="text-3xl font-bold mb-2">
         <span className="text-green-600">#{post.id}</span> {post.title}
       </h1>
