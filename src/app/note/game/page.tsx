@@ -3,23 +3,11 @@ import { games } from '@/lib/games'
 
 export default function GameListPage() {
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
+    <div className="text-gray-100">
       <div className="max-w-7xl mx-auto py-10 px-4">
         {/* ヘッダー */}
         <div className="mb-8">
-          <nav className="mb-6 flex gap-4">
-            <Link href="/" className="text-blue-400 hover:text-blue-300 hover:underline">
-              ホーム
-            </Link>
-            <span className="text-gray-500">/</span>
-            <Link href="/note" className="text-blue-400 hover:text-blue-300 hover:underline">
-              ノート
-            </Link>
-            <span className="text-gray-500">/</span>
-            <span className="text-gray-400">ゲーム</span>
-          </nav>
-          
-          <h1 className="text-4xl font-bold mb-4">🎮 ブラウザゲームコレクション</h1>
+          <h1 className="text-3xl font-bold mb-4">ブラウザゲームコレクション</h1>
           <p className="text-gray-300 text-lg">
             JavaScriptで作成したミニゲーム集。PCでもスマホでも遊べます！
           </p>
@@ -55,7 +43,11 @@ export default function GameListPage() {
                   </span>
                 </div>
                 <div className="absolute top-2 right-2 px-2 py-1 bg-black bg-opacity-50 rounded text-xs">
-                  {game.difficulty === 'easy' ? '簡単' : game.difficulty === 'medium' ? '普通' : '難しい'}
+                  {game.difficulty === 'easy'
+                    ? '簡単'
+                    : game.difficulty === 'medium'
+                      ? '普通'
+                      : '難しい'}
                 </div>
               </div>
 
@@ -63,15 +55,12 @@ export default function GameListPage() {
               <div className="p-4">
                 <h2 className="text-xl font-bold mb-2">{game.title}</h2>
                 <p className="text-gray-400 text-sm mb-4">{game.description}</p>
-                
+
                 {/* 特徴 */}
                 <div className="mb-4">
                   <div className="flex flex-wrap gap-1">
                     {game.features.slice(0, 3).map((feature, index) => (
-                      <span
-                        key={index}
-                        className="text-xs px-2 py-1 bg-gray-700 rounded"
-                      >
+                      <span key={index} className="text-xs px-2 py-1 bg-gray-700 rounded">
                         {feature}
                       </span>
                     ))}
@@ -141,13 +130,8 @@ export default function GameListPage() {
         </div>
 
         {/* フッター */}
-        <div className="mt-12 text-center text-gray-500">
-          <p>Created with ❤️ using JavaScript and HTML5 Canvas</p>
-          <p className="mt-2">
-            <Link href="/blog" className="text-blue-400 hover:text-blue-300 hover:underline">
-              開発ブログを読む
-            </Link>
-          </p>
+        <div className="mt-12 text-center text-gray-500 text-sm">
+          <p>Created with JavaScript and HTML5 Canvas</p>
         </div>
       </div>
     </div>

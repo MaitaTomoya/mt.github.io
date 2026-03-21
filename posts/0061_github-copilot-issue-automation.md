@@ -1,5 +1,5 @@
 ---
-id: 30
+id: 61
 title: "GitHub Copilotで実現するIssueコメント駆動開発：AIによる自動コード生成とPR作成"
 tags: ["GitHub Copilot", "GitHub Actions", "自動化", "AI開発", "CI/CD", "効率化"]
 create: "2025-08-14 23:34"

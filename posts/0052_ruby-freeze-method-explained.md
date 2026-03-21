@@ -1,4 +1,5 @@
 ---
+id: 52
 layout: post
 title: "Ruby の .freeze メソッドを理解する：オブジェクトの不変性とメモリ効率"
 date: "2025-09-05 13:22"
