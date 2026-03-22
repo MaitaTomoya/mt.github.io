@@ -34,6 +34,15 @@ const noteSections: NoteSection[] = [
     status: 'new',
   },
   {
+    title: '読書記録',
+    description:
+      '読んだ本の内容・感想・生活への活かし方をまとめた読書ノート。Claude Codeで本のPDFから要約を自動生成',
+    href: '/note/books',
+    color: 'amber',
+    tags: ['読書', '要約', '感想', '自己成長'],
+    status: 'new',
+  },
+  {
     title: 'ブラウザゲームコレクション',
     description:
       'HTML5 Canvas APIで作成したミニゲーム集。テトリス、スネーク、2048などクラシックゲームをプレイ可能',
