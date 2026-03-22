@@ -39,6 +39,9 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# 読書PDF（ローカルのみ）
+/books-pdf/
+
 # vercel
 .vercel
 
