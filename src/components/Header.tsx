@@ -73,24 +73,31 @@ export default function Header() {
         </button>
       </div>
 
-      {/* モバイルメニュー */}
+      {/* モバイルメニューオーバーレイ */}
       {isMenuOpen && (
-        <nav className="md:hidden border-t border-gray-800 bg-black">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`block px-4 py-3 text-sm transition-colors ${
-                pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
-                  ? 'text-blue-400 bg-gray-900'
-                  : 'text-gray-400 hover:text-gray-200 hover:bg-gray-900'
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+        <>
+          <div
+            className="md:hidden fixed inset-0 top-14 bg-black/60 z-40"
+            onClick={() => setIsMenuOpen(false)}
+            aria-hidden="true"
+          />
+          <nav className="md:hidden fixed left-0 right-0 top-14 border-t border-gray-700 bg-gray-900/95 backdrop-blur-md z-50 shadow-lg shadow-black/30">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`block px-4 py-3 text-sm transition-colors border-b border-gray-800/50 ${
+                  pathname === item.href || (item.href !== '/' && pathname.startsWith(item.href))
+                    ? 'text-blue-400'
+                    : 'text-gray-300 hover:text-white hover:bg-white/5'
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </>
       )}
     </header>
   )
