@@ -17,11 +17,12 @@ export interface Game {
   rating?: number
 }
 
-export type GameCategory = 'puzzle' | 'arcade' | 'strategy' | 'action'
+export type GameCategory = 'puzzle' | 'arcade' | 'strategy' | 'action' | 'learning'
 
 export const GAME_CATEGORIES = {
   PUZZLE: 'puzzle' as const,
   ARCADE: 'arcade' as const,
   STRATEGY: 'strategy' as const,
   ACTION: 'action' as const,
+  LEARNING: 'learning' as const,
 }
