@@ -34,6 +34,15 @@ const noteSections: NoteSection[] = [
     status: 'new',
   },
   {
+    title: '技術選定に向けた基礎理解',
+    description:
+      'プログラミング言語、フレームワーク、データベース、クラウドサービスの選び方を体系的に学ぶ。ケーススタディと成功/失敗事例付き',
+    href: '/note/tech-selection',
+    color: 'cyan',
+    tags: ['技術選定', '言語比較', 'フレームワーク', 'アーキテクチャ'],
+    status: 'new',
+  },
+  {
     title: '読書記録',
     description:
       '読んだ本の内容・感想・生活への活かし方をまとめた読書ノート。Claude Codeで本のPDFから要約を自動生成',
