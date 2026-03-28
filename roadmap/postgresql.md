@@ -1,10 +1,17 @@
 ---
 title: 'PostgreSQL'
-order: 23
+order: 25
 section: 'データベース'
 ---
 
 # PostgreSQL
+
+## 前提知識
+
+この記事ではPostgreSQL固有の機能に焦点を当てる。SQLの基本やデータベースの概念については以下の記事を参照してほしい。
+
+- [データベース基礎](/roadmap/database-fundamentals) - データベースの概念、ACID特性、CAP定理、RDB vs NoSQLなど
+- [SQL基礎](/roadmap/sql-fundamentals) - SELECT、INSERT、UPDATE、DELETE、JOIN、サブクエリ、トランザクションなど
 
 ## PostgreSQLとは何か
 
@@ -13,50 +20,10 @@ PostgreSQL（ポストグレスキューエル、通称: ポスグレ）は、**
 特徴:
 
 - **完全にオープンソース**で、ライセンス費用がかからない
-- **ACID準拠**（後述）で、データの信頼性が高い
+- **ACID準拠**で、データの信頼性が高い
 - **JSON/JSONB**をネイティブサポートし、NoSQLのような使い方もできる
 - **拡張性**が非常に高く、独自のデータ型や関数を追加できる
 - Instagram、Spotify、Reddit、Apple、Microsoftなど世界中の企業が採用
-
-### RDBMSの基本概念
-
-RDBMSを理解するために、まず基本用語を整理する。
-
-Excelのスプレッドシートに例えると分かりやすい:
-
-| RDBMS用語               | Excelでの対応                 | 説明                     |
-| ----------------------- | ----------------------------- | ------------------------ |
-| データベース            | ワークブック（.xlsxファイル） | データの入れ物全体       |
-| テーブル                | ワークシート                  | データの種類ごとの表     |
-| 行（レコード/タプル）   | 行                            | 1件のデータ              |
-| 列（カラム/フィールド） | 列                            | データの項目             |
-| 主キー（Primary Key）   | -                             | 各行を一意に識別するID   |
-| 外部キー（Foreign Key） | -                             | 他のテーブルとの関連付け |
-
-**テーブルの例（usersテーブル）**:
-
-| id (主キー) | name     | email              | age |
-| ----------- | -------- | ------------------ | --- |
-| 1           | 田中太郎 | taro@example.com   | 25  |
-| 2           | 佐藤花子 | hanako@example.com | 28  |
-| 3           | 鈴木次郎 | jiro@example.com   | 32  |
-
-### リレーション（関連付け）
-
-テーブル同士を関連付けることで、データの重複を避け、整合性を保つ。これがリレーショナルデータベースの核心。
-
-```
-users テーブル                    orders テーブル
-+----+--------+                  +----+---------+--------+-------+
-| id | name   |                  | id | user_id | item   | price |
-+----+--------+                  +----+---------+--------+-------+
-| 1  | 太郎   | ←────────────── | 1  | 1       | 本     | 1500  |
-| 2  | 花子   | ←────────────── | 2  | 1       | ペン   | 200   |
-+----+--------+   外部キーで     | 3  | 2       | ノート | 300   |
-                  関連付け       +----+---------+--------+-------+
-```
-
-`orders`テーブルの`user_id`が外部キー。`users`テーブルの`id`を参照している。これにより「太郎が買った商品一覧」のようなクエリが可能になる。
 
 ## MySQL vs PostgreSQLの違い
 
@@ -196,157 +163,199 @@ mydb=# \dt
  public | orders | table | myuser
 ```
 
-## SQLの基本
+## PostgreSQL固有のデータ型
 
-SQLは**Structured Query Language**の略で、データベースを操作するための言語。大きく2種類に分けられる。
+PostgreSQLはSQL標準のデータ型に加えて、豊富な独自データ型をサポートしている。基本的なデータ型（INTEGER、VARCHAR、BOOLEAN、DATE、TIMESTAMPなど）については[SQL基礎](/roadmap/sql-fundamentals)を参照。
 
-### DDL（Data Definition Language） - テーブルの定義
+### 数値型（PostgreSQL固有）
+
+| データ型    | サイズ  | 説明                      |
+| ----------- | ------- | ------------------------- |
+| `SERIAL`    | 4バイト | 自動採番（INTEGERベース） |
+| `BIGSERIAL` | 8バイト | 自動採番（BIGINTベース）  |
+
+**注意**: 新しいプロジェクトでは`SERIAL`の代わりに`GENERATED ALWAYS AS IDENTITY`の使用が推奨されている。
 
 ```sql
--- データベースの作成
-CREATE DATABASE shop;
-
--- テーブルの作成
+-- SERIALの代わり（SQL標準準拠）
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY,          -- 自動採番の主キー
-    name VARCHAR(100) NOT NULL,     -- 最大100文字、NULL不可
-    email VARCHAR(255) UNIQUE NOT NULL,  -- ユニーク制約
-    age INTEGER CHECK (age >= 0),   -- 0以上の整数
-    is_active BOOLEAN DEFAULT true, -- デフォルト値
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    name VARCHAR(100) NOT NULL
 );
-
--- テーブルの変更
-ALTER TABLE users ADD COLUMN phone VARCHAR(20);         -- 列の追加
-ALTER TABLE users DROP COLUMN phone;                     -- 列の削除
-ALTER TABLE users ALTER COLUMN name TYPE VARCHAR(200);   -- 型の変更
-ALTER TABLE users RENAME COLUMN name TO full_name;       -- 列名の変更
-ALTER TABLE users ADD CONSTRAINT age_check CHECK (age >= 0 AND age <= 150);
-
--- テーブルの削除
-DROP TABLE users;                   -- テーブルを削除
-DROP TABLE IF EXISTS users;         -- 存在する場合のみ削除
-
--- テーブルのデータだけ削除（構造は残す）
-TRUNCATE TABLE users;
 ```
 
-### DML（Data Manipulation Language） - データの操作
-
-```sql
--- データの挿入（INSERT）
-INSERT INTO users (name, email, age)
-VALUES ('田中太郎', 'taro@example.com', 25);
-
--- 複数行を一度に挿入
-INSERT INTO users (name, email, age)
-VALUES
-    ('佐藤花子', 'hanako@example.com', 28),
-    ('鈴木次郎', 'jiro@example.com', 32),
-    ('高橋美咲', 'misaki@example.com', 22);
-
--- データの取得（SELECT）
-SELECT * FROM users;                   -- 全列取得
-SELECT name, email FROM users;         -- 特定の列だけ取得
-SELECT name AS "名前", age AS "年齢" FROM users;  -- 別名を付ける
-
--- データの更新（UPDATE）
-UPDATE users
-SET age = 26, updated_at = CURRENT_TIMESTAMP
-WHERE id = 1;
-
--- データの削除（DELETE）
-DELETE FROM users WHERE id = 4;
-
--- 全データの削除（WHERE句なし - 危険）
-DELETE FROM users;  -- 全行削除。本番では絶対にWHERE句をつける
-```
-
-## データ型
-
-PostgreSQLは非常に豊富なデータ型をサポートしている。
-
-### 数値型
-
-| データ型           | サイズ  | 範囲             | 用途                               |
-| ------------------ | ------- | ---------------- | ---------------------------------- |
-| `SMALLINT`         | 2バイト | -32,768 ~ 32,767 | 小さな整数（年齢、個数など）       |
-| `INTEGER`          | 4バイト | -21億 ~ 21億     | 一般的な整数                       |
-| `BIGINT`           | 8バイト | -922京 ~ 922京   | 大きな整数（ID、金額の分単位など） |
-| `SERIAL`           | 4バイト | 1 ~ 21億         | 自動採番（INTEGERベース）          |
-| `BIGSERIAL`        | 8バイト | 1 ~ 922京        | 自動採番（BIGINTベース）           |
-| `NUMERIC(p,s)`     | 可変    | 任意精度         | 金額など正確な計算が必要な場合     |
-| `REAL`             | 4バイト | 6桁精度          | 浮動小数点（近似値）               |
-| `DOUBLE PRECISION` | 8バイト | 15桁精度         | 浮動小数点（近似値）               |
-
-**注意**: 金額は`NUMERIC`を使うこと。`REAL`や`DOUBLE PRECISION`は近似値のため、金額計算で誤差が出る。
-
-### 文字列型
-
-| データ型     | 説明                                | 用途                         |
-| ------------ | ----------------------------------- | ---------------------------- |
-| `VARCHAR(n)` | 最大n文字の可変長文字列             | 名前、メールアドレスなど     |
-| `CHAR(n)`    | 固定長n文字（不足分はスペース埋め） | 固定長コード（郵便番号など） |
-| `TEXT`       | 長さ制限なしの文字列                | 本文、説明文など             |
-
-**実務でのアドバイス**: PostgreSQLでは`VARCHAR`と`TEXT`のパフォーマンスに差はない。長さ制限が必要な場合は`VARCHAR(n)`、不要な場合は`TEXT`を使う。
-
-### 日付・時刻型
+### 日時型（PostgreSQL推奨）
 
 | データ型      | 説明                          | 例                       |
 | ------------- | ----------------------------- | ------------------------ |
-| `DATE`        | 日付のみ                      | `2024-03-28`             |
-| `TIME`        | 時刻のみ                      | `14:30:00`               |
-| `TIMESTAMP`   | 日付+時刻（タイムゾーンなし） | `2024-03-28 14:30:00`    |
 | `TIMESTAMPTZ` | 日付+時刻（タイムゾーン付き） | `2024-03-28 14:30:00+09` |
 | `INTERVAL`    | 時間の間隔                    | `1 year 2 months 3 days` |
 
 **実務でのアドバイス**: 日時は常に`TIMESTAMPTZ`（タイムゾーン付き）を使うこと。タイムゾーンなしだと、サーバーの場所が変わった時に問題が起きる。
 
-### その他の重要な型
+### その他のPostgreSQL固有型
 
-| データ型  | 説明                                       | 用途                     |
-| --------- | ------------------------------------------ | ------------------------ |
-| `BOOLEAN` | true/false                                 | フラグ、有効/無効        |
-| `UUID`    | 一意識別子                                 | 分散システムでのID       |
-| `JSON`    | JSONデータ（テキスト保存）                 | 構造化されていないデータ |
-| `JSONB`   | JSONデータ（バイナリ保存、インデックス可） | 検索が必要なJSONデータ   |
-| `ARRAY`   | 配列型                                     | タグ、カテゴリ           |
-| `INET`    | IPアドレス                                 | ネットワーク管理         |
-| `BYTEA`   | バイナリデータ                             | 小さなファイル           |
+| データ型   | 説明                                       | 用途                     |
+| ---------- | ------------------------------------------ | ------------------------ |
+| `UUID`     | 一意識別子                                 | 分散システムでのID       |
+| `JSON`     | JSONデータ（テキスト保存）                 | 構造化されていないデータ |
+| `JSONB`    | JSONデータ（バイナリ保存、インデックス可） | 検索が必要なJSONデータ   |
+| `ARRAY`    | 配列型                                     | タグ、カテゴリ           |
+| `INET`     | IPアドレス                                 | ネットワーク管理         |
+| `BYTEA`    | バイナリデータ                             | 小さなファイル           |
+| `TSVECTOR` | 全文検索用テキスト                         | 全文検索                 |
+| `TSQUERY`  | 全文検索クエリ                             | 全文検索条件             |
 
-### JSON/JSONB型の使い方
+## JSONB操作（詳細）
+
+JSONBはPostgreSQLの強力な機能の1つ。JSONデータをバイナリ形式で保存し、高速な検索とインデックスを可能にする。
+
+### JSON vs JSONB
+
+| 比較項目     | JSON                     | JSONB                    |
+| ------------ | ------------------------ | ------------------------ |
+| 保存形式     | テキスト（入力そのまま） | バイナリ（解析済み）     |
+| 挿入速度     | 速い                     | やや遅い（変換コスト）   |
+| 検索速度     | 遅い（毎回パース）       | 速い（バイナリで即検索） |
+| インデックス | 不可                     | GINインデックス可能      |
+| キーの順序   | 保持される               | 保持されない             |
+| 重複キー     | 許可                     | 最後の値が残る           |
+
+**結論**: 特別な理由がない限り**JSONB**を使うこと。
+
+### JSONB演算子一覧
+
+| 演算子 | 説明                   | 例                                  |
+| ------ | ---------------------- | ----------------------------------- | ---------------- | ---------------------- | --- | ------------- |
+| `->`   | キーでJSON値を取得     | `data->'name'` → `"太郎"`（JSON型） |
+| `->>`  | キーでテキスト値を取得 | `data->>'name'` → `太郎`（TEXT型）  |
+| `#>`   | パスでJSON値を取得     | `data#>'{address,city}'` → `"東京"` |
+| `#>>`  | パスでテキスト値を取得 | `data#>>'{address,city}'` → `東京`  |
+| `@>`   | 左が右を含むか         | `data @> '{"role":"admin"}'`        |
+| `<@`   | 左が右に含まれるか     | `'{"role":"admin"}' <@ data`        |
+| `?`    | キーが存在するか       | `data ? 'name'`                     |
+| `?     | `                      | いずれかのキーが存在するか          | `data ?          | array['name','email']` |
+| `?&`   | 全てのキーが存在するか | `data ?& array['name','email']`     |
+| `      |                        | `                                   | JSON同士をマージ | `data                  |     | '{"age":30}'` |
+| `-`    | キーを削除             | `data - 'name'`                     |
+| `#-`   | パスで要素を削除       | `data #- '{address,zip}'`           |
+
+### JSONB実用パターン
 
 ```sql
--- JSONB型のカラムを持つテーブル
+-- テーブル作成
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     attributes JSONB DEFAULT '{}'
 );
 
--- JSONBデータの挿入
-INSERT INTO products (name, attributes)
-VALUES (
-    'Tシャツ',
-    '{"color": "red", "size": "M", "tags": ["casual", "summer"]}'
-);
+-- データ挿入
+INSERT INTO products (name, attributes) VALUES
+('Tシャツ', '{
+    "color": "red",
+    "size": "M",
+    "tags": ["casual", "summer"],
+    "price": {"regular": 3000, "sale": 2400},
+    "stock": 150
+}'),
+('ジーンズ', '{
+    "color": "blue",
+    "size": "L",
+    "tags": ["casual", "denim"],
+    "price": {"regular": 8000, "sale": 6400},
+    "stock": 80
+}');
 
--- JSONBの検索
-SELECT name, attributes->>'color' AS color     -- テキストとして取得
-FROM products
-WHERE attributes->>'color' = 'red';
+-- 基本的な値の取得
+SELECT
+    name,
+    attributes->>'color' AS color,            -- テキストで取得
+    attributes->'price'->>'regular' AS price,  -- ネストしたキー
+    attributes->'tags' AS tags                 -- JSON配列として取得
+FROM products;
 
-SELECT name
-FROM products
-WHERE attributes @> '{"tags": ["summer"]}';    -- 含まれているか
+-- 含まれるかのチェック（@>）
+SELECT name FROM products
+WHERE attributes @> '{"color": "red"}';
 
--- JSONBのインデックス
-CREATE INDEX idx_products_attributes ON products USING GIN (attributes);
+-- 配列内の要素を検索
+SELECT name FROM products
+WHERE attributes @> '{"tags": ["summer"]}';
+
+-- キーの存在チェック
+SELECT name FROM products
+WHERE attributes ? 'stock';
+
+-- JSONBの更新（特定のキーだけ更新）
+UPDATE products
+SET attributes = attributes || '{"stock": 120}'
+WHERE name = 'Tシャツ';
+
+-- ネストしたキーの更新
+UPDATE products
+SET attributes = jsonb_set(attributes, '{price,sale}', '2200')
+WHERE name = 'Tシャツ';
+
+-- キーの削除
+UPDATE products
+SET attributes = attributes - 'stock'
+WHERE name = 'Tシャツ';
+
+-- JSONB配列の操作
+UPDATE products
+SET attributes = jsonb_set(
+    attributes,
+    '{tags}',
+    (attributes->'tags') || '"winter"'::jsonb  -- タグを追加
+)
+WHERE name = 'Tシャツ';
 ```
 
-### ARRAY型の使い方
+### GINインデックスによるJSONB高速検索
+
+```sql
+-- GINインデックスの作成（JSONB全体に対して）
+CREATE INDEX idx_products_attrs ON products USING GIN (attributes);
+-- → @>, ?, ?|, ?& 演算子の検索が高速化される
+
+-- 特定のパスに対するGINインデックス
+CREATE INDEX idx_products_color ON products USING GIN ((attributes->'color'));
+
+-- jsonb_path_opsオプション（@>演算子のみに最適化、サイズが小さい）
+CREATE INDEX idx_products_attrs_ops ON products USING GIN (attributes jsonb_path_ops);
+
+-- インデックスが使われているか確認
+EXPLAIN ANALYZE SELECT * FROM products WHERE attributes @> '{"color": "red"}';
+```
+
+### JSONB集約関数
+
+```sql
+-- 行をJSONオブジェクトに変換
+SELECT jsonb_build_object(
+    'id', id,
+    'name', name,
+    'color', attributes->>'color'
+) FROM products;
+
+-- 複数行をJSON配列に集約
+SELECT jsonb_agg(
+    jsonb_build_object('name', name, 'color', attributes->>'color')
+) AS products_json
+FROM products;
+
+-- JSONBのキーと値を展開
+SELECT key, value
+FROM products, jsonb_each(attributes)
+WHERE id = 1;
+
+-- JSONBの配列を展開
+SELECT name, tag
+FROM products, jsonb_array_elements_text(attributes->'tags') AS tag;
+```
+
+## ARRAY型の使い方
 
 ```sql
 -- 配列型のカラム
@@ -367,433 +376,30 @@ SELECT * FROM articles WHERE 'postgresql' = ANY(tags);
 UPDATE articles
 SET tags = array_append(tags, 'beginner')
 WHERE id = 1;
+
+-- 配列から要素を削除
+UPDATE articles
+SET tags = array_remove(tags, 'sql')
+WHERE id = 1;
+
+-- 配列の長さ
+SELECT title, array_length(tags, 1) AS tag_count FROM articles;
+
+-- 配列の結合
+SELECT title, array_to_string(tags, ', ') AS tags_str FROM articles;
+
+-- GINインデックス（配列検索の高速化）
+CREATE INDEX idx_articles_tags ON articles USING GIN (tags);
 ```
 
-## テーブル設計
+## CTE（Common Table Expression / WITH句）
 
-### 正規化
+CTEは、クエリ内で名前付きの一時テーブルを定義する機能。複雑なクエリを読みやすくする。
 
-正規化とは、データの重複を排除してテーブルを効率的に設計する手法。
-
-#### 正規化前（非正規形）
-
-```
-注文テーブル（全部入り）:
-+--------+----------+----------+--------+---------+-------+
-| 注文ID | 顧客名   | 顧客住所  | 商品名 | 単価    | 数量  |
-+--------+----------+----------+--------+---------+-------+
-| 1      | 田中太郎 | 東京都   | 本A    | 1500    | 2     |
-| 1      | 田中太郎 | 東京都   | ペンB  | 200     | 3     |
-| 2      | 佐藤花子 | 大阪府   | 本A    | 1500    | 1     |
-+--------+----------+----------+--------+---------+-------+
-
-問題点:
-- 「田中太郎」「東京都」が重複している
-- 田中太郎が引っ越したら全行を更新する必要がある
-- 顧客名を間違えて「田中太朗」と入力するリスク
-```
-
-#### 第1正規形（1NF）
-
-ルール: **1つのセルに1つの値だけ**。繰り返しグループを排除する。
-
-上の例では既に1NFを満たしている。
-
-#### 第2正規形（2NF）
-
-ルール: 1NFを満たし、**主キーの一部にだけ依存するカラムを分離**する。
-
-```
-顧客テーブル:
-+--------+----------+----------+
-| 顧客ID | 顧客名   | 顧客住所 |
-+--------+----------+----------+
-| 1      | 田中太郎 | 東京都   |
-| 2      | 佐藤花子 | 大阪府   |
-+--------+----------+----------+
-
-商品テーブル:
-+--------+--------+------+
-| 商品ID | 商品名 | 単価 |
-+--------+--------+------+
-| 1      | 本A    | 1500 |
-| 2      | ペンB  | 200  |
-+--------+--------+------+
-
-注文テーブル:
-+--------+--------+
-| 注文ID | 顧客ID |
-+--------+--------+
-| 1      | 1      |
-| 2      | 2      |
-+--------+--------+
-
-注文明細テーブル:
-+--------+--------+------+
-| 注文ID | 商品ID | 数量 |
-+--------+--------+------+
-| 1      | 1      | 2    |
-| 1      | 2      | 3    |
-| 2      | 1      | 1    |
-+--------+--------+------+
-```
-
-#### 第3正規形（3NF）
-
-ルール: 2NFを満たし、**主キー以外のカラムに依存するカラムを分離**する。
-
-上の例では既に3NFを満たしている。もし顧客テーブルに「都道府県コード」と「都道府県名」の両方があったら、都道府県名は都道府県コードに依存するため、別テーブルに分離する。
-
-### ER図の読み方
-
-ER図（Entity-Relationship Diagram）は、テーブル間の関係を視覚的に表す図。
-
-```
-リレーションの種類:
-
-1対1（1:1）  users ──── profiles
-  1人のユーザーに1つのプロフィール
-
-1対多（1:N）  users ──┤< orders
-  1人のユーザーが複数の注文を持つ
-
-多対多（M:N）  students >┤──┤< courses
-  1人の学生が複数のコースを受講し、1つのコースに複数の学生がいる
-  → 中間テーブル（enrollments）で実装する
-```
-
-## SELECT詳細
-
-### 基本的な絞り込み
+### 基本的なCTE
 
 ```sql
--- WHERE句（条件指定）
-SELECT * FROM users WHERE age >= 25;
-SELECT * FROM users WHERE name = '田中太郎';
-SELECT * FROM users WHERE age BETWEEN 20 AND 30;
-SELECT * FROM users WHERE name IN ('田中太郎', '佐藤花子');
-SELECT * FROM users WHERE name LIKE '田中%';        -- 前方一致
-SELECT * FROM users WHERE name LIKE '%太郎';        -- 後方一致
-SELECT * FROM users WHERE name LIKE '%中%';         -- 部分一致
-SELECT * FROM users WHERE email IS NULL;
-SELECT * FROM users WHERE email IS NOT NULL;
-
--- 複数条件
-SELECT * FROM users WHERE age >= 25 AND is_active = true;
-SELECT * FROM users WHERE age < 20 OR age > 60;
-SELECT * FROM users WHERE NOT (age >= 25);
-
--- ORDER BY（ソート）
-SELECT * FROM users ORDER BY age ASC;              -- 昇順（デフォルト）
-SELECT * FROM users ORDER BY age DESC;             -- 降順
-SELECT * FROM users ORDER BY age DESC, name ASC;   -- 複数条件
-
--- LIMIT / OFFSET（ページネーション）
-SELECT * FROM users ORDER BY id LIMIT 10;           -- 最初の10件
-SELECT * FROM users ORDER BY id LIMIT 10 OFFSET 20; -- 21件目から10件
-
--- DISTINCT（重複排除）
-SELECT DISTINCT city FROM users;                     -- 重複なしの都市一覧
-
--- AS（別名）
-SELECT
-    name AS "名前",
-    age AS "年齢",
-    age * 12 AS "年齢（月）"
-FROM users;
-```
-
-### ページネーションの注意点
-
-```sql
--- OFFSETベースのページネーション（一般的だが大量データでは遅い）
--- ページ1
-SELECT * FROM users ORDER BY id LIMIT 20 OFFSET 0;
--- ページ2
-SELECT * FROM users ORDER BY id LIMIT 20 OFFSET 20;
--- ページ100（OFFSET 1980行をスキップする必要がある = 遅い）
-SELECT * FROM users ORDER BY id LIMIT 20 OFFSET 1980;
-
--- カーソルベースのページネーション（大量データ向け、高速）
--- ページ1
-SELECT * FROM users ORDER BY id LIMIT 20;
--- ページ2（前ページの最後のIDを使う）
-SELECT * FROM users WHERE id > 20 ORDER BY id LIMIT 20;
--- これなら何ページ目でも高速
-```
-
-## 集約関数
-
-```sql
--- 基本的な集約関数
-SELECT COUNT(*) FROM users;                    -- 全行数
-SELECT COUNT(email) FROM users;                -- NULLでない行数
-SELECT COUNT(DISTINCT city) FROM users;        -- ユニークな値の数
-SELECT SUM(price) FROM orders;                 -- 合計
-SELECT AVG(age) FROM users;                    -- 平均
-SELECT MAX(age) FROM users;                    -- 最大値
-SELECT MIN(age) FROM users;                    -- 最小値
-
--- GROUP BY（グループ化）
-SELECT city, COUNT(*) AS user_count
-FROM users
-GROUP BY city
-ORDER BY user_count DESC;
--- 結果:
--- city    | user_count
--- --------+-----------
--- 東京都  | 150
--- 大阪府  | 80
--- 愛知県  | 45
-
--- HAVING（グループに対する条件）
-SELECT city, COUNT(*) AS user_count
-FROM users
-GROUP BY city
-HAVING COUNT(*) >= 50              -- 50人以上の都市だけ
-ORDER BY user_count DESC;
-
--- GROUP BYの実用例: 月別の売上
-SELECT
-    DATE_TRUNC('month', created_at) AS month,
-    COUNT(*) AS order_count,
-    SUM(total_price) AS total_sales,
-    AVG(total_price) AS avg_order_value
-FROM orders
-WHERE created_at >= '2024-01-01'
-GROUP BY DATE_TRUNC('month', created_at)
-ORDER BY month;
-```
-
-### SQLの実行順序
-
-SQLの文は書く順序と実行される順序が異なる。デバッグの際に重要。
-
-| 順番 | 句             | 説明               |
-| ---- | -------------- | ------------------ |
-| 1    | FROM           | テーブルを指定     |
-| 2    | WHERE          | 行の絞り込み       |
-| 3    | GROUP BY       | グループ化         |
-| 4    | HAVING         | グループの絞り込み |
-| 5    | SELECT         | 列の選択           |
-| 6    | DISTINCT       | 重複の排除         |
-| 7    | ORDER BY       | ソート             |
-| 8    | LIMIT / OFFSET | 行数の制限         |
-
-だから`WHERE`でSELECTの別名を使えない（WHEREの方が先に実行されるため）。
-
-## JOIN（テーブルの結合）
-
-JOINは複数のテーブルを結合してデータを取得する。RDBの最も重要な機能の1つ。
-
-### サンプルデータ
-
-```sql
--- テーブル作成
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL
-);
-
-CREATE TABLE orders (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(id),
-    item VARCHAR(100) NOT NULL,
-    price INTEGER NOT NULL
-);
-
--- データ挿入
-INSERT INTO users (name) VALUES ('太郎'), ('花子'), ('次郎');
-INSERT INTO orders (user_id, item, price) VALUES
-    (1, '本', 1500),
-    (1, 'ペン', 200),
-    (2, 'ノート', 300),
-    (NULL, 'キーボード', 5000);  -- user_idがNULL（誰の注文か不明）
-```
-
-### INNER JOIN（内部結合）
-
-両方のテーブルに一致するデータだけを取得する。
-
-```sql
-SELECT u.name, o.item, o.price
-FROM users u
-INNER JOIN orders o ON u.id = o.user_id;
-```
-
-```
-結果:
- name | item   | price
-------+--------+-------
- 太郎 | 本     | 1500
- 太郎 | ペン   | 200
- 花子 | ノート | 300
-```
-
-次郎（注文がない）とキーボード（user_idがNULL）は表示されない。
-
-### LEFT JOIN（左外部結合）
-
-左テーブル（FROM側）の全行を取得し、右テーブルに一致がない場合はNULLになる。
-
-```sql
-SELECT u.name, o.item, o.price
-FROM users u
-LEFT JOIN orders o ON u.id = o.user_id;
-```
-
-```
-結果:
- name | item   | price
-------+--------+-------
- 太郎 | 本     | 1500
- 太郎 | ペン   | 200
- 花子 | ノート | 300
- 次郎 | NULL   | NULL    ← 注文がないユーザーもNULLで表示
-```
-
-### RIGHT JOIN（右外部結合）
-
-右テーブル（JOIN側）の全行を取得する。LEFT JOINの逆。
-
-```sql
-SELECT u.name, o.item, o.price
-FROM users u
-RIGHT JOIN orders o ON u.id = o.user_id;
-```
-
-```
-結果:
- name | item       | price
-------+------------+-------
- 太郎 | 本         | 1500
- 太郎 | ペン       | 200
- 花子 | ノート     | 300
- NULL | キーボード | 5000    ← ユーザー不明の注文も表示
-```
-
-### FULL OUTER JOIN（完全外部結合）
-
-両方のテーブルの全行を取得する。一致がない場合はNULL。
-
-```sql
-SELECT u.name, o.item, o.price
-FROM users u
-FULL OUTER JOIN orders o ON u.id = o.user_id;
-```
-
-```
-結果:
- name | item       | price
-------+------------+-------
- 太郎 | 本         | 1500
- 太郎 | ペン       | 200
- 花子 | ノート     | 300
- 次郎 | NULL       | NULL
- NULL | キーボード | 5000
-```
-
-### CROSS JOIN（交差結合）
-
-全ての組み合わせを生成する。結果の行数は「テーブルAの行数 x テーブルBの行数」。
-
-```sql
-SELECT u.name, o.item
-FROM users u
-CROSS JOIN orders o;
--- 3ユーザー x 4注文 = 12行
-```
-
-実務ではあまり使わないが、テストデータ生成や日付のカレンダー生成に役立つことがある。
-
-### SELF JOIN（自己結合）
-
-同じテーブルを自分自身と結合する。階層構造（上司-部下など）を表現する際に使う。
-
-```sql
--- 社員テーブル（上司のIDを持つ）
-CREATE TABLE employees (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(100),
-    manager_id INTEGER REFERENCES employees(id)
-);
-
-INSERT INTO employees (name, manager_id) VALUES
-    ('社長', NULL),
-    ('部長A', 1),
-    ('部長B', 1),
-    ('課長', 2),
-    ('一般社員', 4);
-
--- 社員と上司の名前を表示
-SELECT
-    e.name AS "社員名",
-    m.name AS "上司名"
-FROM employees e
-LEFT JOIN employees m ON e.manager_id = m.id;
-```
-
-```
-結果:
- 社員名   | 上司名
-----------+--------
- 社長     | NULL
- 部長A    | 社長
- 部長B    | 社長
- 課長     | 部長A
- 一般社員 | 課長
-```
-
-### JOINの使い分け早見表
-
-| JOIN種類        | いつ使う                                         |
-| --------------- | ------------------------------------------------ |
-| INNER JOIN      | 両方のテーブルに確実にデータがある場合           |
-| LEFT JOIN       | 主テーブルの全行を表示したい場合（最もよく使う） |
-| RIGHT JOIN      | ほとんど使わない（LEFT JOINで代用可能）          |
-| FULL OUTER JOIN | 両テーブルの全データを確認したい場合             |
-| CROSS JOIN      | 全組み合わせが必要な場合（稀）                   |
-| SELF JOIN       | 階層構造、自己参照の場合                         |
-
-## サブクエリ
-
-クエリの中にクエリを入れる。ネスト（入れ子）のSQLを書ける。
-
-```sql
--- WHERE IN サブクエリ: 注文したことがあるユーザーを取得
-SELECT * FROM users
-WHERE id IN (SELECT DISTINCT user_id FROM orders WHERE user_id IS NOT NULL);
-
--- EXISTS サブクエリ: 注文が存在するユーザー（INより効率的な場合がある）
-SELECT * FROM users u
-WHERE EXISTS (
-    SELECT 1 FROM orders o WHERE o.user_id = u.id
-);
-
--- NOT EXISTS: 注文がないユーザー
-SELECT * FROM users u
-WHERE NOT EXISTS (
-    SELECT 1 FROM orders o WHERE o.user_id = u.id
-);
-
--- スカラサブクエリ: 1つの値を返すサブクエリ
-SELECT
-    name,
-    age,
-    age - (SELECT AVG(age) FROM users) AS "平均との差"
-FROM users;
-
--- FROM句のサブクエリ（派生テーブル）
-SELECT city, user_count
-FROM (
-    SELECT city, COUNT(*) AS user_count
-    FROM users
-    GROUP BY city
-) AS city_stats
-WHERE user_count >= 10;
-
--- WITH句（CTE: Common Table Expression）
--- サブクエリを名前付きで定義。可読性が高い
+-- サブクエリを名前付きで定義
 WITH order_summary AS (
     SELECT
         user_id,
@@ -809,6 +415,93 @@ SELECT
 FROM users u
 JOIN order_summary os ON u.id = os.user_id
 ORDER BY os.total_spent DESC;
+```
+
+### 複数のCTEを連結
+
+```sql
+WITH
+-- CTE 1: ユーザーごとの注文統計
+user_stats AS (
+    SELECT
+        user_id,
+        COUNT(*) AS order_count,
+        SUM(price) AS total_spent,
+        AVG(price) AS avg_price
+    FROM orders
+    GROUP BY user_id
+),
+-- CTE 2: 上位顧客（合計1万円以上）
+top_customers AS (
+    SELECT user_id, total_spent
+    FROM user_stats
+    WHERE total_spent >= 10000
+)
+SELECT
+    u.name,
+    us.order_count,
+    us.total_spent,
+    us.avg_price
+FROM users u
+JOIN top_customers tc ON u.id = tc.user_id
+JOIN user_stats us ON u.id = us.user_id
+ORDER BY us.total_spent DESC;
+```
+
+### 再帰CTE
+
+自分自身を参照するCTE。階層構造のデータ（組織図、カテゴリツリーなど）を扱う際に強力。
+
+```sql
+-- 組織図の全階層を取得
+WITH RECURSIVE org_tree AS (
+    -- 基底ケース: ルート（上司がいない社員）
+    SELECT id, name, manager_id, 1 AS depth, name::TEXT AS path
+    FROM employees
+    WHERE manager_id IS NULL
+
+    UNION ALL
+
+    -- 再帰ケース: 部下を辿る
+    SELECT e.id, e.name, e.manager_id, t.depth + 1, t.path || ' > ' || e.name
+    FROM employees e
+    JOIN org_tree t ON e.manager_id = t.id
+)
+SELECT
+    REPEAT('  ', depth - 1) || name AS "組織図",
+    depth AS "階層",
+    path AS "パス"
+FROM org_tree
+ORDER BY path;
+
+-- 結果例:
+-- 組織図          | 階層 | パス
+-- ----------------+------+-------------------
+-- 社長            | 1    | 社長
+--   部長A         | 2    | 社長 > 部長A
+--     課長        | 3    | 社長 > 部長A > 課長
+--       一般社員  | 4    | 社長 > 部長A > 課長 > 一般社員
+--   部長B         | 2    | 社長 > 部長B
+```
+
+### 連番の生成
+
+```sql
+-- 1から100までの連番を生成
+WITH RECURSIVE numbers AS (
+    SELECT 1 AS n
+    UNION ALL
+    SELECT n + 1 FROM numbers WHERE n < 100
+)
+SELECT n FROM numbers;
+
+-- 日付の連番（カレンダー生成）
+WITH RECURSIVE dates AS (
+    SELECT '2024-01-01'::DATE AS d
+    UNION ALL
+    SELECT d + 1 FROM dates WHERE d < '2024-12-31'
+)
+SELECT d AS "日付", EXTRACT(DOW FROM d) AS "曜日" FROM dates;
 ```
 
 ## Window関数
@@ -872,20 +565,427 @@ FROM orders;
 
 **GROUP BYとWindow関数の使い分け**: 集計結果だけが必要ならGROUP BY、個々の行に集計値を添えたいならWindow関数を使う。
 
+## テーブル設計
+
+### 正規化
+
+正規化の基本概念については[データベース基礎](/roadmap/database-fundamentals)を参照。ここではPostgreSQLでの実装例を示す。
+
+### ER図の読み方
+
+ER図（Entity-Relationship Diagram）は、テーブル間の関係を視覚的に表す図。
+
+```
+リレーションの種類:
+
+1対1（1:1）  users ──── profiles
+  1人のユーザーに1つのプロフィール
+
+1対多（1:N）  users ──┤< orders
+  1人のユーザーが複数の注文を持つ
+
+多対多（M:N）  students >┤──┤< courses
+  1人の学生が複数のコースを受講し、1つのコースに複数の学生がいる
+  → 中間テーブル（enrollments）で実装する
+```
+
+## LISTEN / NOTIFY（リアルタイム通知）
+
+PostgreSQL独自のリアルタイム通知機能。テーブルの変更をアプリケーションにプッシュ通知できる。WebSocketやポーリングの代わりに使える。
+
+### 基本的な使い方
+
+```sql
+-- セッション1: チャンネルをリッスン
+LISTEN order_created;
+
+-- セッション2: 通知を送信
+NOTIFY order_created, '{"order_id": 123, "user_id": 1, "total": 5000}';
+
+-- セッション1に通知が届く:
+-- Asynchronous notification "order_created" with payload
+-- "{"order_id": 123, "user_id": 1, "total": 5000}" received from server process with PID 12345.
+```
+
+### トリガーと組み合わせた自動通知
+
+```sql
+-- 注文が作成されたら自動で通知する関数
+CREATE OR REPLACE FUNCTION notify_order_created()
+RETURNS TRIGGER AS $$
+BEGIN
+    PERFORM pg_notify(
+        'order_created',
+        json_build_object(
+            'order_id', NEW.id,
+            'user_id', NEW.user_id,
+            'total', NEW.total_price
+        )::TEXT
+    );
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- トリガーの作成
+CREATE TRIGGER trigger_order_notify
+    AFTER INSERT ON orders
+    FOR EACH ROW
+    EXECUTE FUNCTION notify_order_created();
+```
+
+### Node.jsでのLISTEN/NOTIFY
+
+```javascript
+const { Client } = require('pg')
+
+const client = new Client({ connectionString: process.env.DATABASE_URL })
+await client.connect()
+
+// チャンネルをリッスン
+await client.query('LISTEN order_created')
+
+// 通知を受信
+client.on('notification', (msg) => {
+  const payload = JSON.parse(msg.payload)
+  console.log('新しい注文:', payload)
+  // WebSocketでフロントエンドに通知するなどの処理
+})
+```
+
+### 用途
+
+- リアルタイムダッシュボードの更新
+- チャットメッセージの配信
+- 在庫変動の通知
+- キャッシュの無効化
+
+## パーティショニング（テーブル分割）
+
+大量のデータを持つテーブルを、条件に基づいて物理的に分割する機能。パフォーマンスとメンテナンスが向上する。
+
+### レンジパーティショニング（範囲）
+
+```sql
+-- 日付でパーティショニングされた注文テーブル
+CREATE TABLE orders (
+    id BIGSERIAL,
+    user_id INTEGER NOT NULL,
+    item VARCHAR(200),
+    price INTEGER,
+    ordered_at TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP
+) PARTITION BY RANGE (ordered_at);
+
+-- 月別のパーティションを作成
+CREATE TABLE orders_2024_01 PARTITION OF orders
+    FOR VALUES FROM ('2024-01-01') TO ('2024-02-01');
+CREATE TABLE orders_2024_02 PARTITION OF orders
+    FOR VALUES FROM ('2024-02-01') TO ('2024-03-01');
+CREATE TABLE orders_2024_03 PARTITION OF orders
+    FOR VALUES FROM ('2024-03-01') TO ('2024-04-01');
+
+-- デフォルトパーティション（どの範囲にも合わない行をキャッチ）
+CREATE TABLE orders_default PARTITION OF orders DEFAULT;
+
+-- クエリは通常のテーブルと同じ
+SELECT * FROM orders WHERE ordered_at >= '2024-02-01' AND ordered_at < '2024-03-01';
+-- → PostgreSQLが自動的にorders_2024_02パーティションだけを検索する（パーティションプルーニング）
+```
+
+### リストパーティショニング
+
+```sql
+-- 地域でパーティショニング
+CREATE TABLE users (
+    id BIGSERIAL,
+    name VARCHAR(100),
+    region VARCHAR(20) NOT NULL
+) PARTITION BY LIST (region);
+
+CREATE TABLE users_asia PARTITION OF users FOR VALUES IN ('japan', 'korea', 'china');
+CREATE TABLE users_europe PARTITION OF users FOR VALUES IN ('uk', 'france', 'germany');
+CREATE TABLE users_americas PARTITION OF users FOR VALUES IN ('us', 'canada', 'brazil');
+```
+
+### ハッシュパーティショニング
+
+```sql
+-- IDのハッシュで均等に4分割
+CREATE TABLE logs (
+    id BIGSERIAL,
+    message TEXT,
+    created_at TIMESTAMPTZ
+) PARTITION BY HASH (id);
+
+CREATE TABLE logs_0 PARTITION OF logs FOR VALUES WITH (MODULUS 4, REMAINDER 0);
+CREATE TABLE logs_1 PARTITION OF logs FOR VALUES WITH (MODULUS 4, REMAINDER 1);
+CREATE TABLE logs_2 PARTITION OF logs FOR VALUES WITH (MODULUS 4, REMAINDER 2);
+CREATE TABLE logs_3 PARTITION OF logs FOR VALUES WITH (MODULUS 4, REMAINDER 3);
+```
+
+### パーティショニングの効果
+
+| メリット             | 説明                                                   |
+| -------------------- | ------------------------------------------------------ |
+| クエリ高速化         | パーティションプルーニングで検索対象を絞れる           |
+| メンテナンスの効率化 | 古いパーティションをDROPするだけで大量データを削除可能 |
+| VACUUMの効率化       | パーティション単位でVACUUMできる                       |
+| パラレルクエリ       | 複数パーティションを並列に検索できる                   |
+
+## レプリケーション（ストリーミングレプリカ）
+
+レプリケーションとは、データベースのコピーを別のサーバーに作成し、同期を維持する仕組み。
+
+### レプリケーションの種類
+
+| 種類                   | 説明                              | 用途                     |
+| ---------------------- | --------------------------------- | ------------------------ |
+| ストリーミングレプリカ | WALログをリアルタイムで転送・適用 | 読み取りスケーリング、HA |
+| 論理レプリケーション   | テーブル単位でデータを複製        | 部分的なデータ共有       |
+
+### ストリーミングレプリケーションの構成
+
+```
+            書き込み
+クライアント -------> プライマリ（マスター）
+                        |
+                 WALログ転送
+                        |
+                        v
+                    レプリカ（スタンバイ）
+                        |
+            読み取り <----
+クライアント
+```
+
+### 基本的な設定
+
+```bash
+# プライマリ（postgresql.conf）
+wal_level = replica
+max_wal_senders = 3
+synchronous_standby_names = ''  # 非同期レプリケーション
+
+# レプリカの作成（ベースバックアップ）
+pg_basebackup -h primary_host -D /var/lib/postgresql/data -U replication_user -P -R
+
+# レプリカ（postgresql.conf に自動設定される）
+# primary_conninfo = 'host=primary_host user=replication_user'
+```
+
+### 読み取りスケーリング
+
+```
+                    +--- レプリカ1（読み取り専用）
+                    |
+プライマリ ---------+--- レプリカ2（読み取り専用）
+（書き込み）        |
+                    +--- レプリカ3（読み取り専用）
+
+→ 読み取りクエリをレプリカに分散させて負荷を軽減
+```
+
+## VACUUM / ANALYZE（メンテナンス）
+
+PostgreSQLはMVCC（Multi-Version Concurrency Control）を採用しており、UPDATE/DELETEした行は物理的に削除されず、不可視のまま残る。VACUUMはこの「死んだ行」を回収する。
+
+### VACUUMの種類
+
+| 種類           | 説明                                       | ロック       |
+| -------------- | ------------------------------------------ | ------------ |
+| VACUUM         | 死んだ行を回収し、再利用可能にする         | 読み書き可能 |
+| VACUUM FULL    | テーブルを完全に再構築（サイズが縮小する） | 排他ロック   |
+| VACUUM ANALYZE | VACUUMとANALYZEを同時に実行                | 読み書き可能 |
+| autovacuum     | 自動的にVACUUMとANALYZEを実行する          | 読み書き可能 |
+
+### 基本コマンド
+
+```sql
+-- 特定テーブルのVACUUM
+VACUUM users;
+
+-- VACUUM + ANALYZE（統計情報も更新）
+VACUUM ANALYZE users;
+
+-- VACUUM FULL（テーブルを再構築、排他ロックがかかるので注意）
+VACUUM FULL users;
+
+-- 全テーブルのVACUUM
+VACUUM;
+
+-- ANALYZEのみ（統計情報の更新）
+ANALYZE users;
+```
+
+### テーブルの肥大化を確認
+
+```sql
+-- テーブルサイズと死んだ行の確認
+SELECT
+    relname AS table_name,
+    n_live_tup AS live_rows,
+    n_dead_tup AS dead_rows,
+    ROUND(n_dead_tup * 100.0 / NULLIF(n_live_tup + n_dead_tup, 0), 2) AS dead_ratio,
+    last_vacuum,
+    last_autovacuum,
+    last_analyze
+FROM pg_stat_user_tables
+ORDER BY n_dead_tup DESC;
+```
+
+### autovacuumの設定
+
+```sql
+-- autovacuumの状態確認
+SHOW autovacuum;
+
+-- テーブル単位でautovacuumの閾値を変更
+ALTER TABLE orders SET (
+    autovacuum_vacuum_threshold = 50,           -- 最低50行の変更で発動
+    autovacuum_vacuum_scale_factor = 0.1,       -- テーブルの10%が変更で発動
+    autovacuum_analyze_threshold = 50,
+    autovacuum_analyze_scale_factor = 0.05
+);
+```
+
+## pg_stat_statements（クエリ分析）
+
+実行されたSQLの統計情報を収集する拡張機能。スロークエリの特定やパフォーマンスチューニングに必須。
+
+### 有効化
+
+```sql
+-- 拡張機能のインストール
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+
+-- postgresql.confに追加（再起動が必要）
+-- shared_preload_libraries = 'pg_stat_statements'
+-- pg_stat_statements.track = all
+```
+
+### よく使うクエリ
+
+```sql
+-- 実行時間が長いクエリのトップ10
+SELECT
+    ROUND(total_exec_time::numeric, 2) AS total_time_ms,
+    calls,
+    ROUND(mean_exec_time::numeric, 2) AS avg_time_ms,
+    ROUND(max_exec_time::numeric, 2) AS max_time_ms,
+    LEFT(query, 100) AS query
+FROM pg_stat_statements
+ORDER BY total_exec_time DESC
+LIMIT 10;
+
+-- 呼び出し回数が多いクエリのトップ10
+SELECT
+    calls,
+    ROUND(total_exec_time::numeric, 2) AS total_time_ms,
+    ROUND(mean_exec_time::numeric, 2) AS avg_time_ms,
+    LEFT(query, 100) AS query
+FROM pg_stat_statements
+ORDER BY calls DESC
+LIMIT 10;
+
+-- 統計情報のリセット
+SELECT pg_stat_statements_reset();
+```
+
+## 拡張機能（Extensions）
+
+PostgreSQLの強力な拡張システム。サードパーティ製の機能を簡単に追加できる。
+
+### 主要な拡張機能
+
+| 拡張機能           | 説明                         | 用途                     |
+| ------------------ | ---------------------------- | ------------------------ |
+| PostGIS            | 地理空間データ型と関数       | 地図、位置情報           |
+| pg_trgm            | トライグラムベースの類似検索 | あいまい検索、タイポ補正 |
+| uuid-ossp          | UUID生成関数                 | 分散ID生成               |
+| pgcrypto           | 暗号化関数                   | パスワードハッシュ       |
+| pg_stat_statements | クエリ統計情報の収集         | パフォーマンス分析       |
+| hstore             | キーバリュー型データ         | 簡易的なKVストア         |
+
+### PostGIS（地理空間データ）
+
+```sql
+-- インストール
+CREATE EXTENSION IF NOT EXISTS postgis;
+
+-- 位置情報付きの店舗テーブル
+CREATE TABLE shops (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100),
+    location GEOGRAPHY(POINT, 4326)  -- 緯度経度のポイント
+);
+
+-- データ挿入（経度, 緯度の順）
+INSERT INTO shops (name, location) VALUES
+('東京駅店', ST_GeographyFromText('POINT(139.7671 35.6812)')),
+('新宿店', ST_GeographyFromText('POINT(139.7003 35.6938)'));
+
+-- 指定地点から半径1km以内の店舗を検索
+SELECT name,
+    ST_Distance(location, ST_GeographyFromText('POINT(139.7671 35.6812)')) AS distance_m
+FROM shops
+WHERE ST_DWithin(location, ST_GeographyFromText('POINT(139.7671 35.6812)'), 1000)
+ORDER BY distance_m;
+```
+
+### pg_trgm（あいまい検索）
+
+```sql
+-- インストール
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
+
+-- 類似度インデックスの作成
+CREATE INDEX idx_users_name_trgm ON users USING GIN (name gin_trgm_ops);
+
+-- 類似検索（タイポを許容）
+SELECT name, similarity(name, 'たなか') AS sim
+FROM users
+WHERE name % 'たなか'   -- 類似度が閾値以上
+ORDER BY sim DESC;
+
+-- 類似度の閾値設定
+SET pg_trgm.similarity_threshold = 0.3;
+```
+
+### uuid-ossp
+
+```sql
+-- インストール
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+-- UUIDの生成
+SELECT uuid_generate_v4();  -- ランダムなUUID
+
+-- テーブルでの使用
+CREATE TABLE sessions (
+    id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id),
+    expires_at TIMESTAMPTZ NOT NULL
+);
+```
+
+### pgcrypto
+
+```sql
+-- インストール
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+-- パスワードのハッシュ化
+INSERT INTO users (name, email, password_hash)
+VALUES ('太郎', 'taro@example.com', crypt('my_password', gen_salt('bf')));
+
+-- パスワードの検証
+SELECT * FROM users
+WHERE email = 'taro@example.com'
+  AND password_hash = crypt('my_password', password_hash);
+```
+
 ## インデックス
 
-インデックスは、データベースの検索を高速化する仕組み。本の索引に相当する。
-
-### インデックスの仕組み
-
-本で特定のキーワードを探すとき、最初のページから順に読む（全文スキャン）のは非効率。索引を使えば、キーワードからページ番号を素早く見つけられる。
-
-データベースのインデックスも同じ原理。
-
-| 操作                 | インデックスなし    | インデックスあり       |
-| -------------------- | ------------------- | ---------------------- |
-| 100万行から1行を検索 | 最大100万行スキャン | 数十回の比較で見つかる |
-| 時間計算量           | O(n)                | O(log n)               |
+インデックスの基本概念については[SQL基礎](/roadmap/sql-fundamentals)を参照。ここではPostgreSQL固有のインデックス機能を解説する。
 
 ### インデックスの種類
 
@@ -895,174 +995,27 @@ FROM orders;
 | Hash         | ハッシュテーブル           | 等値検索のみ（=）                |
 | GIN          | Generalized Inverted Index | 全文検索、JSONB、配列            |
 | GiST         | Generalized Search Tree    | 地理情報、範囲型                 |
+| BRIN         | Block Range Index          | 大きなテーブルの範囲検索         |
 
-### インデックスの作成と管理
+### PostgreSQL固有のインデックス機能
 
 ```sql
--- 基本的なインデックスの作成（B-tree）
-CREATE INDEX idx_users_email ON users (email);
-
--- ユニークインデックス
-CREATE UNIQUE INDEX idx_users_email_unique ON users (email);
-
--- 複合インデックス（複数カラム）
-CREATE INDEX idx_orders_user_date ON orders (user_id, created_at);
-
 -- 部分インデックス（条件付き）
 CREATE INDEX idx_users_active ON users (email) WHERE is_active = true;
+-- → is_active = true の行だけインデックスに含まれる（小さくて高速）
 
--- JSONBインデックス（GIN）
-CREATE INDEX idx_products_attrs ON products USING GIN (attributes);
+-- 式インデックス
+CREATE INDEX idx_users_lower_email ON users (LOWER(email));
+-- → LOWER(email) で検索する場合に使われる
 
--- インデックスの確認
-\di                            -- psqlで一覧表示
-SELECT * FROM pg_indexes WHERE tablename = 'users';
+-- カバリングインデックス（INCLUDE句）
+CREATE INDEX idx_orders_user ON orders (user_id) INCLUDE (item, price);
+-- → user_idで検索した際、テーブルにアクセスせずにitem, priceも取得できる
 
--- インデックスの削除
-DROP INDEX idx_users_email;
+-- 並行インデックス作成（テーブルロックなし）
+CREATE INDEX CONCURRENTLY idx_users_name ON users (name);
+-- → テーブルへの書き込みをブロックしない（本番環境で推奨）
 ```
-
-### いつインデックスを作るべきか
-
-| 作るべき場合                    | 作らない方がよい場合                                                      |
-| ------------------------------- | ------------------------------------------------------------------------- |
-| WHERE句で頻繁に検索されるカラム | テーブルが小さい（数百行以下）                                            |
-| JOINの結合条件に使われるカラム  | 頻繁にINSERT/UPDATEが行われるカラム（インデックスの更新コストが高くなる） |
-| ORDER BYに使われるカラム        | カーディナリティが低いカラム（true/falseなど）                            |
-| 外部キー                        |                                                                           |
-
-**注意**: インデックスは検索を速くするが、INSERT/UPDATE/DELETEを遅くする。インデックスも更新する必要があるため。むやみに作らないこと。
-
-## トランザクション
-
-トランザクションとは、複数のSQL操作を1つのまとまりとして扱う仕組み。「全て成功するか、全て失敗するか」を保証する。
-
-### 銀行振込の例
-
-太郎の口座から花子の口座に1万円を送金する場合:
-
-```sql
--- トランザクションなし（危険）
-UPDATE accounts SET balance = balance - 10000 WHERE user_id = 1;  -- 太郎から引く
--- ここでサーバーがクラッシュしたら？
--- 太郎のお金は減ったのに、花子には入金されない！
-UPDATE accounts SET balance = balance + 10000 WHERE user_id = 2;  -- 花子に足す
-
--- トランザクションあり（安全）
-BEGIN;  -- トランザクション開始
-UPDATE accounts SET balance = balance - 10000 WHERE user_id = 1;
-UPDATE accounts SET balance = balance + 10000 WHERE user_id = 2;
-COMMIT;  -- 両方成功したら確定
-
--- エラーが発生した場合
-BEGIN;
-UPDATE accounts SET balance = balance - 10000 WHERE user_id = 1;
--- エラー発生！
-ROLLBACK;  -- 全ての変更を取り消し。太郎の残高も元に戻る
-```
-
-### ACID特性
-
-トランザクションが満たすべき4つの特性:
-
-| 特性   | 英語        | 説明                                             | 例                                          |
-| ------ | ----------- | ------------------------------------------------ | ------------------------------------------- |
-| 原子性 | Atomicity   | 全て成功するか、全て失敗するか                   | 振込の途中で止まらない                      |
-| 一貫性 | Consistency | トランザクション前後でデータの整合性が保たれる   | 送金前後で合計金額が変わらない              |
-| 独立性 | Isolation   | 同時実行されるトランザクションが互いに干渉しない | 2人が同時に同じ商品を買おうとしても問題ない |
-| 永続性 | Durability  | COMMITされたデータは失われない                   | サーバーが落ちてもデータは残る              |
-
-## 制約
-
-制約は、テーブルに不正なデータが入るのを防ぐルール。
-
-```sql
-CREATE TABLE products (
-    -- PRIMARY KEY: 主キー（一意 + NOT NULL）
-    id SERIAL PRIMARY KEY,
-
-    -- NOT NULL: NULLを許可しない
-    name VARCHAR(100) NOT NULL,
-
-    -- UNIQUE: 重複を許可しない
-    sku VARCHAR(50) UNIQUE,
-
-    -- CHECK: 条件を満たす値のみ許可
-    price INTEGER CHECK (price > 0),
-    stock INTEGER CHECK (stock >= 0) DEFAULT 0,
-
-    -- FOREIGN KEY: 外部キー（他テーブルとの参照整合性）
-    category_id INTEGER REFERENCES categories(id)
-        ON DELETE SET NULL       -- 参照先が削除されたらNULLに
-        ON UPDATE CASCADE,       -- 参照先が更新されたら追従
-
-    -- DEFAULT: デフォルト値
-    is_published BOOLEAN DEFAULT false,
-    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
-);
-```
-
-### 外部キーのON DELETE/ON UPDATE
-
-| オプション  | 説明                                              |
-| ----------- | ------------------------------------------------- |
-| CASCADE     | 参照先の操作に追従（削除/更新も連動）             |
-| SET NULL    | 参照先が削除/更新されたらNULLに設定               |
-| SET DEFAULT | 参照先が削除/更新されたらデフォルト値に設定       |
-| RESTRICT    | 参照されている場合は削除/更新を拒否（デフォルト） |
-| NO ACTION   | RESTRICTと同じだが、チェックのタイミングが異なる  |
-
-## ビュー
-
-ビューは、SELECT文に名前を付けて保存したもの。仮想テーブルとして使える。
-
-```sql
--- ビューの作成
-CREATE VIEW user_order_summary AS
-SELECT
-    u.id,
-    u.name,
-    COUNT(o.id) AS order_count,
-    COALESCE(SUM(o.price), 0) AS total_spent
-FROM users u
-LEFT JOIN orders o ON u.id = o.user_id
-GROUP BY u.id, u.name;
-
--- ビューの使用（通常のテーブルと同じように使える）
-SELECT * FROM user_order_summary WHERE total_spent > 10000;
-
--- ビューの削除
-DROP VIEW user_order_summary;
-```
-
-### マテリアライズドビュー
-
-通常のビューは使うたびにクエリを実行する。マテリアライズドビューは結果をキャッシュするため、高速に読み取れる。
-
-```sql
--- マテリアライズドビューの作成
-CREATE MATERIALIZED VIEW monthly_sales AS
-SELECT
-    DATE_TRUNC('month', created_at) AS month,
-    COUNT(*) AS order_count,
-    SUM(total_price) AS total_sales
-FROM orders
-GROUP BY DATE_TRUNC('month', created_at)
-ORDER BY month;
-
--- 使用
-SELECT * FROM monthly_sales;
-
--- データを最新に更新（手動で実行する必要がある）
-REFRESH MATERIALIZED VIEW monthly_sales;
-
--- データの更新中もSELECTできるようにする
-REFRESH MATERIALIZED VIEW CONCURRENTLY monthly_sales;
--- CONCURRENTLYを使うにはユニークインデックスが必要
-CREATE UNIQUE INDEX idx_monthly_sales ON monthly_sales (month);
-```
-
-**使いどころ**: ダッシュボードの集計表示、レポート、頻繁に実行される重いクエリの結果キャッシュ。
 
 ## 関数とトリガー
 
@@ -1120,6 +1073,39 @@ CREATE TRIGGER trigger_users_updated_at
 -- これで、usersテーブルのUPDATEが実行されるたびに、
 -- updated_atが自動的に現在時刻に更新される
 ```
+
+## ビュー
+
+ビューの基本概念については[SQL基礎](/roadmap/sql-fundamentals)を参照。
+
+### マテリアライズドビュー
+
+通常のビューは使うたびにクエリを実行する。マテリアライズドビューは結果をキャッシュするため、高速に読み取れる。PostgreSQL固有の機能。
+
+```sql
+-- マテリアライズドビューの作成
+CREATE MATERIALIZED VIEW monthly_sales AS
+SELECT
+    DATE_TRUNC('month', created_at) AS month,
+    COUNT(*) AS order_count,
+    SUM(total_price) AS total_sales
+FROM orders
+GROUP BY DATE_TRUNC('month', created_at)
+ORDER BY month;
+
+-- 使用
+SELECT * FROM monthly_sales;
+
+-- データを最新に更新（手動で実行する必要がある）
+REFRESH MATERIALIZED VIEW monthly_sales;
+
+-- データの更新中もSELECTできるようにする
+REFRESH MATERIALIZED VIEW CONCURRENTLY monthly_sales;
+-- CONCURRENTLYを使うにはユニークインデックスが必要
+CREATE UNIQUE INDEX idx_monthly_sales ON monthly_sales (month);
+```
+
+**使いどころ**: ダッシュボードの集計表示、レポート、頻繁に実行される重いクエリの結果キャッシュ。
 
 ## パフォーマンスチューニング
 
@@ -1739,3 +1725,4 @@ WHERE created_at < CURRENT_TIMESTAMP - INTERVAL '90 days';
 - [Use The Index, Luke（インデックスの解説、日本語あり）](https://use-the-index-luke.com/ja)
 - [SQLBolt（インタラクティブなSQL学習）](https://sqlbolt.com/)
 - [DB Fiddle（ブラウザでSQLを試せる）](https://www.db-fiddle.com/)
+- [PostGIS公式ドキュメント](https://postgis.net/documentation/)
