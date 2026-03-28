@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getAllRoadmapSlugs, getRoadmapPostData, roadmapSections } from '@/lib/roadmap'
+import MermaidArticleContent from '@/components/MermaidArticleContent'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -52,10 +53,7 @@ export default async function RoadmapPostPage({ params }: PageProps) {
       <h1 className="text-3xl font-bold mb-2">{post.title}</h1>
       {post.section && <p className="text-gray-500 text-sm mb-8">{post.section}</p>}
 
-      <article
-        className="prose dark:prose-invert max-w-none"
-        dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-      />
+      <MermaidArticleContent contentHtml={post.contentHtml} />
 
       {/* 前後のナビゲーション */}
       <nav className="mt-12 pt-6 border-t border-gray-700 flex justify-between">

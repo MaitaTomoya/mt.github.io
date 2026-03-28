@@ -6,6 +6,7 @@ import {
   getTechSelectionPostData,
   techSelectionCategories,
 } from '@/lib/tech-selection'
+import MermaidArticleContent from '@/components/MermaidArticleContent'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -59,10 +60,7 @@ export default async function TechSelectionPostPage({ params }: PageProps) {
       <h1 className="text-3xl font-bold mb-2">{post.title}</h1>
       {post.category && <p className="text-gray-500 text-sm mb-8">{post.category}</p>}
 
-      <article
-        className="prose dark:prose-invert max-w-none"
-        dangerouslySetInnerHTML={{ __html: post.contentHtml }}
-      />
+      <MermaidArticleContent contentHtml={post.contentHtml} />
 
       {/* 前後のナビゲーション */}
       <nav className="mt-12 pt-6 border-t border-gray-700 flex justify-between">
