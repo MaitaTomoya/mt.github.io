@@ -42,13 +42,15 @@ export default function GameListPage() {
               <div className="aspect-video bg-gradient-to-br from-blue-600 to-purple-600 relative">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-6xl">
-                    {game.id === 'tetris'
-                      ? '🧱'
-                      : game.id === 'snake'
-                        ? '🐍'
-                        : game.id === 'algorithm'
-                          ? 'A≡B'
-                          : '🔢'}
+                    {game.id === 'typing'
+                      ? 'Aa'
+                      : game.id === 'tetris'
+                        ? '🧱'
+                        : game.id === 'snake'
+                          ? '🐍'
+                          : game.id === 'algorithm'
+                            ? 'A≡B'
+                            : '🔢'}
                   </span>
                 </div>
                 <div className="absolute top-2 right-2 px-2 py-1 bg-black bg-opacity-50 rounded text-xs">

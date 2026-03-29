@@ -63,6 +63,26 @@ export const games: Game[] = [
       '初心者向け日本語解説',
     ],
   },
+  {
+    id: 'typing',
+    title: 'タイピングトレーニング',
+    description:
+      'プログラミング向けタイピング、日本語入力、Vim操作、macショートカットを実践的に練習できるトレーニングゲーム',
+    thumbnail: '/game-images/typing.jpg',
+    category: GAME_CATEGORIES.LEARNING,
+    difficulty: 'medium',
+    controls: {
+      desktop: ['キーボード: タイピング入力', 'ESC: モード選択に戻る', 'Tab: ヒント表示切替'],
+      mobile: ['タッチキーボードで入力（デスクトップ推奨）'],
+    },
+    features: [
+      '4つのモード（通常/日本語/Vim/macショートカット）',
+      '3段階の難易度',
+      'WPMと正確率のリアルタイム表示',
+      '苦手キーの分析',
+      'ハイスコア保存',
+    ],
+  },
 ]
 
 /**
