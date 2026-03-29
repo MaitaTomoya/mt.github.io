@@ -5,13 +5,14 @@ import TetrisGame from './TetrisGame'
 import SnakeGame from './SnakeGame'
 import Game2048 from './Game2048'
 import AlgorithmVisualizer from './AlgorithmVisualizer'
+import TypingGame from './TypingGame'
 
 interface GamePlayerProps {
   gameId: string
 }
 
 export default function GamePlayer({ gameId }: GamePlayerProps) {
-  const isScrollable = gameId === 'algorithm'
+  const isScrollable = gameId === 'algorithm' || gameId === 'typing'
 
   useEffect(() => {
     // フルスクリーン用のスタイル適用
@@ -30,6 +31,7 @@ export default function GamePlayer({ gameId }: GamePlayerProps) {
     return (
       <div className="min-h-screen bg-gray-900">
         {gameId === 'algorithm' && <AlgorithmVisualizer />}
+        {gameId === 'typing' && <TypingGame />}
       </div>
     )
   }
