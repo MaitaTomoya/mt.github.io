@@ -1182,7 +1182,7 @@ function NormalPlayView({
 
             return (
               <span key={i} className={`${colorClass} ${extraClass}`}>
-                {char}
+                {char === ' ' ? '\u00A0' : char}
               </span>
             )
           })}
