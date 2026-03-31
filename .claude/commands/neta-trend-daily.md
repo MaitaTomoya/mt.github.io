@@ -8,7 +8,7 @@
 
 以下の興味領域を基準にフィルタリング・評価する:
 
-- AI（開発とセキュリティへの応用。AWSが提供しているKiroやClaudeの追加機能・活用事例の記事も含む）
+- AI（開発とセキュリティへの応用。特に**Claude Code**と**KIRO**に関する記事・最新機能・アップデート・活用事例は優先的に取得する）
 - Webセキュリティ/ハッキング（OWASP、脆弱性、サプライチェーン攻撃）
 - OSS開発/コミュニティ
 - 個人開発/SaaS運営（Technical SEO、グロースハック、収益化）
@@ -63,13 +63,21 @@
 - **元記事URLではなくHNのコメントページURLを使用すること**
 - **タイトルは日本語に翻訳して出力**
 
+**Claude Code / KIRO（優先ソース）**
+
+- https://www.anthropic.com/news — Anthropic公式ニュース（Claude Code関連の記事を優先チェック）
+- https://docs.anthropic.com/en/docs/claude-code/changelog — Claude Codeチェンジログ（新機能・バグ修正）
+- https://kiro.dev/blog — KIRO公式ブログ
+- 直近1週間以内の新しい記事・アップデートがあれば★★★として注目ピックアップに含める
+- Claude Code / KIROに関する記事は他ソース（はてブ、HN、Reddit）でも見つけた場合、興味度を1段階引き上げる
+
 **セキュリティブログ**
 
 - https://www.aikido.dev/blog
 - https://www.wiz.io/blog
 - 最新1-3記事をチェックし、興味度★★★のものがあれば注目トピックに含める
 
-**Reddit（13サブレッド）**
+**Reddit（14サブレッド）**
 
 - **重要**: WebFetchツールはreddit.comをブロックするため、**Bashツールでcurlコマンドを使用**すること
 - 各サブレッドから `/hot.json?t=day&limit=10` で上位10件を取得
@@ -88,7 +96,7 @@ curl -s -H "User-Agent: neta-trend-collector/1.0 (trend analysis tool)" \
 サブレッド一覧:
 
 - セキュリティ系: r/netsec, r/cybersecurity
-- AI系: r/OpenAI, r/LocalLLaMA, r/ClaudeCode
+- AI系: r/OpenAI, r/LocalLLaMA, r/ClaudeCode, r/KiroEditor
 - コア技術系: r/programming, r/technology
 - OSS/個人開発系: r/opensource, r/indiehackers, r/webdev, r/javascript
 - キャリア/実践系: r/cscareerquestions, r/productivity

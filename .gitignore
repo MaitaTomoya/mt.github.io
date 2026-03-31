@@ -25,6 +25,9 @@
 *.pem
 NOTE.md
 
+# Claude local settings (contains machine-specific paths)
+.claude/settings.local.json
+
 # Gemini logs (moved to global location)
 .claude/gemini-consultations/
 .claude/gemini-responses/
