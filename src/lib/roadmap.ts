@@ -127,7 +127,21 @@ export const roadmapSections: RoadmapSection[] = [
   {
     id: 'database',
     title: 'データベース',
-    items: [{ slug: 'postgresql', title: 'PostgreSQL', type: 'topic' }],
+    items: [
+      { slug: 'database-fundamentals', title: 'データベース基礎', type: 'topic' },
+      { slug: 'sql-fundamentals', title: 'SQL基礎', type: 'topic' },
+      { slug: 'postgresql', title: 'PostgreSQL', type: 'topic' },
+      { slug: 'mysql', title: 'MySQL', type: 'topic' },
+      { slug: 'mongodb', title: 'MongoDB', type: 'topic' },
+      { slug: 'dynamodb', title: 'DynamoDB', type: 'topic' },
+      { slug: 'supabase', title: 'Supabase', type: 'topic' },
+      { slug: 'database-design', title: 'データベース設計', type: 'topic' },
+      {
+        slug: 'checkpoint-database',
+        title: 'チェックポイント: データベース設計と運用',
+        type: 'checkpoint',
+      },
+    ],
   },
   {
     id: 'devops',

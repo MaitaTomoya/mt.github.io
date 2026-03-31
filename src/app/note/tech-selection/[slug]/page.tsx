@@ -1,7 +1,11 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getAllRoadmapSlugs, getRoadmapPostData, roadmapSections } from '@/lib/roadmap'
+import {
+  getAllTechSelectionSlugs,
+  getTechSelectionPostData,
+  techSelectionCategories,
+} from '@/lib/tech-selection'
 import MermaidArticleContent from '@/components/MermaidArticleContent'
 
 interface PageProps {
@@ -9,29 +13,32 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const slugs = getAllRoadmapSlugs()
+  const slugs = getAllTechSelectionSlugs()
   return slugs.map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const post = await getRoadmapPostData(slug)
+  const post = await getTechSelectionPostData(slug)
   return {
     title: post?.title || slug,
   }
 }
 
+/**
+ * 前後の記事slugを取得する
+ */
 function findAdjacentSlugs(currentSlug: string) {
-  const allItems = roadmapSections.flatMap((s) => s.items)
+  const allItems = techSelectionCategories.flatMap((c) => c.items)
   const currentIndex = allItems.findIndex((item) => item.slug === currentSlug)
   const prev = currentIndex > 0 ? allItems[currentIndex - 1] : null
   const next = currentIndex < allItems.length - 1 ? allItems[currentIndex + 1] : null
   return { prev, next }
 }
 
-export default async function RoadmapPostPage({ params }: PageProps) {
+export default async function TechSelectionPostPage({ params }: PageProps) {
   const { slug } = await params
-  const post = await getRoadmapPostData(slug)
+  const post = await getTechSelectionPostData(slug)
 
   if (!post) {
     notFound()
@@ -43,15 +50,15 @@ export default async function RoadmapPostPage({ params }: PageProps) {
     <div className="max-w-3xl mx-auto py-10 px-4">
       <nav className="mb-6">
         <Link
-          href="/note/roadmap"
+          href="/note/tech-selection"
           className="text-blue-400 hover:text-blue-300 hover:underline text-sm"
         >
-          ← ロードマップ一覧へ
+          ← 技術選定ガイド一覧へ
         </Link>
       </nav>
 
       <h1 className="text-3xl font-bold mb-2">{post.title}</h1>
-      {post.section && <p className="text-gray-500 text-sm mb-8">{post.section}</p>}
+      {post.category && <p className="text-gray-500 text-sm mb-8">{post.category}</p>}
 
       <MermaidArticleContent contentHtml={post.contentHtml} />
 
@@ -59,7 +66,7 @@ export default async function RoadmapPostPage({ params }: PageProps) {
       <nav className="mt-12 pt-6 border-t border-gray-700 flex justify-between">
         {prev ? (
           <Link
-            href={`/note/roadmap/${prev.slug}/`}
+            href={`/note/tech-selection/${prev.slug}/`}
             className="text-blue-400 hover:text-blue-300 hover:underline text-sm"
           >
             ← {prev.title}
@@ -69,7 +76,7 @@ export default async function RoadmapPostPage({ params }: PageProps) {
         )}
         {next ? (
           <Link
-            href={`/note/roadmap/${next.slug}/`}
+            href={`/note/tech-selection/${next.slug}/`}
             className="text-blue-400 hover:text-blue-300 hover:underline text-sm"
           >
             {next.title} →

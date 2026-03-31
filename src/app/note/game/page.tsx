@@ -25,6 +25,9 @@ export default function GameListPage() {
             <button className="px-4 py-2 bg-gray-700 text-gray-300 rounded hover:bg-gray-600 transition-colors">
               アーケード
             </button>
+            <button className="px-4 py-2 bg-gray-700 text-gray-300 rounded hover:bg-gray-600 transition-colors">
+              学習
+            </button>
           </div>
         </div>
 
@@ -39,7 +42,15 @@ export default function GameListPage() {
               <div className="aspect-video bg-gradient-to-br from-blue-600 to-purple-600 relative">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="text-6xl">
-                    {game.id === 'tetris' ? '🧱' : game.id === 'snake' ? '🐍' : '🔢'}
+                    {game.id === 'typing'
+                      ? 'Aa'
+                      : game.id === 'tetris'
+                        ? '🧱'
+                        : game.id === 'snake'
+                          ? '🐍'
+                          : game.id === 'algorithm'
+                            ? 'A≡B'
+                            : '🔢'}
                   </span>
                 </div>
                 <div className="absolute top-2 right-2 px-2 py-1 bg-black bg-opacity-50 rounded text-xs">
