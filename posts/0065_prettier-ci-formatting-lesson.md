@@ -18,7 +18,7 @@ PRで新規のJSファイル（Stimulus controller）を追加したところ、
 指摘に従って手動で改行を入れたが、**別の箇所で再びFAIL**した。
 
 ```javascript
-// 最初にClaudeが書き出したコード（NG）
+// 自分が書いた改行（NG）
 const result =
     someObject.getContent().doSomething(true).getChild();
 
