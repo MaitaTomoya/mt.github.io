@@ -1165,8 +1165,7 @@ export default function BirthdayCamera() {
   /** マップごとのBGMファイル */
   const currentBgmSrcRef = useRef<string>('')
 
-  const getBgmForMap = useCallback((mapIdx: number): string => {
-    if (mapIdx === 6) return '/audio/bgm-yokoyama.m4a'
+  const getBgmForMap = useCallback((_mapIdx?: number): string => {
     return '/audio/bgm-kumashun.m4a'
   }, [])
 
@@ -1961,10 +1960,8 @@ export default function BirthdayCamera() {
           '',
           '--- BGM ---',
           '',
-          'BGM1 ..................... まいた',
-          'BGM2 ............... くましゅん',
-          'BGM3 ..................... まいた',
-          'その他BGM ................ まいた',
+          'メインBGM ........... くましゅん',
+          'クリアBGM ................ まいた',
           '',
           '',
           '--- SPECIAL THANKS ---',
@@ -3293,14 +3290,17 @@ export default function BirthdayCamera() {
 
     // ランナー初期化
     const now = Date.now()
-    titleRunnerRef.current = {
-      startTime: now,
-      runners: [
-        { id: 'maita', color: '#e74c3c', knocked: false, knockTime: 0, x: -20 },
-        { id: 'kumashun', color: '#8b4513', knocked: false, knockTime: 0, x: -20 },
-        { id: 'yokoyama', color: '#2c3e50', knocked: false, knockTime: 0, x: -20 },
-      ],
-      allKnocked: false,
+    // allKnocked状態なら再初期化しない（フォーショット達成後に消えないように）
+    if (!titleRunnerRef.current.allKnocked) {
+      titleRunnerRef.current = {
+        startTime: now,
+        runners: [
+          { id: 'maita', color: '#e74c3c', knocked: false, knockTime: 0, x: -20 },
+          { id: 'kumashun', color: '#8b4513', knocked: false, knockTime: 0, x: -20 },
+          { id: 'yokoyama', color: '#2c3e50', knocked: false, knockTime: 0, x: -20 },
+        ],
+        allKnocked: false,
+      }
     }
 
     // Canvas上のタップ処理
