@@ -65,8 +65,8 @@ export const games: Game[] = [
   },
   {
     id: 'birthday-camera',
-    title: 'まどか姫のバースデークエスト',
-    description: 'まどか姫が誕生日ケーキを取り戻すDQ風ドットRPG。3人のボスを倒して冒険しよ��!',
+    title: 'まどかのバースデークエスト',
+    description: 'まどかが誕生日ケーキを取り戻すDQ風ドットRPG。3人のボスを倒して冒険しよう!',
     thumbnail: '/game-images/birthday-camera.jpg',
     category: GAME_CATEGORIES.ACTION,
     difficulty: 'easy',
