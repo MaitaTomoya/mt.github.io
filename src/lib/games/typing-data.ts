@@ -285,6 +285,20 @@ export const normalQuestions: {
     { text: 'super', category: 'JavaScript' },
     { text: 'yield', category: 'JavaScript' },
     { text: 'delete', category: 'JavaScript' },
+    { text: 'npm ci', category: 'npm' },
+    { text: 'git add .', category: 'Git' },
+    { text: 'cd ~/', category: 'Shell' },
+    { text: 'ls -la', category: 'Shell' },
+    { text: 'a => b', category: 'JavaScript' },
+    { text: 'x !== y', category: 'JavaScript' },
+    { text: 'a && b', category: 'JavaScript' },
+    { text: 'a || b', category: 'JavaScript' },
+    { text: 'a ?? b', category: 'JavaScript' },
+    { text: 'obj?.key', category: 'JavaScript' },
+    { text: '{} [] ()', category: '記号' },
+    { text: '<div />', category: 'JSX' },
+    { text: '`hello`', category: 'JavaScript' },
+    { text: 'a | b', category: 'Shell' },
   ],
   medium: [
     { text: 'const app = express()', category: 'Express' },
@@ -313,6 +327,25 @@ export const normalQuestions: {
     { text: 'Promise.all([p1, p2, p3])', category: 'JavaScript' },
     { text: 'interface Props { children: ReactNode }', category: 'TypeScript' },
     { text: 'type Status = "active" | "inactive"', category: 'TypeScript' },
+    { text: 'const { name, age, ...rest } = user', category: 'JavaScript' },
+    { text: 'const url = `https://api.example.com/users/${id}`', category: 'JavaScript' },
+    { text: 'arr.filter((x) => x > 0)', category: 'JavaScript' },
+    { text: 'const [first, ...others] = items', category: 'JavaScript' },
+    { text: 'cat file.txt | grep "error"', category: 'Shell' },
+    { text: 'find . -name "*.ts" | xargs wc -l', category: 'Shell' },
+    { text: 'git log --oneline --graph', category: 'Git' },
+    { text: 'docker run -d -p 3000:3000', category: 'Docker' },
+    { text: 'curl -s -H "Authorization: Bearer ${TOKEN}"', category: 'Shell' },
+    { text: 'export PATH="$HOME/.local/bin:$PATH"', category: 'Shell' },
+    { text: '/^[a-zA-Z0-9]+@[a-zA-Z]+\\.[a-z]{2,}$/', category: '正規表現' },
+    { text: 'ssh -i ~/.ssh/id_ed25519 -p 2222 user@host', category: 'Shell' },
+    { text: 'tar -czf backup_$(date +%Y%m%d).tar.gz ./src/', category: 'Shell' },
+    { text: '{ ...defaultConfig, debug: true }', category: 'JavaScript' },
+    { text: 'const obj = { [key]: value }', category: 'JavaScript' },
+    { text: 'git commit -m "feat(auth): OAuth2.0 (#123)"', category: 'Git' },
+    { text: 'npm install express && npm start', category: 'npm' },
+    { text: 'res.status(200).json({ ok: true, data })', category: 'Express' },
+    { text: 'Record<string, unknown>', category: 'TypeScript' },
   ],
   hard: [
     {
@@ -394,6 +427,46 @@ export const normalQuestions: {
     {
       text: 'useEffect(() => { const controller = new AbortController(); return () => controller.abort() }, [])',
       category: 'React',
+    },
+    {
+      text: "SELECT u.id, COUNT(o.id) FROM users AS u LEFT JOIN orders AS o ON u.id = o.user_id WHERE u.status = 'active' GROUP BY u.id",
+      category: 'SQL',
+    },
+    {
+      text: 'grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));',
+      category: 'CSS',
+    },
+    {
+      text: 'const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/;',
+      category: '正規表現',
+    },
+    {
+      text: 'DATABASE_URL="postgresql://user:pass@localhost:5432/mydb?schema=public"',
+      category: '環境変数',
+    },
+    {
+      text: 'console.error(`[${new Date().toISOString()}] Error: user(id=${userId})`);',
+      category: 'JavaScript',
+    },
+    {
+      text: 'git log --pretty=format:"%h %an <%ae> %s" --since="2026-01-01"',
+      category: 'Git',
+    },
+    {
+      text: '<div class="flex items-center gap-2 rounded-lg bg-gray-100/80 px-4 py-2">',
+      category: 'Tailwind',
+    },
+    {
+      text: '@media (max-width: 768px) { .container > *:nth-child(n + 4) { display: none; } }',
+      category: 'CSS',
+    },
+    {
+      text: 'REDIS_URL="redis://:secret@127.0.0.1:6379/0"',
+      category: '環境変数',
+    },
+    {
+      text: 'type ApiResponse<T> = Promise<{ data: T; status: number; error?: string }>;',
+      category: 'TypeScript',
     },
   ],
 }
