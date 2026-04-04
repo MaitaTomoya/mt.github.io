@@ -33,70 +33,74 @@ export default function GameListPage() {
 
         {/* ゲームグリッド */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {games.map((game) => (
-            <div
-              key={game.id}
-              className="bg-gray-800 rounded-lg overflow-hidden hover:scale-105 transition-transform duration-200 shadow-lg"
-            >
-              {/* サムネイル */}
-              <div className="aspect-video bg-gradient-to-br from-blue-600 to-purple-600 relative">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="text-6xl">
-                    {game.id === 'typing'
-                      ? 'Aa'
-                      : game.id === 'tetris'
-                        ? '🧱'
-                        : game.id === 'snake'
-                          ? '🐍'
-                          : game.id === 'algorithm'
-                            ? 'A≡B'
-                            : '🔢'}
-                  </span>
-                </div>
-                <div className="absolute top-2 right-2 px-2 py-1 bg-black bg-opacity-50 rounded text-xs">
-                  {game.difficulty === 'easy'
-                    ? '簡単'
-                    : game.difficulty === 'medium'
-                      ? '普通'
-                      : '難しい'}
-                </div>
-              </div>
-
-              {/* ゲーム情報 */}
-              <div className="p-4">
-                <h2 className="text-xl font-bold mb-2">{game.title}</h2>
-                <p className="text-gray-400 text-sm mb-4">{game.description}</p>
-
-                {/* 特徴 */}
-                <div className="mb-4">
-                  <div className="flex flex-wrap gap-1">
-                    {game.features.slice(0, 3).map((feature, index) => (
-                      <span key={index} className="text-xs px-2 py-1 bg-gray-700 rounded">
-                        {feature}
-                      </span>
-                    ))}
+          {games
+            .filter((game) => game.id !== 'birthday-camera')
+            .map((game) => (
+              <div
+                key={game.id}
+                className="bg-gray-800 rounded-lg overflow-hidden hover:scale-105 transition-transform duration-200 shadow-lg"
+              >
+                {/* サムネイル */}
+                <div className="aspect-video bg-gradient-to-br from-blue-600 to-purple-600 relative">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-6xl">
+                      {game.id === 'typing'
+                        ? 'Aa'
+                        : game.id === 'tetris'
+                          ? '🧱'
+                          : game.id === 'snake'
+                            ? '🐍'
+                            : game.id === 'algorithm'
+                              ? 'A≡B'
+                              : game.id === 'birthday-camera'
+                                ? '🔮'
+                                : '🔢'}
+                    </span>
+                  </div>
+                  <div className="absolute top-2 right-2 px-2 py-1 bg-black bg-opacity-50 rounded text-xs">
+                    {game.difficulty === 'easy'
+                      ? '簡単'
+                      : game.difficulty === 'medium'
+                        ? '普通'
+                        : '難しい'}
                   </div>
                 </div>
 
-                {/* プレイボタン */}
-                <div className="flex gap-2">
-                  <Link
-                    href={`/note/game/${game.id}`}
-                    className="flex-1 text-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-                  >
-                    詳細を見る
-                  </Link>
-                  <Link
-                    href={`/note/game/${game.id}/play`}
-                    target="_blank"
-                    className="flex-1 text-center px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
-                  >
-                    プレイする
-                  </Link>
+                {/* ゲーム情報 */}
+                <div className="p-4">
+                  <h2 className="text-xl font-bold mb-2">{game.title}</h2>
+                  <p className="text-gray-400 text-sm mb-4">{game.description}</p>
+
+                  {/* 特徴 */}
+                  <div className="mb-4">
+                    <div className="flex flex-wrap gap-1">
+                      {game.features.slice(0, 3).map((feature, index) => (
+                        <span key={index} className="text-xs px-2 py-1 bg-gray-700 rounded">
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* プレイボタン */}
+                  <div className="flex gap-2">
+                    <Link
+                      href={`/note/game/${game.id}`}
+                      className="flex-1 text-center px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                    >
+                      詳細を見る
+                    </Link>
+                    <Link
+                      href={`/note/game/${game.id}/play`}
+                      target="_blank"
+                      className="flex-1 text-center px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
+                    >
+                      プレイする
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
 
         {/* 説明セクション */}

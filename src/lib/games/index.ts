@@ -64,6 +64,19 @@ export const games: Game[] = [
     ],
   },
   {
+    id: 'birthday-camera',
+    title: 'まどか姫のバースデークエスト',
+    description: 'まどか姫が誕生日ケーキを取り戻すDQ風ドットRPG。3人のボスを倒して冒険しよ��!',
+    thumbnail: '/game-images/birthday-camera.jpg',
+    category: GAME_CATEGORIES.ACTION,
+    difficulty: 'easy',
+    controls: {
+      desktop: ['矢印キー/WASD: 移動', 'スペース/Enter: 決定'],
+      mobile: ['十字キー: 移動', 'Aボタン: 決定/話す/調べる'],
+    },
+    features: ['DQ風ドットRPG', 'ターン制バトル', '3体のボス', 'アイテム・武器収集'],
+  },
+  {
     id: 'typing',
     title: 'タイピングトレーニング',
     description:
