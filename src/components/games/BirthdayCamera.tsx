@@ -2901,6 +2901,7 @@ export default function BirthdayCamera() {
     currentEnemy,
     pendingBossEntity,
     confirmSelect,
+    potionConfirmSelect,
     battleMenu,
     skillSelect,
   ])
