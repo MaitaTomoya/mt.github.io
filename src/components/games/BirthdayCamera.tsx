@@ -3630,19 +3630,18 @@ export default function BirthdayCamera() {
             const cy = CANVAS_H / 2 - 20
             // ケーキ+ロウソクエリア全体をタップで未消化の最初の1本を消す
             if (Math.abs(tapX - cx) < 80 && tapY > cy - 60 && tapY < cy + 80) {
-              const idx = candlesOut.indexOf(false)
-              if (idx >= 0) {
-                setCandlesOut((prev) => {
-                  const next = [...prev]
-                  next[idx] = true
-                  return next
+              setCandlesOut((prev) => {
+                const idx = prev.indexOf(false)
+                if (idx < 0) return prev
+                const next = [...prev]
+                next[idx] = true
+                setCandleSmoke((sp) => {
+                  const sn = [...sp]
+                  sn[idx] = Date.now()
+                  return sn
                 })
-                setCandleSmoke((prev) => {
-                  const next = [...prev]
-                  next[idx] = Date.now()
-                  return next
-                })
-              }
+                return next
+              })
             }
           }
           if (phase === 'endroll') {
