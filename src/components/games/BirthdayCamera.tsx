@@ -7,6 +7,7 @@ import { useRef, useState, useEffect, useCallback } from 'react'
 // ============================================================
 type GamePhase =
   | 'title'
+  | 'prologue'
   | 'explore'
   | 'dialogue'
   | 'battle'
@@ -20,6 +21,7 @@ type GamePhase =
 
 /** 技の定義 */
 interface Skill {
+  id: string
   name: string
   power: number
   critBonus: number
@@ -28,10 +30,38 @@ interface Skill {
 }
 
 const SKILLS: Skill[] = [
-  { name: 'こうげき', power: 1.0, critBonus: 0, missBonus: 0, description: '通常攻撃' },
-  { name: 'かえんぎり', power: 1.5, critBonus: 0.1, missBonus: 0.05, description: '炎の斬撃' },
-  { name: 'いなずま', power: 1.3, critBonus: 0.2, missBonus: 0, description: '雷を落とす' },
-  { name: 'きあいだめ', power: 0, critBonus: 0, missBonus: 0, description: '次は必ず会心' },
+  {
+    id: 'kaen',
+    name: 'かえんぎり',
+    power: 1.5,
+    critBonus: 0.1,
+    missBonus: 0.05,
+    description: '炎の斬撃',
+  },
+  {
+    id: 'inazuma',
+    name: 'いなずま',
+    power: 1.3,
+    critBonus: 0.2,
+    missBonus: 0,
+    description: '雷を落とす',
+  },
+  {
+    id: 'kiai',
+    name: 'きあいだめ',
+    power: 0,
+    critBonus: 0,
+    missBonus: 0,
+    description: '次は必ず会心',
+  },
+  {
+    id: 'heal',
+    name: 'いやしのひかり',
+    power: 0,
+    critBonus: 0,
+    missBonus: 0,
+    description: 'HP20回復',
+  },
 ]
 
 /** セーブデータ */
@@ -60,6 +90,7 @@ interface Player {
   critRate: number
   missRate: number
   charged: boolean
+  learnedSkills: string[]
   items: Item[]
   weapon: string
   defeatedBosses: string[]
@@ -95,6 +126,7 @@ interface MapEntity {
   enemy?: Enemy
   targetMap?: number
   targetPos?: Position
+  teachSkill?: string
   opened?: boolean
   defeated?: boolean
 }
@@ -170,6 +202,7 @@ function createMaps(): GameMap[] {
           y: 1,
           type: 'bookshelf',
           id: 'book_castle1',
+          teachSkill: 'heal',
           dialogue: [
             '[ まどか姫の冒険日記 ]',
             'まどか、33歳の誕生日おめでとう!',
@@ -330,6 +363,7 @@ function createMaps(): GameMap[] {
           y: 2,
           type: 'bookshelf',
           id: 'book_field1',
+          teachSkill: 'kaen',
           dialogue: [
             '[ 草原の石碑 ]',
             'まどかへ -- まいたより',
@@ -414,6 +448,14 @@ function createMaps(): GameMap[] {
             '商人「やあ旅の姫様、山道は危険だぞ」',
             '商人「この先にくましゅんがいる...気をつけな」',
           ],
+        },
+        {
+          x: 9,
+          y: 5,
+          type: 'bookshelf',
+          id: 'scroll_kiai',
+          teachSkill: 'kiai',
+          dialogue: ['[ 古い巻物 ]', '精神を集中し、気を練る技法が記されている...'],
         },
         {
           x: 9,
@@ -512,6 +554,7 @@ function createMaps(): GameMap[] {
           y: 2,
           type: 'bookshelf',
           id: 'book_forest',
+          teachSkill: 'inazuma',
           dialogue: [
             '[ 森の古い手紙 ]',
             'まどかへ -- くましゅんより',
@@ -1022,6 +1065,27 @@ function drawFlower(ctx: CanvasRenderingContext2D, px: number, py: number) {
 export default function BirthdayCamera() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animFrameRef = useRef<number>(0)
+  const bgmRef = useRef<HTMLAudioElement | null>(null)
+  const bgmStartedRef = useRef(false)
+
+  /** BGM再生（ユーザー操作のイベントハンドラ内で呼ぶこと） */
+  const startBgm = useCallback(() => {
+    if (bgmStartedRef.current) return
+    if (!bgmRef.current) {
+      const audio = new Audio('/audio/bgm.m4a')
+      audio.loop = true
+      audio.volume = 0.3
+      bgmRef.current = audio
+    }
+    bgmRef.current
+      .play()
+      .then(() => {
+        bgmStartedRef.current = true
+      })
+      .catch(() => {
+        // リトライ: 次のユーザー操作で再試行されるようにフラグは立てない
+      })
+  }, [])
 
   const [phase, setPhase] = useState<GamePhase>('title')
   const [currentMapIdx, setCurrentMapIdx] = useState(0)
@@ -1036,6 +1100,7 @@ export default function BirthdayCamera() {
     critRate: 0.1,
     missRate: 0.1,
     charged: false,
+    learnedSkills: [],
     items: [],
     weapon: 'すで',
     defeatedBosses: [],
@@ -1051,6 +1116,11 @@ export default function BirthdayCamera() {
   const [skillSelect, setSkillSelect] = useState(0)
   const [titleSelect, setTitleSelect] = useState(0)
   const [hasSaveData, setHasSaveData] = useState(false)
+  const [prologueIdx, setPrologueIdx] = useState(0)
+  const PROLOGUE_TEXTS = [
+    '2026年4月4日、私の33回目の誕生日。',
+    '今日はいろんな人からお祝いされるんだろうなぁ...',
+  ]
 
   /** セーブデータの存在チェック */
   useEffect(() => {
@@ -1268,7 +1338,7 @@ export default function BirthdayCamera() {
       ctx.strokeRect(10, logY, CANVAS_W - 20, CANVAS_H - logY - 10)
 
       if (phaseRef.current === 'battleMenu') {
-        const menuItems = ['わざ', 'きあいだめ', 'どうぐ', 'にげる']
+        const menuItems = ['たたかう', 'わざ', 'どうぐ', 'にげる']
         ctx.font = '13px monospace'
         const colW = (CANVAS_W - 40) / 2
         menuItems.forEach((item, i) => {
@@ -1296,19 +1366,33 @@ export default function BirthdayCamera() {
         // 技選択サブメニュー
         ctx.font = '13px monospace'
         const colW = (CANVAS_W - 40) / 2
+        const learned = playerRef.current.learnedSkills
         SKILLS.forEach((skill, i) => {
           const col = i % 2
           const row = Math.floor(i / 2)
           const isSelected = i === skillSelect
-          ctx.fillStyle = isSelected ? '#ffd700' : '#fff'
-          ctx.font = isSelected ? 'bold 13px monospace' : '13px monospace'
-          const prefix = isSelected ? '> ' : '  '
-          ctx.fillText(prefix + skill.name, 24 + col * colW, logY + 24 + row * 24)
+          const isLocked = !learned.includes(skill.id)
+          if (isLocked) {
+            ctx.fillStyle = '#555'
+            ctx.font = '13px monospace'
+            ctx.fillText('  ???', 24 + col * colW, logY + 24 + row * 24)
+          } else {
+            ctx.fillStyle = isSelected ? '#ffd700' : '#fff'
+            ctx.font = isSelected ? 'bold 13px monospace' : '13px monospace'
+            const prefix = isSelected ? '> ' : '  '
+            ctx.fillText(prefix + skill.name, 24 + col * colW, logY + 24 + row * 24)
+          }
         })
         // 選択中の技の説明
+        const selectedSkill = SKILLS[skillSelect]
+        const isSelectedLocked = !learned.includes(selectedSkill.id)
         ctx.fillStyle = '#aaa'
         ctx.font = '11px monospace'
-        ctx.fillText(SKILLS[skillSelect].description, 24, logY + 74)
+        ctx.fillText(
+          isSelectedLocked ? 'まだ習得していない' : selectedSkill.description,
+          24,
+          logY + 74
+        )
       } else {
         // バトルログ表示
         ctx.font = '12px monospace'
@@ -1509,13 +1593,14 @@ export default function BirthdayCamera() {
       if (tile === 1 || tile === 2) return
 
       // まいたの真横を素通りしようとした場合のチェック
+      // ボスから離れる方向に移動した場合のみ発動
       const nearbyBoss = map.entities.find(
         (e) =>
           e.type === 'boss' &&
           !e.defeated &&
-          e.y === newY &&
-          Math.abs(e.x - newX) === 1 &&
-          (dir === 'left' || dir === 'right')
+          e.y === player.y &&
+          Math.abs(e.x - player.x) === 1 &&
+          ((dir === 'left' && e.x > player.x) || (dir === 'right' && e.x < player.x))
       )
       if (nearbyBoss && nearbyBoss.id === 'maita') {
         setDialogueLines([
@@ -1574,6 +1659,15 @@ export default function BirthdayCamera() {
   const handleAction = useCallback(() => {
     if (phase === 'title') {
       setPhase('explore')
+      return
+    }
+
+    if (phase === 'prologue') {
+      if (prologueIdx < PROLOGUE_TEXTS.length - 1) {
+        setPrologueIdx((i) => i + 1)
+      } else {
+        setPhase('explore')
+      }
       return
     }
 
@@ -1666,14 +1760,18 @@ export default function BirthdayCamera() {
     }
 
     if (phase === 'battleSkillSelect') {
-      // 技を選んで攻撃実行
-      handleSkillAttack(SKILLS[skillSelect])
+      const selectedSkill = SKILLS[skillSelect]
+      if (!player.learnedSkills.includes(selectedSkill.id)) {
+        // ロック中の技は使えない
+        return
+      }
+      handleSkillAttack(selectedSkill)
       return
     }
 
     if (phase === 'battleMenu') {
-      if (battleMenu === 0) {
-        // こうげき → 技選択サブメニューへ
+      if (battleMenu === 1) {
+        // わざ → 技選択サブメニューへ
         setSkillSelect(0)
         setPhase('battleSkillSelect')
         return
@@ -1730,7 +1828,16 @@ export default function BirthdayCamera() {
           setPhase('dialogue')
         } else if (entity.type === 'bookshelf' && entity.dialogue) {
           // 本棚を読む（最初に導入メッセージを追加）
-          setDialogueLines(['まどかは本棚の本に手を伸ばした...', ...entity.dialogue])
+          const lines = ['まどかは本棚の本に手を伸ばした...', ...entity.dialogue]
+          // 技習得
+          if (entity.teachSkill && !player.learnedSkills.includes(entity.teachSkill)) {
+            const skill = SKILLS.find((s) => s.id === entity.teachSkill)
+            if (skill) {
+              lines.push(`${skill.name}を習得した!`)
+              setPlayer((p) => ({ ...p, learnedSkills: [...p.learnedSkills, entity.teachSkill!] }))
+            }
+          }
+          setDialogueLines(lines)
           setDialogueIdx(0)
           setPhase('dialogue')
         } else if (entity.type === 'boss' && !entity.defeated && entity.enemy) {
@@ -1821,10 +1928,20 @@ export default function BirthdayCamera() {
       const enemy = { ...currentEnemy }
       const logs: string[] = []
 
-      if (skill.name === 'きあいだめ') {
+      if (skill.id === 'kiai') {
         setPlayer((prev) => ({ ...prev, charged: true }))
         logs.push('まどかは きあいをためた!')
         logs.push('次の攻撃は必ず会心の一撃になる!')
+        setBattleLog(logs)
+        setPhase('battlePlayerAttack')
+        return
+      }
+
+      if (skill.id === 'heal') {
+        const healed = Math.min(20, p.maxHp - p.hp)
+        setPlayer((prev) => ({ ...prev, hp: Math.min(prev.maxHp, prev.hp + 20) }))
+        logs.push('まどかは いやしのひかりを使った!')
+        logs.push(`HPが${healed}回復!`)
         setBattleLog(logs)
         setPhase('battlePlayerAttack')
         return
@@ -1903,13 +2020,6 @@ export default function BirthdayCamera() {
         return
       }
 
-      setBattleLog(logs)
-      setPhase('battlePlayerAttack')
-    } else if (battleMenu === 1) {
-      // きあいだめ
-      setPlayer((prev) => ({ ...prev, charged: true }))
-      logs.push('まどかは きあいをためた!')
-      logs.push('次の攻撃は必ず会心の一撃になる!')
       setBattleLog(logs)
       setPhase('battlePlayerAttack')
     } else if (battleMenu === 2) {
@@ -2042,7 +2152,7 @@ export default function BirthdayCamera() {
       <div className="fixed inset-0 bg-[#1a0533] flex flex-col items-center justify-center">
         <div className="text-center">
           <p className="text-yellow-400 text-xs font-mono mb-2">* * * * *</p>
-          <h1 className="text-yellow-400 text-2xl font-bold font-mono mb-2">まどか姫の</h1>
+          <h1 className="text-yellow-400 text-2xl font-bold font-mono mb-2">えんどうまどかの</h1>
           <h1 className="text-pink-400 text-3xl font-bold font-mono mb-4">バースデークエスト</h1>
           <p className="text-yellow-400 text-xs font-mono mb-8">* * * * *</p>
 
@@ -2059,8 +2169,11 @@ export default function BirthdayCamera() {
                   e.preventDefault()
                   setTitleSelect(i)
                   if (!hasSaveData) {
-                    setPhase('explore')
+                    setPrologueIdx(0)
+                    startBgm()
+                    setPhase('prologue')
                   } else if (i === 0) {
+                    startBgm()
                     loadGame()
                     setPhase('explore')
                   } else {
@@ -2080,13 +2193,16 @@ export default function BirthdayCamera() {
                       critRate: 0.1,
                       missRate: 0.1,
                       charged: false,
+                      learnedSkills: [],
                       items: [],
                       weapon: 'すで',
                       defeatedBosses: [],
                     })
                     setCurrentMapIdx(0)
                     setMaps(createMaps())
-                    setPhase('explore')
+                    startBgm()
+                    setPrologueIdx(0)
+                    setPhase('prologue')
                   }
                 }}
                 className={`px-8 py-3 font-bold font-mono rounded text-lg active:scale-95 transition-transform ${
@@ -2102,6 +2218,30 @@ export default function BirthdayCamera() {
 
           <p className="text-gray-600 text-xs font-mono mt-6">十字キーで移動 / Aボタンで決定</p>
         </div>
+      </div>
+    )
+  }
+
+  // プロローグ画面
+  if (phase === 'prologue') {
+    return (
+      <div
+        className="fixed inset-0 bg-black flex items-center justify-center cursor-pointer"
+        onPointerDown={() => {
+          startBgm()
+          if (prologueIdx < PROLOGUE_TEXTS.length - 1) {
+            setPrologueIdx((i) => i + 1)
+          } else {
+            setPhase('explore')
+          }
+        }}
+      >
+        <p className="text-white text-lg font-mono px-8 text-center leading-relaxed">
+          {PROLOGUE_TEXTS[prologueIdx]}
+        </p>
+        <p className="absolute bottom-12 text-gray-500 text-xs font-mono animate-pulse">
+          タップして続ける
+        </p>
       </div>
     )
   }
