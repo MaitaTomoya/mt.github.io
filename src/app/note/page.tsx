@@ -52,6 +52,15 @@ const noteSections: NoteSection[] = [
     status: 'new',
   },
   {
+    title: 'AWS全資格取得ロードマップ 2026',
+    description:
+      '2026年中にAWS認定資格を全12種取得するためのロードマップ。学習ノートと進捗管理付き',
+    href: '/note/aws-cert',
+    color: 'orange',
+    tags: ['AWS', '資格', 'クラウド', 'ロードマップ'],
+    status: 'new',
+  },
+  {
     title: 'ブラウザゲームコレクション',
     description:
       'HTML5 Canvas APIで作成したミニゲーム集。テトリス、スネーク、2048などクラシックゲームをプレイ可能',
