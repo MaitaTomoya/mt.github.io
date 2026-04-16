@@ -250,19 +250,43 @@ export async function getRoadmapPostData(slug: string): Promise<RoadmapPostDetai
   const fileContents = fs.readFileSync(fullPath, 'utf8')
   const matterResult = matter(fileContents)
 
+  let content = matterResult.content
+  const mermaidRegex = /```mermaid\r?\n([\s\S]*?)\r?\n```/g
+  const mermaidBlocks: string[] = []
+  let mermaidIndex = 0
+
+  content = content.replace(mermaidRegex, (_, code) => {
+    const escapedCode = code
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;')
+    mermaidBlocks.push(escapedCode)
+    return `\n<!-- MERMAID_PLACEHOLDER_${mermaidIndex++} -->\n`
+  })
+
   const processedContent = await remark()
     .use(remarkGfm)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
     .use(rehypeSlug)
     .use(rehypeStringify)
-    .process(matterResult.content)
+    .process(content)
+
+  let contentHtml = processedContent.toString()
+
+  mermaidBlocks.forEach((code, index) => {
+    const placeholder = `<!-- MERMAID_PLACEHOLDER_${index} -->`
+    const mermaidDiv = `<div class="mermaid">${code}</div>`
+    contentHtml = contentHtml.replace(placeholder, mermaidDiv)
+  })
 
   return {
     slug,
     title: (matterResult.data.title as string) || slug,
     order: (matterResult.data.order as number) || 0,
     section: (matterResult.data.section as string) || '',
-    contentHtml: processedContent.toString(),
+    contentHtml,
   }
 }
